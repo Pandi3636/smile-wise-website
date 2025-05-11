@@ -1,67 +1,54 @@
 
+import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Smile, AlignHorizontalJustifyStart } from "lucide-react";
 
 const serviceItems = [
   {
-    id: 1,
+    icon: <Smile className="w-10 h-10 text-dental-blue" />,
     title: "General Dentistry",
-    description: "Comprehensive dental check-ups, cleanings, fillings, and preventive care.",
-    icon: "🦷"
+    description: "Routine exams, cleanings, fillings, and preventive care for long-term oral health."
   },
   {
-    id: 2,
+    icon: <Smile className="w-10 h-10 text-dental-blue" />,
     title: "Cosmetic Dentistry",
-    description: "Teeth whitening, veneers, bonding, and other aesthetic improvements.",
-    icon: "✨"
+    description: "Teeth whitening, veneers, and smile makeovers to enhance your confidence."
   },
   {
-    id: 3,
-    title: "Root Canal Treatment",
-    description: "Professional and painless root canal procedures to save damaged teeth.",
-    icon: "🔬"
+    icon: <Calendar className="w-10 h-10 text-dental-blue" />,
+    title: "Restorative Dentistry",
+    description: "Crowns, bridges, dentures, and implants to restore your teeth and bite."
   },
   {
-    id: 4,
-    title: "Pediatric Dentistry",
-    description: "Child-friendly dental care focused on preventive education and treatments.",
-    icon: "👶"
-  },
-  {
-    id: 5,
+    icon: <AlignHorizontalJustifyStart className="w-10 h-10 text-dental-blue" />,
     title: "Orthodontics",
-    description: "Braces, aligners, and other treatments to straighten teeth and improve bites.",
-    icon: "😁"
-  },
-  {
-    id: 6,
-    title: "Dental Implants",
-    description: "Permanent replacement of missing teeth with natural-looking implants.",
-    icon: "🔧"
+    description: "Braces and clear aligners to straighten teeth and correct bite issues."
   }
 ];
 
 const Services = () => {
   return (
-    <section className="bg-gray-50 py-12 md:py-24">
+    <section id="services" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Services</h2>
+          <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">Our Dental Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We offer a wide range of dental services to meet all your oral healthcare needs.
+            We offer a wide range of dental services to keep your smile healthy and bright.
+            Our expert team uses the latest technology for your comfort.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {serviceItems.map(service => (
-            <Card key={service.id} className="h-full transition-all duration-300 hover:shadow-lg hover:border-dental-blue">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {serviceItems.map((service, index) => (
+            <Card key={index} className="group hover:shadow-lg transition-shadow duration-300 border-none">
               <CardHeader className="pb-2">
-                <div className="text-4xl mb-2">{service.icon}</div>
-                <CardTitle>{service.title}</CardTitle>
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <CardTitle className="text-xl text-dental-purple-dark group-hover:text-dental-purple transition-colors">
+                  {service.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-gray-600">
-                  {service.description}
-                </CardDescription>
+                <CardDescription className="text-gray-600">{service.description}</CardDescription>
               </CardContent>
             </Card>
           ))}

@@ -1,23 +1,28 @@
 
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import DoctorTips from "@/components/DoctorTips";
-import Services from "@/components/Services";
-import TrainingVideos from "@/components/TrainingVideos";
-import BookingForm from "@/components/BookingForm";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
+import InstagramSection from "@/components/InstagramSection";
+import Navbar from "@/components/Navbar";
+import ScheduleVisitSection from "@/components/ScheduleVisitSection";
+// import ServicesHighlightsSection from "@/components/ServicesHighlightsSection";
+import TeethViewSection from "@/components/TeethViewSection";
+import ContactSection from "@/components/ContactSection";
+import FAQ from "@/components/FAQ";
+import Services from "@/components/Services";
+import Gallery from "@/components/Gallery";
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen">
       <Navbar />
-      <main className="flex-grow">
-        <Hero />
-        <DoctorTips />
-        <Services />
-        <TrainingVideos />
-        <BookingForm />
-      </main>
+      <HeroSection />
+      <Services/>
+      <Gallery/>
+      <ScheduleVisitSection />
+      <InstagramSection />
+      <TeethViewSection />
+      <ContactSection />
+      <FAQ/>
       <Footer />
     </div>
   );
