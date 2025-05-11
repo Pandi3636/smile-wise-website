@@ -12,3 +12,8 @@ export interface AdminCredentials {
   email: string;
   password: string;
 }
+
+export interface Category {
+  id: string;
+  name: string;
+}

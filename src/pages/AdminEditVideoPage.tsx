@@ -1,13 +1,13 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import AdminNavbar from "@/components/AdminNavbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { createVideo, uploadVideo, uploadThumbnail } from "@/services/videoService";
+import { getVideoById, updateVideo, uploadVideo, uploadThumbnail } from "@/services/videoService";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,9 +23,11 @@ type FileState = {
   uploading: boolean;
 };
 
-const AdminAddVideoPage = () => {
+const AdminEditVideoPage = () => {
+  const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [fileState, setFileState] = useState<FileState>({
     file: null,
     preview: null,
@@ -33,7 +35,7 @@ const AdminAddVideoPage = () => {
   });
   const [thumbnailState, setThumbnailState] = useState<FileState>({
     file: null,
-    preview: null, 
+    preview: null,
     uploading: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,37 +48,65 @@ const AdminAddVideoPage = () => {
     },
   });
 
+  useEffect(() => {
+    const fetchVideo = async () => {
+      if (!id) return;
+      
+      try {
+        setIsLoading(true);
+        const video = await getVideoById(id);
+        if (video) {
+          form.reset({
+            title: video.title,
+            video_url: video.video_url,
+          });
+          
+          // If there's a thumbnail, set preview
+          if (video.thumbnail) {
+            setThumbnailState({
+              file: null,
+              preview: video.thumbnail,
+              uploading: false,
+            });
+          }
+        }
+      } catch (error: any) {
+        toast({
+          title: "Error fetching video",
+          description: error.message,
+          variant: "destructive",
+        });
+        navigate("/admin/dashboard");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchVideo();
+  }, [id, navigate, toast, form]);
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!id) return;
+    
     try {
       setIsSubmitting(true);
       let videoUrl = values.video_url;
-      let thumbnailUrl = null;
+      let thumbnailUrl = thumbnailState.preview;
       
-      // If there's a file upload, upload it to Supabase storage
+      // Upload new video if file selected
       if (fileState.file) {
         setFileState((prev) => ({ ...prev, uploading: true }));
         videoUrl = await uploadVideo(fileState.file);
       }
       
-      // Upload thumbnail if provided
+      // Upload new thumbnail if file selected
       if (thumbnailState.file) {
         setThumbnailState((prev) => ({ ...prev, uploading: true }));
         thumbnailUrl = await uploadThumbnail(thumbnailState.file);
       }
       
-      // If no URL provided and no file uploaded, show error
-      if (!videoUrl && !fileState.file) {
-        toast({
-          title: "Error",
-          description: "Please provide either a video URL or upload a file",
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
-      }
-      
-      // Create video in database
-      await createVideo({
+      // Update video in database
+      await updateVideo(id, {
         title: values.title,
         video_url: videoUrl,
         thumbnail: thumbnailUrl || undefined,
@@ -84,14 +114,14 @@ const AdminAddVideoPage = () => {
       
       toast({
         title: "Success",
-        description: "Video added successfully",
+        description: "Video updated successfully",
       });
       
       navigate("/admin/dashboard");
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to add video",
+        description: error.message || "Failed to update video",
         variant: "destructive",
       });
     } finally {
@@ -127,6 +157,9 @@ const AdminAddVideoPage = () => {
       preview: previewUrl,
       uploading: false,
     });
+
+    // Clear video URL when file is selected
+    form.setValue("video_url", "");
   };
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -175,6 +208,17 @@ const AdminAddVideoPage = () => {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <AdminNavbar />
+        <div className="pt-24 pb-16 container mx-auto px-4 flex justify-center">
+          <p>Loading video data...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <AdminNavbar />
@@ -182,8 +226,8 @@ const AdminAddVideoPage = () => {
         <div className="max-w-2xl mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Add New Training Video</CardTitle>
-              <CardDescription>Upload a new training video or provide a YouTube link</CardDescription>
+              <CardTitle className="text-2xl">Edit Training Video</CardTitle>
+              <CardDescription>Update video details or replace the video file</CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
@@ -233,7 +277,7 @@ const AdminAddVideoPage = () => {
                                 htmlFor="video-upload" 
                                 className="cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-md border text-sm"
                               >
-                                Upload Video
+                                Upload New Video
                               </label>
                               <Input
                                 id="video-upload"
@@ -277,7 +321,26 @@ const AdminAddVideoPage = () => {
                     <div className="border border-dashed border-gray-300 rounded-lg p-4">
                       <FormLabel>Thumbnail Image</FormLabel>
                       <div className="text-center mt-2">
-                        {!thumbnailState.file ? (
+                        {thumbnailState.preview ? (
+                          <div className="space-y-2">
+                            <img 
+                              src={thumbnailState.preview} 
+                              alt="Thumbnail preview" 
+                              className="mx-auto max-h-48 object-cover rounded"
+                            />
+                            <div>
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                type="button" 
+                                onClick={clearThumbnailSelection}
+                                disabled={isSubmitting}
+                              >
+                                Remove
+                              </Button>
+                            </div>
+                          </div>
+                        ) : (
                           <div className="flex flex-col items-center">
                             <label 
                               htmlFor="thumbnail-upload" 
@@ -297,25 +360,6 @@ const AdminAddVideoPage = () => {
                               Recommended: 16:9 ratio, JPG or PNG
                             </p>
                           </div>
-                        ) : (
-                          <div>
-                            <div className="mb-2">
-                              <img 
-                                src={thumbnailState.preview!} 
-                                alt="Thumbnail preview" 
-                                className="mx-auto max-h-48 object-cover rounded"
-                              />
-                            </div>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
-                              type="button" 
-                              onClick={clearThumbnailSelection}
-                              disabled={isSubmitting}
-                            >
-                              Remove
-                            </Button>
-                          </div>
                         )}
                       </div>
                     </div>
@@ -332,9 +376,9 @@ const AdminAddVideoPage = () => {
                     </Button>
                     <Button 
                       type="submit" 
-                      disabled={isSubmitting || fileState.uploading}
+                      disabled={isSubmitting}
                     >
-                      {isSubmitting ? "Adding Video..." : "Add Video"}
+                      {isSubmitting ? "Updating..." : "Update Video"}
                     </Button>
                   </div>
                 </form>
@@ -347,4 +391,4 @@ const AdminAddVideoPage = () => {
   );
 };
 
-export default AdminAddVideoPage;
+export default AdminEditVideoPage;

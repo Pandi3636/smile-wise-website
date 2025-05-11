@@ -12,6 +12,17 @@ export const getAllVideos = async (): Promise<TrainingVideo[]> => {
   return data || [];
 };
 
+export const getVideoById = async (id: string): Promise<TrainingVideo | null> => {
+  const { data, error } = await supabase
+    .from('training_videos')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
 export const uploadVideo = async (file: File) => {
   const fileExt = file.name.split('.').pop();
   const fileName = `${Math.random()}.${fileExt}`;
@@ -30,10 +41,39 @@ export const uploadVideo = async (file: File) => {
   return publicUrl;
 };
 
+export const uploadThumbnail = async (file: File) => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Math.random()}.${fileExt}`;
+  const filePath = `thumbnails/${fileName}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from('training')
+    .upload(filePath, file);
+
+  if (uploadError) throw uploadError;
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('training')
+    .getPublicUrl(filePath);
+  
+  return publicUrl;
+};
+
 export const createVideo = async (video: Partial<TrainingVideo>) => {
   const { data, error } = await supabase
     .from('training_videos')
     .insert([video])
+    .select();
+
+  if (error) throw error;
+  return data?.[0];
+};
+
+export const updateVideo = async (id: string, video: Partial<TrainingVideo>) => {
+  const { data, error } = await supabase
+    .from('training_videos')
+    .update(video)
+    .eq('id', id)
     .select();
 
   if (error) throw error;
