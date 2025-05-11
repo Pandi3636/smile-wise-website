@@ -17,8 +17,8 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Welcome to Dr. Prabha's Dental Your Perfect
-Smile Starts Here
+              Welcome to Drprabhasdentistry  Your Perfect
+Smile Starts Here.
             </h1>
             <p className="text-lg text-white-600 mb-8 max-w-lg">
               We provide comprehensive dental care with a gentle touch. Your smile is our priority - let us help you maintain a healthy, beautiful smile.
