@@ -1,72 +1,130 @@
-
 import { supabase } from '@/lib/supabase';
 import { TrainingVideo } from '@/types';
 
 export const getAllVideos = async (): Promise<TrainingVideo[]> => {
-  const { data, error } = await supabase
-    .from('training_videos')
-    .select('*')
-    .order('created_at', { ascending: false });
-  
-  if (error) throw error;
-  return data || [];
+  try {
+    const { data, error } = await supabase
+      .from('training_videos')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    return [];
+  }
 };
 
 export const getVideoById = async (id: string): Promise<TrainingVideo | null> => {
-  const { data, error } = await supabase
-    .from('training_videos')
-    .select('*')
-    .eq('id', id)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('training_videos')
+      .select('*')
+      .eq('id', id)
+      .single();
 
-  if (error) throw error;
-  return data;
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching video:", error);
+    return null;
+  }
 };
 
 export const uploadVideo = async (file: File) => {
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Math.random()}.${fileExt}`;
-  const filePath = `videos/${fileName}`;
+  try {
+    // Check if storage bucket exists
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
+    
+    if (!trainingBucket) {
+      // Create bucket if it doesn't exist
+      const { error: bucketError } = await supabase.storage.createBucket('training', {
+        public: true
+      });
+      if (bucketError) throw bucketError;
+    }
+    
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `videos/${fileName}`;
 
-  const { error: uploadError, data } = await supabase.storage
-    .from('training')
-    .upload(filePath, file);
+    const { error: uploadError } = await supabase.storage
+      .from('training')
+      .upload(filePath, file);
 
-  if (uploadError) throw uploadError;
+    if (uploadError) throw uploadError;
 
-  const { data: { publicUrl } } = supabase.storage
-    .from('training')
-    .getPublicUrl(filePath);
-  
-  return publicUrl;
+    const { data: { publicUrl } } = supabase.storage
+      .from('training')
+      .getPublicUrl(filePath);
+    
+    return publicUrl;
+  } catch (error) {
+    console.error("Error uploading video:", error);
+    throw error;
+  }
 };
 
 export const uploadThumbnail = async (file: File) => {
-  const fileExt = file.name.split('.').pop();
-  const fileName = `${Math.random()}.${fileExt}`;
-  const filePath = `thumbnails/${fileName}`;
+  try {
+    // Check if storage bucket exists
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
+    
+    if (!trainingBucket) {
+      // Create bucket if it doesn't exist
+      const { error: bucketError } = await supabase.storage.createBucket('training', {
+        public: true
+      });
+      if (bucketError) throw bucketError;
+    }
+    
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `thumbnails/${fileName}`;
 
-  const { error: uploadError } = await supabase.storage
-    .from('training')
-    .upload(filePath, file);
+    const { error: uploadError } = await supabase.storage
+      .from('training')
+      .upload(filePath, file);
 
-  if (uploadError) throw uploadError;
+    if (uploadError) throw uploadError;
 
-  const { data: { publicUrl } } = supabase.storage
-    .from('training')
-    .getPublicUrl(filePath);
-  
-  return publicUrl;
+    const { data: { publicUrl } } = supabase.storage
+      .from('training')
+      .getPublicUrl(filePath);
+    
+    return publicUrl;
+  } catch (error) {
+    console.error("Error uploading thumbnail:", error);
+    throw error;
+  }
 };
 
 export const createVideo = async (video: Partial<TrainingVideo>) => {
-  const { data, error } = await supabase
-    .from('training_videos')
-    .insert([video])
-    .select();
+  try {
+    // Check if table exists first
+    const { error: tableError } = await supabase
+      .from('training_videos')
+      .select('count')
+      .limit(1);
+    
+    if (tableError && tableError.message.includes('does not exist')) {
+      throw new Error('Training videos table not found. Please set up the database.');
+    }
+    
+    const { data, error } = await supabase
+      .from('training_videos')
+      .insert([video])
+      .select();
 
-  if (error) throw error;
-  return data?.[0];
+    if (error) throw error;
+    return data?.[0];
+  } catch (error) {
+    console.error("Error creating video:", error);
+    throw error;
+  }
 };
 
 export const updateVideo = async (id: string, video: Partial<TrainingVideo>) => {

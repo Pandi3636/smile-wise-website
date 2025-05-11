@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui/use-toast";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -24,6 +26,7 @@ const AdminLoginPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [initializing, setInitializing] = useState(true);
+  const [setupError, setSetupError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,9 +39,13 @@ const AdminLoginPage = () => {
   useEffect(() => {
     const setupAdmin = async () => {
       try {
-        await initializeAdmin();
-      } catch (error) {
+        const result = await initializeAdmin();
+        if (!result) {
+          setSetupError("Database tables not found. Please run the SQL script in Supabase SQL Editor.");
+        }
+      } catch (error: any) {
         console.error("Error initializing admin:", error);
+        setSetupError(error.message || "Failed to initialize admin system");
       } finally {
         setInitializing(false);
       }
@@ -93,6 +100,16 @@ const AdminLoginPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              {setupError && (
+                <Alert variant="destructive" className="mb-4">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Setup Error</AlertTitle>
+                  <AlertDescription>
+                    {setupError}
+                  </AlertDescription>
+                </Alert>
+              )}
+              
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField

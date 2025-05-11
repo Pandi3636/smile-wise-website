@@ -1,16 +1,33 @@
-
 import { supabase } from '@/lib/supabase';
 import { AdminCredentials } from '@/types';
 
 // Initialize admin account if it doesn't exist
 export const initializeAdmin = async () => {
   try {
+    // Check if admin_users table exists
+    const { error: tableError } = await supabase
+      .from('admin_users')
+      .select('count')
+      .limit(1)
+      .single();
+    
+    // If table doesn't exist, we'll show a message to the user
+    if (tableError && tableError.message.includes('does not exist')) {
+      console.error("Admin users table doesn't exist. Please run the SQL script in Supabase SQL Editor.");
+      return false;
+    }
+
     // Check if admin user exists
-    const { data: existingUsers } = await supabase
+    const { data: existingUsers, error } = await supabase
       .from('admin_users')
       .select('email')
       .eq('email', 'admin@gmail.com')
       .single();
+
+    if (error && !error.message.includes('does not exist')) {
+      console.error("Error checking admin:", error);
+      return false;
+    }
 
     if (!existingUsers) {
       // Create admin user in the custom table
@@ -50,7 +67,15 @@ export const adminLogin = async (credentials: AdminCredentials) => {
       .eq('password', credentials.password)
       .single();
     
-    if (adminError || !adminUser) {
+    if (adminError) {
+      if (adminError.message.includes('does not exist')) {
+        throw new Error('Admin users table not found. Please set up the database.');
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    }
+    
+    if (!adminUser) {
       throw new Error('Invalid credentials');
     }
 
@@ -60,7 +85,29 @@ export const adminLogin = async (credentials: AdminCredentials) => {
       password: credentials.password
     });
     
-    if (error) throw error;
+    if (error) {
+      // If the user doesn't exist in Supabase Auth, create it
+      if (error.message.includes('Invalid login credentials')) {
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email: credentials.email,
+          password: credentials.password
+        });
+        
+        if (signUpError) throw signUpError;
+        
+        // Try login again after creating user
+        const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
+          email: credentials.email,
+          password: credentials.password
+        });
+        
+        if (retryError) throw retryError;
+        return retryData;
+      } else {
+        throw error;
+      }
+    }
+    
     return data;
   } catch (error: any) {
     throw new Error(error.message || 'Invalid credentials');
