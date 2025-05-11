@@ -1,7 +1,7 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { adminLogin } from "@/services/authService";
+import { adminLogin, initializeAdmin } from "@/services/authService";
 import { AdminCredentials } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,6 +23,7 @@ const AdminLoginPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [initializing, setInitializing] = useState(true);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,6 +32,20 @@ const AdminLoginPage = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    const setupAdmin = async () => {
+      try {
+        await initializeAdmin();
+      } catch (error) {
+        console.error("Error initializing admin:", error);
+      } finally {
+        setInitializing(false);
+      }
+    };
+
+    setupAdmin();
+  }, []);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -56,6 +71,14 @@ const AdminLoginPage = () => {
       setLoading(false);
     }
   };
+
+  if (initializing) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Initializing admin system...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -98,6 +121,11 @@ const AdminLoginPage = () => {
                       </FormItem>
                     )}
                   />
+                  <div className="text-sm text-gray-500 bg-gray-50 p-2 rounded">
+                    Default credentials:<br />
+                    Email: admin@gmail.com<br />
+                    Password: admin@123
+                  </div>
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                   </Button>

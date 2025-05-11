@@ -6,11 +6,20 @@ export interface TrainingVideo {
   created_at: string;
   thumbnail?: string;
   category_id?: string;
+  description?: string;
 }
 
 export interface AdminCredentials {
   email: string;
   password: string;
+}
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  password: string;
+  role: string;
+  created_at: string;
 }
 
 export interface Category {

@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import AdminNavbar from "@/components/AdminNavbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,10 +10,15 @@ import { getVideoById, updateVideo, uploadVideo, uploadThumbnail } from "@/servi
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import AdminLayout from "@/components/AdminLayout";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   video_url: z.string().url("Please enter a valid URL").or(z.string().length(0)),
+  description: z.string().optional(),
+  category_id: z.string().optional(),
 });
 
 type FileState = {
@@ -22,6 +26,15 @@ type FileState = {
   preview: string | null;
   uploading: boolean;
 };
+
+const categories = [
+  { id: "general", name: "General Dentistry" },
+  { id: "cosmetic", name: "Cosmetic Dentistry" },
+  { id: "pediatric", name: "Pediatric Dentistry" },
+  { id: "orthodontics", name: "Orthodontics" },
+  { id: "oral-surgery", name: "Oral Surgery" },
+  { id: "endodontics", name: "Endodontics" }
+];
 
 const AdminEditVideoPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,6 +58,8 @@ const AdminEditVideoPage = () => {
     defaultValues: {
       title: "",
       video_url: "",
+      description: "",
+      category_id: "general",
     },
   });
 
@@ -59,6 +74,8 @@ const AdminEditVideoPage = () => {
           form.reset({
             title: video.title,
             video_url: video.video_url,
+            description: video.description || "",
+            category_id: video.category_id || "general",
           });
           
           // If there's a thumbnail, set preview
@@ -110,6 +127,8 @@ const AdminEditVideoPage = () => {
         title: values.title,
         video_url: videoUrl,
         thumbnail: thumbnailUrl || undefined,
+        description: values.description,
+        category_id: values.category_id,
       });
       
       toast({
@@ -208,28 +227,18 @@ const AdminEditVideoPage = () => {
     });
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <AdminNavbar />
-        <div className="pt-24 pb-16 container mx-auto px-4 flex justify-center">
-          <p>Loading video data...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminNavbar />
-      <div className="pt-24 pb-16 container mx-auto px-4">
-        <div className="max-w-2xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Edit Training Video</CardTitle>
-              <CardDescription>Update video details or replace the video file</CardDescription>
-            </CardHeader>
-            <CardContent>
+    <AdminLayout>
+      <div className="max-w-2xl mx-auto">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Edit Training Video</CardTitle>
+            <CardDescription>Update video details or replace the video file</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {isLoading ? (
+              <div className="text-center py-4">Loading video data...</div>
+            ) : (
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -241,6 +250,45 @@ const AdminEditVideoPage = () => {
                         <FormControl>
                           <Input placeholder="Enter video title" {...field} />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description (Optional)</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Enter video description" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="category_id"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Category</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a category" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {categories.map((category) => (
+                              <SelectItem key={category.id} value={category.id}>
+                                {category.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -265,7 +313,7 @@ const AdminEditVideoPage = () => {
                           </FormItem>
                         )}
                       />
-                      <p className="text-sm text-gray-500 mt-1">Or</p>
+                      <p className="text-sm text-gray-500 mt-1">Or upload a new video:</p>
                     </div>
                     
                     <div className="border border-dashed border-gray-300 rounded-lg p-4">
@@ -383,11 +431,11 @@ const AdminEditVideoPage = () => {
                   </div>
                 </form>
               </Form>
-            </CardContent>
-          </Card>
-        </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 

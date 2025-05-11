@@ -1,8 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Video, BookOpenText, ListVideo } from "lucide-react";
+import { Video, BookOpenText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getAllVideos } from "@/services/videoService";
 import { TrainingVideo } from "@/types";
@@ -17,25 +18,11 @@ const categories = [
   { id: "endodontics", name: "Endodontics" }
 ];
 
-// Default videos to show while loading from Supabase
-const defaultVideos = {
-  general: [
-    {
-      id: "1",
-      title: "Basics of Oral Hygiene – Brushing Techniques",
-      thumbnail: "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1173&auto=format&fit=crop",
-      videoId: "dQw4w9WgXcQ", // Example YouTube video ID
-      duration: "4:23",
-      video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-    }
-  ],
-  // ... keep existing code (other default video categories)
-};
-
 const TrainingSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<null | {
     title: string;
     videoId: string;
+    description?: string;
   }>(null);
   const [videos, setVideos] = useState<TrainingVideo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,6 +31,7 @@ const TrainingSection = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
+        setLoading(true);
         const data = await getAllVideos();
         setVideos(data);
       } catch (error: any) {
@@ -71,7 +59,7 @@ const TrainingSection = () => {
     return (match && match[2].length === 11) ? match[2] : '';
   };
 
-  // Group videos by category - for now, assign all to 'general' if no category
+  // Group videos by category
   const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
     const categoryId = video.category_id || 'general';
     if (!acc[categoryId]) acc[categoryId] = [];
@@ -80,6 +68,7 @@ const TrainingSection = () => {
     acc[categoryId].push({
       id: video.id,
       title: video.title,
+      description: video.description || "",
       thumbnail: video.thumbnail || "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1173&auto=format&fit=crop",
       videoId: extractYoutubeId(video.video_url),
       duration: "3:45", // Placeholder duration
@@ -89,11 +78,12 @@ const TrainingSection = () => {
     return acc;
   }, {});
 
-  // For categories without videos, use default videos
-  const displayVideos = categories.reduce((acc: Record<string, any[]>, category) => {
-    acc[category.id] = videosByCategory[category.id] || defaultVideos[category.id as keyof typeof defaultVideos] || [];
-    return acc;
-  }, {});
+  // Initialize empty arrays for categories without videos
+  categories.forEach(category => {
+    if (!videosByCategory[category.id]) {
+      videosByCategory[category.id] = [];
+    }
+  });
 
   return (
     <section id="training" className="py-16 bg-white">
@@ -105,7 +95,7 @@ const TrainingSection = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">
             Comprehensive educational resources organized by dental specialty to help you better understand various dental procedures, treatments, and care tips.
           </p>
-          {/* Admin link section - only shows to admins */}
+          {/* Admin link section */}
           <div className="mt-4">
             <Button asChild variant="outline">
               <Link to="/admin-login">Administrator Access</Link>
@@ -122,15 +112,23 @@ const TrainingSection = () => {
             ))}
           </TabsList>
           
-          {Object.entries(displayVideos).map(([category, categoryVideos]) => (
+          {Object.entries(videosByCategory).map(([category, categoryVideos]) => (
             <TabsContent key={category} value={category}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {categoryVideos.length > 0 ? (
+                {loading ? (
+                  <div className="col-span-full text-center py-8">
+                    <p className="text-gray-500">Loading videos...</p>
+                  </div>
+                ) : categoryVideos.length > 0 ? (
                   categoryVideos.map((video) => (
                     <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
                       <div 
                         className="relative h-44 overflow-hidden"
-                        onClick={() => setSelectedVideo({ title: video.title, videoId: video.videoId })}
+                        onClick={() => setSelectedVideo({ 
+                          title: video.title, 
+                          videoId: video.videoId,
+                          description: video.description
+                        })}
                       >
                         <img
                           src={video.thumbnail}
@@ -188,6 +186,11 @@ const TrainingSection = () => {
                   allowFullScreen
                 ></iframe>
               </div>
+              {selectedVideo.description && (
+                <div className="p-4 border-t">
+                  <p className="text-gray-700">{selectedVideo.description}</p>
+                </div>
+              )}
             </div>
           </div>
         )}

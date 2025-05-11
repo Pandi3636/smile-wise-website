@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminNavbar from "@/components/AdminNavbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,10 +10,15 @@ import { createVideo, uploadVideo, uploadThumbnail } from "@/services/videoServi
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import AdminLayout from "@/components/AdminLayout";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
   video_url: z.string().url("Please enter a valid URL").or(z.string().length(0)),
+  description: z.string().optional(),
+  category_id: z.string().optional(),
 });
 
 type FileState = {
@@ -22,6 +26,15 @@ type FileState = {
   preview: string | null;
   uploading: boolean;
 };
+
+const categories = [
+  { id: "general", name: "General Dentistry" },
+  { id: "cosmetic", name: "Cosmetic Dentistry" },
+  { id: "pediatric", name: "Pediatric Dentistry" },
+  { id: "orthodontics", name: "Orthodontics" },
+  { id: "oral-surgery", name: "Oral Surgery" },
+  { id: "endodontics", name: "Endodontics" }
+];
 
 const AdminAddVideoPage = () => {
   const { toast } = useToast();
@@ -43,6 +56,8 @@ const AdminAddVideoPage = () => {
     defaultValues: {
       title: "",
       video_url: "",
+      description: "",
+      category_id: "general",
     },
   });
 
@@ -80,6 +95,8 @@ const AdminAddVideoPage = () => {
         title: values.title,
         video_url: videoUrl,
         thumbnail: thumbnailUrl || undefined,
+        description: values.description,
+        category_id: values.category_id,
       });
       
       toast({
@@ -176,141 +193,131 @@ const AdminAddVideoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <AdminNavbar />
-      <div className="pt-24 pb-16 container mx-auto px-4">
-        <div className="max-w-2xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Add New Training Video</CardTitle>
-              <CardDescription>Upload a new training video or provide a YouTube link</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Video Title</FormLabel>
+    <AdminLayout>
+      <div className="max-w-2xl mx-auto">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Add New Training Video</CardTitle>
+            <CardDescription>Upload a new training video or provide a YouTube link</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Video Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter video title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description (Optional)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Enter video description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="category_id"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <Input placeholder="Enter video title" {...field} />
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
                         </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                        <SelectContent>
+                          {categories.map((category) => (
+                            <SelectItem key={category.id} value={category.id}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="grid gap-6">
+                  <div>
+                    <FormField
+                      control={form.control}
+                      name="video_url"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Video URL (YouTube or other)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="https://www.youtube.com/watch?v=..." 
+                              {...field}
+                              disabled={!!fileState.file}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <p className="text-sm text-gray-500 mt-1">Or</p>
+                  </div>
                   
-                  <div className="grid gap-6">
-                    <div>
-                      <FormField
-                        control={form.control}
-                        name="video_url"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Video URL (YouTube or other)</FormLabel>
-                            <FormControl>
-                              <Input 
-                                placeholder="https://www.youtube.com/watch?v=..." 
-                                {...field}
-                                disabled={!!fileState.file}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <p className="text-sm text-gray-500 mt-1">Or</p>
-                    </div>
-                    
-                    <div className="border border-dashed border-gray-300 rounded-lg p-4">
-                      <div className="text-center">
-                        <div className="mt-2">
-                          {!fileState.file ? (
-                            <div className="flex flex-col items-center">
-                              <label 
-                                htmlFor="video-upload" 
-                                className="cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-md border text-sm"
-                              >
-                                Upload Video
-                              </label>
-                              <Input
-                                id="video-upload"
-                                type="file"
-                                accept="video/*"
-                                className="hidden"
-                                onChange={handleFileChange}
-                                disabled={isSubmitting}
-                              />
-                              <p className="text-xs text-gray-500 mt-2">
-                                Supported formats: MP4, WEBM (max 100MB)
-                              </p>
-                            </div>
-                          ) : (
-                            <div>
-                              <p className="text-sm font-medium mb-2">Selected file: {fileState.file.name}</p>
-                              {fileState.preview && (
-                                <div className="mb-2">
-                                  <video 
-                                    src={fileState.preview} 
-                                    controls 
-                                    className="mx-auto max-h-48"
-                                  ></video>
-                                </div>
-                              )}
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                type="button" 
-                                onClick={clearFileSelection}
-                                disabled={isSubmitting}
-                              >
-                                Remove
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="border border-dashed border-gray-300 rounded-lg p-4">
-                      <FormLabel>Thumbnail Image</FormLabel>
-                      <div className="text-center mt-2">
-                        {!thumbnailState.file ? (
+                  <div className="border border-dashed border-gray-300 rounded-lg p-4">
+                    <div className="text-center">
+                      <div className="mt-2">
+                        {!fileState.file ? (
                           <div className="flex flex-col items-center">
                             <label 
-                              htmlFor="thumbnail-upload" 
+                              htmlFor="video-upload" 
                               className="cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-md border text-sm"
                             >
-                              Upload Thumbnail
+                              Upload Video
                             </label>
                             <Input
-                              id="thumbnail-upload"
+                              id="video-upload"
                               type="file"
-                              accept="image/*"
+                              accept="video/*"
                               className="hidden"
-                              onChange={handleThumbnailChange}
+                              onChange={handleFileChange}
                               disabled={isSubmitting}
                             />
                             <p className="text-xs text-gray-500 mt-2">
-                              Recommended: 16:9 ratio, JPG or PNG
+                              Supported formats: MP4, WEBM (max 100MB)
                             </p>
                           </div>
                         ) : (
                           <div>
-                            <div className="mb-2">
-                              <img 
-                                src={thumbnailState.preview!} 
-                                alt="Thumbnail preview" 
-                                className="mx-auto max-h-48 object-cover rounded"
-                              />
-                            </div>
+                            <p className="text-sm font-medium mb-2">Selected file: {fileState.file.name}</p>
+                            {fileState.preview && (
+                              <div className="mb-2">
+                                <video 
+                                  src={fileState.preview} 
+                                  controls 
+                                  className="mx-auto max-h-48"
+                                ></video>
+                              </div>
+                            )}
                             <Button 
                               variant="outline" 
                               size="sm" 
                               type="button" 
-                              onClick={clearThumbnailSelection}
+                              onClick={clearFileSelection}
                               disabled={isSubmitting}
                             >
                               Remove
@@ -321,29 +328,75 @@ const AdminAddVideoPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-end space-x-4 pt-4">
-                    <Button 
-                      variant="outline" 
-                      type="button" 
-                      onClick={() => navigate("/admin/dashboard")}
-                      disabled={isSubmitting}
-                    >
-                      Cancel
-                    </Button>
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting || fileState.uploading}
-                    >
-                      {isSubmitting ? "Adding Video..." : "Add Video"}
-                    </Button>
+                  <div className="border border-dashed border-gray-300 rounded-lg p-4">
+                    <FormLabel>Thumbnail Image</FormLabel>
+                    <div className="text-center mt-2">
+                      {!thumbnailState.file ? (
+                        <div className="flex flex-col items-center">
+                          <label 
+                            htmlFor="thumbnail-upload" 
+                            className="cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-md border text-sm"
+                          >
+                            Upload Thumbnail
+                          </label>
+                          <Input
+                            id="thumbnail-upload"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleThumbnailChange}
+                            disabled={isSubmitting}
+                          />
+                          <p className="text-xs text-gray-500 mt-2">
+                            Recommended: 16:9 ratio, JPG or PNG
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="mb-2">
+                            <img 
+                              src={thumbnailState.preview!} 
+                              alt="Thumbnail preview" 
+                              className="mx-auto max-h-48 object-cover rounded"
+                            />
+                          </div>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            type="button" 
+                            onClick={clearThumbnailSelection}
+                            disabled={isSubmitting}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
-        </div>
+                </div>
+
+                <div className="flex justify-end space-x-4 pt-4">
+                  <Button 
+                    variant="outline" 
+                    type="button" 
+                    onClick={() => navigate("/admin/dashboard")}
+                    disabled={isSubmitting}
+                  >
+                    Cancel
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting || fileState.uploading}
+                  >
+                    {isSubmitting ? "Adding Video..." : "Add Video"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 
