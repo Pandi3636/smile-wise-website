@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tooth } from "lucide-react";
+import { Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tipItems = [
@@ -36,7 +36,7 @@ const DoctorTips = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="flex justify-center items-center mb-4">
-            <Tooth className="h-8 w-8 text-dental-blue mr-2" />
+            <Stethoscope className="h-8 w-8 text-dental-blue mr-2" />
             <h2 className="text-3xl font-bold text-gray-800">Doctor Tips</h2>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
