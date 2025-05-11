@@ -15,6 +15,7 @@ import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminAddVideoPage from "./pages/AdminAddVideoPage";
 import AdminEditVideoPage from "./pages/AdminEditVideoPage";
+import DoctorTipDetail from "./pages/doctorTipDetail";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/doctor-tips" element={<DoctorTipsPage />} />
+          <Route path="/doctor-tips/:id" element={<DoctorTipDetail />} />
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/contact" element={<ContactPage />} />
           

@@ -1,7 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-// import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const doctorTips = [
   {
@@ -17,8 +16,6 @@ const doctorTips = [
     description: "Learn which foods to avoid for a whiter smile.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyef76wUc1ywuU0aYfdaMoBZHWq3EI5rgu_NPpczQsuydG3X3veZYjibW8RmB3TaBvT7Y&usqp=CAU",
     slug: "2"
-
-
   },
   {
     id: 3,
@@ -26,7 +23,6 @@ const doctorTips = [
     description: "Replace it every 3 months or after an illness.",
     image: "https://static.vecteezy.com/system/resources/previews/017/324/224/non_2x/a-bunch-of-old-worn-out-toothbrushes-with-bent-bristles-on-a-white-background-photo.jpg",
     slug: "3"
-
   },
   {
     id: 4,
@@ -34,7 +30,6 @@ const doctorTips = [
     description: "Make brushing fun and consistent.",
     image: "https://cdn.shopify.com/s/files/1/0661/2113/8345/files/WEB-BANNERS19.jpg?v=1728290727",
     slug: "4"
-
   }
 ];
 
@@ -64,19 +59,17 @@ const DoctorTipsSection = () => {
               </CardHeader>
               <CardContent>
                 <CardDescription>{tip.description}</CardDescription>
-                {/* <Link to={`/doctorDataTips/${tip.slug}`}> */}
-
+                <Link to={`/doctor-tips/${tip.id}`}>
                   <p className="text-dental-blue mt-2 hover:underline">View More</p>
-                {/* </Link> */}
-
+                </Link>
               </CardContent>
             </Card>
           ))}
         </div>
 
         <div className="text-center mt-10">
-          <a
-            href="#"
+          <Link
+            to="/doctor-tips"
             className="text-dental-blue hover:text-blue-700 font-medium inline-flex items-center"
           >
             View all doctor tips
@@ -89,7 +82,7 @@ const DoctorTipsSection = () => {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

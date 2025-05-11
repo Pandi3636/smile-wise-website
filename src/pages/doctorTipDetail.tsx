@@ -3,12 +3,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import DoctorDataTips from "./DoctorDataTips";
+import { doctorTips } from "./DoctorDataTips";
 
 const DoctorTipDetail = () => {
   const { id } = useParams();
-  const tips = DoctorDataTips();
-  const tip = tips.find((tip) => tip.id === id);
+  const tip = doctorTips.find((tip) => tip.id === parseInt(id as string));
 
   if (!tip) {
     return (
@@ -34,7 +33,7 @@ const DoctorTipDetail = () => {
             className="w-full h-64 object-cover rounded-lg mb-6"
           />
           <div className="prose max-w-none">
-            <p className="text-gray-700">{tip.content}</p>
+            <p className="text-gray-700">{tip.description}</p>
           </div>
         </div>
       </div>
