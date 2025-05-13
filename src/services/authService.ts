@@ -1,17 +1,59 @@
 import { supabase } from '@/lib/supabase';
 import { AdminCredentials } from '@/types';
 
-// Initialize admin account if it doesn't exist
+// SQL script to initialize tables if they don't exist yet
+const createTablesSQL = `
+-- Create admin_users table for authentication
+CREATE TABLE IF NOT EXISTS public.admin_users (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(50) NOT NULL DEFAULT 'admin',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create training_videos table
+CREATE TABLE IF NOT EXISTS public.training_videos (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  title VARCHAR(255) NOT NULL,
+  video_url TEXT NOT NULL,
+  thumbnail TEXT,
+  description TEXT,
+  category_id VARCHAR(50),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create categories table
+CREATE TABLE IF NOT EXISTS public.categories (
+  id VARCHAR(50) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+`;
+
+// Initialize admin account and required tables
 export const initializeAdmin = async () => {
   try {
-    // Check if admin_users table exists
+    // First run the SQL to create tables if they don't exist
+    const { error: sqlError } = await supabase.rpc('exec', { sql: createTablesSQL });
+    
+    if (sqlError) {
+      console.error("SQL Error:", sqlError);
+      // Try to run the SQL directly against the database
+      try {
+        await supabase.query(createTablesSQL);
+      } catch (directError) {
+        console.error("Direct SQL execution error:", directError);
+      }
+    }
+    
+    // Check if admin_users table exists by trying to query it
     const { error: tableError } = await supabase
       .from('admin_users')
       .select('count')
       .limit(1)
       .single();
     
-    // If table doesn't exist, we'll show a message to the user
+    // If table doesn't exist, the SQL above might not have worked
     if (tableError && tableError.message.includes('does not exist')) {
       console.error("Admin users table doesn't exist. Please run the SQL script in Supabase SQL Editor.");
       return false;
@@ -24,32 +66,69 @@ export const initializeAdmin = async () => {
       .eq('email', 'admin@gmail.com')
       .single();
 
-    if (error && !error.message.includes('does not exist')) {
+    if (error && !error.message.includes('No rows found') && !error.message.includes('does not exist')) {
       console.error("Error checking admin:", error);
       return false;
     }
 
     if (!existingUsers) {
       // Create admin user in the custom table
-      const { error } = await supabase
+      const { error: insertError } = await supabase
         .from('admin_users')
         .insert([
-          { email: 'admin@gmail.com', password: 'admin@123', role: 'admin' }
+          { email: 'admin@gmail.com', password: 'Password@123', role: 'admin' }
         ]);
 
-      if (error) throw error;
+      if (insertError) {
+        console.error("Error inserting admin user:", insertError);
+        return false;
+      }
     }
 
     // Also ensure the admin exists in auth
     const { data: user, error: authError } = await supabase.auth.signUp({
       email: 'admin@gmail.com',
-      password: 'admin@123',
+      password: 'Password@123',
     });
 
     if (authError && !authError.message.includes('already registered')) {
-      throw authError;
+      console.error("Error creating auth user:", authError);
+      return false;
     }
 
+    // Create a bucket for training videos if it doesn't exist
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
+    
+    if (!trainingBucket) {
+      const { error: bucketError } = await supabase.storage.createBucket('training', {
+        public: false,
+        fileSizeLimit: 100 * 1024 * 1024 // 100MB limit
+      });
+      
+      if (bucketError) {
+        console.error("Error creating training bucket:", bucketError);
+      }
+    }
+
+    // Insert default categories if they don't exist
+    const { error: categoriesError } = await supabase
+      .from('categories')
+      .insert([
+        { id: 'general', name: 'General Dentistry' },
+        { id: 'cosmetic', name: 'Cosmetic Dentistry' },
+        { id: 'pediatric', name: 'Pediatric Dentistry' },
+        { id: 'orthodontics', name: 'Orthodontics' },
+        { id: 'oral-surgery', name: 'Oral Surgery' },
+        { id: 'endodontics', name: 'Endodontics' }
+      ])
+      .onConflict('id')
+      .ignore();
+
+    if (categoriesError) {
+      console.error("Error inserting categories:", categoriesError);
+    }
+    
     return true;
   } catch (error) {
     console.error("Error initializing admin:", error);
@@ -68,15 +147,19 @@ export const adminLogin = async (credentials: AdminCredentials) => {
       .single();
     
     if (adminError) {
+      if (adminError.message.includes('No rows found')) {
+        throw new Error('Invalid credentials. Please try again.');
+      }
       if (adminError.message.includes('does not exist')) {
         throw new Error('Admin users table not found. Please set up the database.');
       } else {
-        throw new Error('Invalid credentials');
+        console.error("Admin check error:", adminError);
+        throw new Error('Authentication error. Please try again.');
       }
     }
     
     if (!adminUser) {
-      throw new Error('Invalid credentials');
+      throw new Error('Invalid credentials. Please try again.');
     }
 
     // If admin exists in custom table, sign in with Supabase auth
@@ -93,7 +176,10 @@ export const adminLogin = async (credentials: AdminCredentials) => {
           password: credentials.password
         });
         
-        if (signUpError) throw signUpError;
+        if (signUpError) {
+          console.error("Sign up error:", signUpError);
+          throw new Error('Failed to create authentication account.');
+        }
         
         // Try login again after creating user
         const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
@@ -101,15 +187,20 @@ export const adminLogin = async (credentials: AdminCredentials) => {
           password: credentials.password
         });
         
-        if (retryError) throw retryError;
-        return retryData;
+        if (retryError) {
+          console.error("Retry login error:", retryError);
+          throw new Error('Login failed after account creation.');
+        }
+        return { ...retryData, admin: adminUser };
       } else {
-        throw error;
+        console.error("Auth error:", error);
+        throw new Error('Authentication failed. Please try again.');
       }
     }
     
-    return data;
+    return { ...data, admin: adminUser };
   } catch (error: any) {
+    console.error("Login error:", error);
     throw new Error(error.message || 'Invalid credentials');
   }
 };

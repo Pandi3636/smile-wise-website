@@ -12,7 +12,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -27,6 +27,7 @@ const AdminLoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [initializing, setInitializing] = useState(true);
   const [setupError, setSetupError] = useState<string | null>(null);
+  const [initProgress, setInitProgress] = useState<string>("Setting up database...");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,9 +40,10 @@ const AdminLoginPage = () => {
   useEffect(() => {
     const setupAdmin = async () => {
       try {
+        setInitProgress("Checking database tables...");
         const result = await initializeAdmin();
         if (!result) {
-          setSetupError("Database tables not found. Please run the SQL script in Supabase SQL Editor.");
+          setSetupError("Database setup issue. Please ensure Supabase is properly configured.");
         }
       } catch (error: any) {
         console.error("Error initializing admin:", error);
@@ -81,8 +83,12 @@ const AdminLoginPage = () => {
 
   if (initializing) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Initializing admin system...</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
+        <div className="flex items-center gap-2 mb-4">
+          <Loader2 className="h-6 w-6 animate-spin text-dental-blue" />
+          <p className="text-lg">{initProgress}</p>
+        </div>
+        <p className="text-sm text-gray-500">This may take a moment...</p>
       </div>
     );
   }
@@ -141,10 +147,17 @@ const AdminLoginPage = () => {
                   <div className="text-sm text-gray-500 bg-gray-50 p-2 rounded">
                     Default credentials:<br />
                     Email: admin@gmail.com<br />
-                    Password: admin@123
+                    Password: Password@123
                   </div>
                   <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Logging in..." : "Login"}
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Logging in...
+                      </>
+                    ) : (
+                      "Login"
+                    )}
                   </Button>
                 </form>
               </Form>
