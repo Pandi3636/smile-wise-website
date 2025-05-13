@@ -38,12 +38,8 @@ export const initializeAdmin = async () => {
     
     if (sqlError) {
       console.error("SQL Error:", sqlError);
-      // Try to run the SQL directly against the database
-      try {
-        await supabase.query(createTablesSQL);
-      } catch (directError) {
-        console.error("Direct SQL execution error:", directError);
-      }
+      // Instead of using query which doesn't exist, catch the error and continue
+      console.error("Unable to execute SQL through RPC. Tables may need to be created manually.");
     }
     
     // Check if admin_users table exists by trying to query it
@@ -111,24 +107,35 @@ export const initializeAdmin = async () => {
       }
     }
 
-    // Insert default categories if they don't exist
-    const { error: categoriesError } = await supabase
-      .from('categories')
-      .insert([
-        { id: 'general', name: 'General Dentistry' },
-        { id: 'cosmetic', name: 'Cosmetic Dentistry' },
-        { id: 'pediatric', name: 'Pediatric Dentistry' },
-        { id: 'orthodontics', name: 'Orthodontics' },
-        { id: 'oral-surgery', name: 'Oral Surgery' },
-        { id: 'endodontics', name: 'Endodontics' }
-      ])
-      .onConflict('id')
-      .ignore();
-
-    if (categoriesError) {
-      console.error("Error inserting categories:", categoriesError);
-    }
+    // Insert default categories if they don't exist - fixed the upsert pattern
+    const defaultCategories = [
+      { id: 'general', name: 'General Dentistry' },
+      { id: 'cosmetic', name: 'Cosmetic Dentistry' },
+      { id: 'pediatric', name: 'Pediatric Dentistry' },
+      { id: 'orthodontics', name: 'Orthodontics' },
+      { id: 'oral-surgery', name: 'Oral Surgery' },
+      { id: 'endodontics', name: 'Endodontics' }
+    ];
     
+    // Insert categories one by one with error handling for each
+    for (const category of defaultCategories) {
+      const { error: checkError, data: existingCategory } = await supabase
+        .from('categories')
+        .select('id')
+        .eq('id', category.id)
+        .maybeSingle();
+        
+      if (!existingCategory && !checkError) {
+        const { error: insertError } = await supabase
+          .from('categories')
+          .insert([category]);
+          
+        if (insertError) {
+          console.error(`Error inserting category ${category.id}:`, insertError);
+        }
+      }
+    }
+
     return true;
   } catch (error) {
     console.error("Error initializing admin:", error);
