@@ -2,7 +2,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { adminLogout, getAdminProfile } from "@/services/authService";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
 import { Video, LogOut, Settings, Eye } from "lucide-react";
 import { AdminUser } from "@/types";

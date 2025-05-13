@@ -43,17 +43,6 @@ export const initializeAdmin = async () => {
       }
     }
 
-    // Also ensure the admin exists in auth
-    const { data: user, error: authError } = await supabase.auth.signUp({
-      email: 'admin@gmail.com',
-      password: 'Password@123',
-    });
-
-    if (authError && !authError.message.includes('already registered')) {
-      console.error("Error creating auth user:", authError);
-      return false;
-    }
-
     // Check if the training bucket exists
     const { data: buckets } = await supabase.storage.listBuckets();
     const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
@@ -106,6 +95,8 @@ export const initializeAdmin = async () => {
 
 export const adminLogin = async (credentials: AdminCredentials) => {
   try {
+    console.log("Login attempt with credentials:", credentials.email);
+    
     // First check credentials against custom admin_users table
     const { data: adminUser, error: adminError } = await supabase
       .from('admin_users')
@@ -130,43 +121,14 @@ export const adminLogin = async (credentials: AdminCredentials) => {
       throw new Error('Invalid credentials. Please try again.');
     }
 
-    // If admin exists in custom table, sign in with Supabase auth
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: credentials.email,
-      password: credentials.password
-    });
+    // Using custom sessions for admin users
+    // Store admin session in localStorage
+    localStorage.setItem('adminSession', JSON.stringify({
+      user: adminUser,
+      timestamp: new Date().toISOString()
+    }));
     
-    if (error) {
-      // If the user doesn't exist in Supabase Auth, create it
-      if (error.message.includes('Invalid login credentials')) {
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-          email: credentials.email,
-          password: credentials.password
-        });
-        
-        if (signUpError) {
-          console.error("Sign up error:", signUpError);
-          throw new Error('Failed to create authentication account.');
-        }
-        
-        // Try login again after creating user
-        const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
-          email: credentials.email,
-          password: credentials.password
-        });
-        
-        if (retryError) {
-          console.error("Retry login error:", retryError);
-          throw new Error('Login failed after account creation.');
-        }
-        return { ...retryData, admin: adminUser };
-      } else {
-        console.error("Auth error:", error);
-        throw new Error('Authentication failed. Please try again.');
-      }
-    }
-    
-    return { ...data, admin: adminUser };
+    return { admin: adminUser };
   } catch (error: any) {
     console.error("Login error:", error);
     throw new Error(error.message || 'Invalid credentials');
@@ -186,24 +148,6 @@ export const updateAdminCredentials = async (id: string, credentials: Partial<Ad
 
     if (adminTableError) throw adminTableError;
     
-    // If password was changed, update in auth as well
-    if (credentials.password) {
-      const { error: authUpdateError } = await supabase.auth.updateUser({
-        password: credentials.password
-      });
-      
-      if (authUpdateError) throw authUpdateError;
-    }
-    
-    // If email was changed, update in auth
-    if (credentials.email) {
-      const { error: emailUpdateError } = await supabase.auth.updateUser({
-        email: credentials.email
-      });
-      
-      if (emailUpdateError) throw emailUpdateError;
-    }
-    
     return true;
   } catch (error: any) {
     throw new Error(error.message || 'Failed to update credentials');
@@ -212,20 +156,15 @@ export const updateAdminCredentials = async (id: string, credentials: Partial<Ad
 
 export const getAdminProfile = async () => {
   try {
-    const { data: session } = await supabase.auth.getSession();
+    // Get from localStorage instead of auth session
+    const adminSessionStr = localStorage.getItem('adminSession');
     
-    if (!session.session) {
+    if (!adminSessionStr) {
       return null;
     }
     
-    const { data, error } = await supabase
-      .from('admin_users')
-      .select('*')
-      .eq('email', session.session.user.email)
-      .single();
-      
-    if (error) throw error;
-    return data;
+    const adminSession = JSON.parse(adminSessionStr);
+    return adminSession.user;
   } catch (error) {
     console.error("Error fetching admin profile:", error);
     return null;
@@ -233,19 +172,26 @@ export const getAdminProfile = async () => {
 };
 
 export const adminLogout = async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw error;
+  // Clear admin session from localStorage
+  localStorage.removeItem('adminSession');
   return true;
 };
 
 export const getCurrentUser = async () => {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data.user;
+  const adminSessionStr = localStorage.getItem('adminSession');
+  if (!adminSessionStr) {
+    return null;
+  }
+  
+  const adminSession = JSON.parse(adminSessionStr);
+  return adminSession.user;
 };
 
 export const getSession = async () => {
-  const { data, error } = await supabase.auth.getSession();
-  if (error) throw error;
-  return data.session;
+  const adminSessionStr = localStorage.getItem('adminSession');
+  if (!adminSessionStr) {
+    return null;
+  }
+  
+  return { user: JSON.parse(adminSessionStr).user };
 };

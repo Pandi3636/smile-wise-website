@@ -105,9 +105,10 @@ export const uploadThumbnail = async (file: File) => {
 
 export const createVideo = async (video: Partial<TrainingVideo>) => {
   try {
+    // Fix: Pass a single object instead of an array
     const { data, error } = await supabase
       .from('training_videos')
-      .insert([video])
+      .insert(video)
       .select();
 
     if (error) throw error;
