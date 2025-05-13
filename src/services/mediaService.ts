@@ -1,5 +1,5 @@
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 
 // Instagram Reels
 export const saveInstagramReel = async (reel: { url: string; title: string }) => {

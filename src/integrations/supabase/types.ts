@@ -48,6 +48,57 @@ export type Database = {
         }
         Relationships: []
       }
+      compressed_videos: {
+        Row: {
+          compressed_size: number
+          compression_level: string
+          created_at: string | null
+          id: string
+          original_size: number
+          title: string
+          video_url: string
+        }
+        Insert: {
+          compressed_size: number
+          compression_level?: string
+          created_at?: string | null
+          id?: string
+          original_size: number
+          title: string
+          video_url: string
+        }
+        Update: {
+          compressed_size?: number
+          compression_level?: string
+          created_at?: string | null
+          id?: string
+          original_size?: number
+          title?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
+      instagram_reels: {
+        Row: {
+          created_at: string | null
+          id: string
+          title: string
+          url: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          title: string
+          url: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          title?: string
+          url?: string
+        }
+        Relationships: []
+      }
       training_videos: {
         Row: {
           category_id: string | null
@@ -75,6 +126,30 @@ export type Database = {
           thumbnail?: string | null
           title?: string
           video_url?: string
+        }
+        Relationships: []
+      }
+      watermarked_images: {
+        Row: {
+          created_at: string | null
+          id: string
+          image_url: string
+          title: string
+          watermark_settings: Json
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          image_url: string
+          title: string
+          watermark_settings: Json
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          title?: string
+          watermark_settings?: Json
         }
         Relationships: []
       }

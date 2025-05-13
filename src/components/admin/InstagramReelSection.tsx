@@ -1,11 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { saveInstagramReel } from "@/services/mediaService";
+import { useToast } from "@/components/ui/use-toast";
+import { saveInstagramReel, getAllInstagramReels, deleteInstagramReel } from "@/services/mediaService";
+import { Trash, ExternalLink } from "lucide-react";
 
 const InstagramReelSection = () => {
   const [reelUrl, setReelUrl] = useState("");
@@ -13,6 +14,23 @@ const InstagramReelSection = () => {
   const [reels, setReels] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchReels();
+  }, []);
+
+  const fetchReels = async () => {
+    try {
+      const fetchedReels = await getAllInstagramReels();
+      setReels(fetchedReels);
+    } catch (error: any) {
+      toast({
+        title: "Error fetching reels",
+        description: error.message || "Failed to fetch Instagram reels",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +67,23 @@ const InstagramReelSection = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDeleteReel = async (id: string) => {
+    try {
+      await deleteInstagramReel(id);
+      setReels(reels.filter(reel => reel.id !== id));
+      toast({
+        title: "Success", 
+        description: "Reel deleted successfully"
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete reel",
+        variant: "destructive",
+      });
     }
   };
 
@@ -136,6 +171,22 @@ const InstagramReelSection = () => {
                       scrolling="no"
                       allowFullScreen
                     ></iframe>
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={reel.url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-1" />
+                        Visit
+                      </a>
+                    </Button>
+                    <Button 
+                      variant="destructive" 
+                      size="sm"
+                      onClick={() => handleDeleteReel(reel.id)}
+                    >
+                      <Trash className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

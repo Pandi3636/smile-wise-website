@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { uploadWatermarkedImage, getAllWatermarkedImages, deleteWatermarkedImage } from "@/services/mediaService";
-import { trash as Trash, upload as Upload, eye as Eye } from "lucide-react";
+import { Trash, Upload, Eye } from "lucide-react";
 
 type WatermarkSettings = {
   text: string;
