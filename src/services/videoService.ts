@@ -1,4 +1,5 @@
-import { supabase } from '@/lib/supabase';
+
+import { supabase } from '@/integrations/supabase/client';
 import { TrainingVideo } from '@/types';
 
 export const getAllVideos = async (): Promise<TrainingVideo[]> => {
@@ -104,16 +105,6 @@ export const uploadThumbnail = async (file: File) => {
 
 export const createVideo = async (video: Partial<TrainingVideo>) => {
   try {
-    // Check if table exists first
-    const { error: tableError } = await supabase
-      .from('training_videos')
-      .select('count')
-      .limit(1);
-    
-    if (tableError && tableError.message.includes('does not exist')) {
-      throw new Error('Training videos table not found. Please set up the database.');
-    }
-    
     const { data, error } = await supabase
       .from('training_videos')
       .insert([video])

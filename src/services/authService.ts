@@ -1,47 +1,9 @@
-import { supabase } from '@/lib/supabase';
+
+import { supabase } from '@/integrations/supabase/client';
 import { AdminCredentials } from '@/types';
 
-// SQL script to initialize tables if they don't exist yet
-const createTablesSQL = `
--- Create admin_users table for authentication
-CREATE TABLE IF NOT EXISTS public.admin_users (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  role VARCHAR(50) NOT NULL DEFAULT 'admin',
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Create training_videos table
-CREATE TABLE IF NOT EXISTS public.training_videos (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  title VARCHAR(255) NOT NULL,
-  video_url TEXT NOT NULL,
-  thumbnail TEXT,
-  description TEXT,
-  category_id VARCHAR(50),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Create categories table
-CREATE TABLE IF NOT EXISTS public.categories (
-  id VARCHAR(50) PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
-);
-`;
-
-// Initialize admin account and required tables
 export const initializeAdmin = async () => {
   try {
-    // First run the SQL to create tables if they don't exist
-    const { error: sqlError } = await supabase.rpc('exec', { sql: createTablesSQL });
-    
-    if (sqlError) {
-      console.error("SQL Error:", sqlError);
-      // Instead of using query which doesn't exist, catch the error and continue
-      console.error("Unable to execute SQL through RPC. Tables may need to be created manually.");
-    }
-    
     // Check if admin_users table exists by trying to query it
     const { error: tableError } = await supabase
       .from('admin_users')
@@ -92,14 +54,13 @@ export const initializeAdmin = async () => {
       return false;
     }
 
-    // Create a bucket for training videos if it doesn't exist
+    // Check if the training bucket exists
     const { data: buckets } = await supabase.storage.listBuckets();
     const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
     
     if (!trainingBucket) {
       const { error: bucketError } = await supabase.storage.createBucket('training', {
-        public: false,
-        fileSizeLimit: 100 * 1024 * 1024 // 100MB limit
+        public: true
       });
       
       if (bucketError) {
@@ -107,7 +68,7 @@ export const initializeAdmin = async () => {
       }
     }
 
-    // Insert default categories if they don't exist - fixed the upsert pattern
+    // Insert default categories if they don't exist
     const defaultCategories = [
       { id: 'general', name: 'General Dentistry' },
       { id: 'cosmetic', name: 'Cosmetic Dentistry' },
