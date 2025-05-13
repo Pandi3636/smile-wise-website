@@ -103,9 +103,9 @@ export const uploadThumbnail = async (file: File) => {
   }
 };
 
-export const createVideo = async (video: Partial<TrainingVideo>) => {
+// Fix: Update parameter type to ensure required fields are present
+export const createVideo = async (video: { title: string; video_url: string } & Partial<TrainingVideo>) => {
   try {
-    // Fix: Pass a single object instead of an array
     const { data, error } = await supabase
       .from('training_videos')
       .insert(video)
