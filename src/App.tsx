@@ -16,6 +16,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminAddVideoPage from "./pages/AdminAddVideoPage";
 import AdminEditVideoPage from "./pages/AdminEditVideoPage";
 import AdminSettingsPage from "./pages/AdminSettingsPage";
+import AdminMediaPage from "./pages/AdminMediaPage";
 import DoctorTipDetail from "./pages/doctorTipDetail";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/admin/add-video" element={<AdminAddVideoPage />} />
           <Route path="/admin/edit-video/:id" element={<AdminEditVideoPage />} />
           <Route path="/admin/settings" element={<AdminSettingsPage />} />
+          <Route path="/admin/media" element={<AdminMediaPage />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

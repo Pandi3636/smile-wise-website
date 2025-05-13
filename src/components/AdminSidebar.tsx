@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { adminLogout, getAdminProfile } from "@/services/authService";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-import { Video, LogOut, Settings, Eye } from "lucide-react";
+import { Video, LogOut, Settings, Eye, Image } from "lucide-react";
 import { AdminUser } from "@/types";
 
 const AdminSidebar = () => {
@@ -72,6 +72,15 @@ const AdminSidebar = () => {
             </li>
             <li>
               <Link 
+                to="/admin/media" 
+                className={`flex items-center gap-3 p-3 rounded-md ${isActive('/admin/media')}`}
+              >
+                <Image size={20} />
+                <span>Media Management</span>
+              </Link>
+            </li>
+            <li>
+              <Link 
                 to="/admin/settings" 
                 className={`flex items-center gap-3 p-3 rounded-md ${isActive('/admin/settings')}`}
               >
@@ -122,6 +131,16 @@ const AdminSidebar = () => {
                 >
                   <Video size={18} />
                   <span>Training Videos</span>
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/admin/media" 
+                  className={`flex items-center gap-3 p-2 rounded-md ${isActive('/admin/media')}`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Image size={18} />
+                  <span>Media Management</span>
                 </Link>
               </li>
               <li>
