@@ -8,9 +8,12 @@ import AdminLayout from "@/components/AdminLayout";
 import InstagramReelSection from "@/components/admin/InstagramReelSection";
 import VideoCompressionSection from "@/components/admin/VideoCompressionSection";
 import WatermarkImageSection from "@/components/admin/WatermarkImageSection";
+import MediaLibrarySection from "@/components/admin/MediaLibrarySection";
+import TrainingVideosSection from "@/components/admin/TrainingVideosSection";
 
 const AdminMediaPage = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("library");
 
   return (
     <AdminLayout>
@@ -23,29 +26,39 @@ const AdminMediaPage = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Media Tools</CardTitle>
+          <CardTitle>Media Management</CardTitle>
           <CardDescription>
-            Manage social media content, compress videos, and add watermarks to images
+            Upload, organize, and manage media files including images and videos
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="instagram" className="space-y-4">
-            <TabsList className="grid grid-cols-3 gap-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+            <TabsList className="grid grid-cols-5 gap-2">
+              <TabsTrigger value="library">Media Library</TabsTrigger>
+              <TabsTrigger value="training">Training Videos</TabsTrigger>
+              <TabsTrigger value="watermark">Image Watermarking</TabsTrigger>
+              <TabsTrigger value="compression">Video Compression</TabsTrigger>
               <TabsTrigger value="instagram">Instagram Reels</TabsTrigger>
-              <TabsTrigger value="videos">Video Compression</TabsTrigger>
-              <TabsTrigger value="images">Watermark Images</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="instagram">
-              <InstagramReelSection />
+            <TabsContent value="library">
+              <MediaLibrarySection />
+            </TabsContent>
+            
+            <TabsContent value="training">
+              <TrainingVideosSection />
             </TabsContent>
 
-            <TabsContent value="videos">
+            <TabsContent value="watermark">
+              <WatermarkImageSection />
+            </TabsContent>
+
+            <TabsContent value="compression">
               <VideoCompressionSection />
             </TabsContent>
 
-            <TabsContent value="images">
-              <WatermarkImageSection />
+            <TabsContent value="instagram">
+              <InstagramReelSection />
             </TabsContent>
           </Tabs>
         </CardContent>
