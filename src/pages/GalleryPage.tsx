@@ -12,7 +12,7 @@ import { getAllVideos } from "@/services/videoService";
 import { Image, Video, GalleryHorizontal } from "lucide-react";
 
 const GalleryPage = () => {
-  const [activeTab, setActiveTab] = useState<"images" | "videos" | "all">("all");
+  const [activeTab, setActiveTab] = useState<"images" | "videos" | "all">("images");
   const [images, setImages] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +26,7 @@ const GalleryPage = () => {
           getAllWatermarkedImages(),
           getAllVideos()
         ]);
+        
         setImages(watermarkedImages);
         setVideos(trainingVideos);
       } catch (error) {
@@ -55,9 +56,6 @@ const GalleryPage = () => {
     }
   };
 
-  // Shuffle media for all tab to mix images and videos
-  const shuffledMedia = getFilteredMedia().sort(() => Math.random() - 0.5);
-
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar />
@@ -74,13 +72,9 @@ const GalleryPage = () => {
           </div>
 
           <div className="mb-8">
-            <Tabs defaultValue={activeTab} onValueChange={(value) => setActiveTab(value as any)} className="w-full">
+            <Tabs defaultValue="images" onValueChange={(value) => setActiveTab(value as any)} className="w-full">
               <div className="flex justify-center">
                 <TabsList className="grid w-full max-w-md grid-cols-3">
-                  <TabsTrigger value="all" className="flex items-center gap-2">
-                    <GalleryHorizontal size={16} />
-                    All
-                  </TabsTrigger>
                   <TabsTrigger value="images" className="flex items-center gap-2">
                     <Image size={16} />
                     Images
@@ -88,6 +82,10 @@ const GalleryPage = () => {
                   <TabsTrigger value="videos" className="flex items-center gap-2">
                     <Video size={16} />
                     Videos
+                  </TabsTrigger>
+                  <TabsTrigger value="all" className="flex items-center gap-2">
+                    <GalleryHorizontal size={16} />
+                    All
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -100,14 +98,14 @@ const GalleryPage = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {shuffledMedia.map((item) => (
+              {getFilteredMedia().map((item) => (
                 <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-3">
                     <div className="overflow-hidden rounded-md">
                       <AspectRatio ratio={4/3} className="bg-muted">
-                        {item.url ? ( // Images
+                        {item.image_url ? ( // Images
                           <img
-                            src={item.url}
+                            src={item.image_url}
                             alt={item.title}
                             className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                           />
@@ -141,7 +139,7 @@ const GalleryPage = () => {
             </div>
           )}
 
-          {!isLoading && shuffledMedia.length === 0 && (
+          {!isLoading && getFilteredMedia().length === 0 && (
             <div className="flex flex-col items-center justify-center py-16">
               <p className="text-dental-dark-gray mb-2">No media content available yet</p>
               <p className="text-sm text-dental-dark-gray/70">Check back later for updates to our gallery</p>

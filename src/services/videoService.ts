@@ -1,5 +1,5 @@
 
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/lib/supabase';
 import { TrainingVideo } from '@/types';
 
 export const getAllVideos = async (): Promise<TrainingVideo[]> => {
@@ -35,18 +35,6 @@ export const getVideoById = async (id: string): Promise<TrainingVideo | null> =>
 
 export const uploadVideo = async (file: File) => {
   try {
-    // Check if storage bucket exists
-    const { data: buckets } = await supabase.storage.listBuckets();
-    const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
-    
-    if (!trainingBucket) {
-      // Create bucket if it doesn't exist
-      const { error: bucketError } = await supabase.storage.createBucket('training', {
-        public: true
-      });
-      if (bucketError) throw bucketError;
-    }
-    
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random()}.${fileExt}`;
     const filePath = `videos/${fileName}`;
@@ -70,18 +58,6 @@ export const uploadVideo = async (file: File) => {
 
 export const uploadThumbnail = async (file: File) => {
   try {
-    // Check if storage bucket exists
-    const { data: buckets } = await supabase.storage.listBuckets();
-    const trainingBucket = buckets?.find(bucket => bucket.name === 'training');
-    
-    if (!trainingBucket) {
-      // Create bucket if it doesn't exist
-      const { error: bucketError } = await supabase.storage.createBucket('training', {
-        public: true
-      });
-      if (bucketError) throw bucketError;
-    }
-    
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random()}.${fileExt}`;
     const filePath = `thumbnails/${fileName}`;

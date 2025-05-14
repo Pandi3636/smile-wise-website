@@ -21,7 +21,7 @@ const categories = [
 const TrainingSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<null | {
     title: string;
-    videoId: string;
+    url: string;
     description?: string;
   }>(null);
   const [videos, setVideos] = useState<TrainingVideo[]>([]);
@@ -49,16 +49,6 @@ const TrainingSection = () => {
     fetchVideos();
   }, [toast]);
 
-  // Function to extract YouTube video ID from URL
-  const extractYoutubeId = (url: string) => {
-    if (!url) return '';
-    
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    
-    return (match && match[2].length === 11) ? match[2] : '';
-  };
-
   // Group videos by category
   const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
     const categoryId = video.category_id || 'general';
@@ -70,9 +60,8 @@ const TrainingSection = () => {
       title: video.title,
       description: video.description || "",
       thumbnail: video.thumbnail || "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1173&auto=format&fit=crop",
-      videoId: extractYoutubeId(video.video_url),
+      url: video.video_url,
       duration: "3:45", // Placeholder duration
-      video_url: video.video_url
     });
     
     return acc;
@@ -126,7 +115,7 @@ const TrainingSection = () => {
                         className="relative h-44 overflow-hidden"
                         onClick={() => setSelectedVideo({ 
                           title: video.title, 
-                          videoId: video.videoId,
+                          url: video.url,
                           description: video.description
                         })}
                       >
@@ -176,15 +165,11 @@ const TrainingSection = () => {
                 </Button>
               </div>
               <div className="aspect-video">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1`}
-                  title={selectedVideo.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                <video
+                  src={selectedVideo.url}
+                  controls
+                  className="w-full h-full"
+                />
               </div>
               {selectedVideo.description && (
                 <div className="p-4 border-t">
