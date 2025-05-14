@@ -78,6 +78,36 @@ export type Database = {
         }
         Relationships: []
       }
+      doctor_tips: {
+        Row: {
+          author: string
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string
+          created_at?: string
+          description: string
+          id?: string
+          image_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       instagram_reels: {
         Row: {
           created_at: string | null

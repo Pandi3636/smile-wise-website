@@ -52,10 +52,10 @@ const Navbar = () => {
             <Link to="/doctor-tips" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Doctor Tips</Link>
             <Link to="/services" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Services</Link>
             <Link to="/training" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Training</Link>
+            <Link to="/gallery" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Gallery</Link>
             <Link to="/about" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">About</Link>
             <Link to="/contact" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Contact</Link>
             <Button asChild className="bg-dental-blue hover:bg-blue-600">
-
               <a href="https://wa.me/919597876632" target="_blank" rel="noopener noreferrer">
                 Book Appointment
               </a>
@@ -81,6 +81,7 @@ const Navbar = () => {
               <Link to="/about" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>About</Link>
               <Link to="/services" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Services</Link>
               <Link to="/doctor-tips" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Doctor Tips</Link>
+              <Link to="/gallery" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Gallery</Link>
               <Link to="/training" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Training</Link>
               <Link to="/contact" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Contact</Link>
               <Button asChild className="bg-dental-blue hover:bg-blue-600 w-full">

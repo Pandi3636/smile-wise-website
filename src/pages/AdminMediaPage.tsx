@@ -10,6 +10,7 @@ import VideoCompressionSection from "@/components/admin/VideoCompressionSection"
 import WatermarkImageSection from "@/components/admin/WatermarkImageSection";
 import MediaLibrarySection from "@/components/admin/MediaLibrarySection";
 import TrainingVideosSection from "@/components/admin/TrainingVideosSection";
+import DoctorTipsSection from "@/components/admin/DoctorTipsSection";
 
 const AdminMediaPage = () => {
   const navigate = useNavigate();
@@ -33,12 +34,13 @@ const AdminMediaPage = () => {
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-            <TabsList className="grid grid-cols-5 gap-2">
+            <TabsList className="grid grid-cols-6 gap-2">
               <TabsTrigger value="library">Media Library</TabsTrigger>
               <TabsTrigger value="training">Training Videos</TabsTrigger>
               <TabsTrigger value="watermark">Image Watermarking</TabsTrigger>
               <TabsTrigger value="compression">Video Compression</TabsTrigger>
               <TabsTrigger value="instagram">Instagram Reels</TabsTrigger>
+              <TabsTrigger value="doctortips">Doctor Tips</TabsTrigger>
             </TabsList>
 
             <TabsContent value="library">
@@ -59,6 +61,10 @@ const AdminMediaPage = () => {
 
             <TabsContent value="instagram">
               <InstagramReelSection />
+            </TabsContent>
+            
+            <TabsContent value="doctortips">
+              <DoctorTipsSection />
             </TabsContent>
           </Tabs>
         </CardContent>
