@@ -17,7 +17,8 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Welcome to Drprabhasdentistry  Your Perfect
+              Dr prabhas dentistry,<br/>
+              Your Perfect
 Smile Starts Here.
             </h1>
             <p className="text-lg text-white-600 mb-8 max-w-lg">
@@ -26,15 +27,15 @@ Smile Starts Here.
             
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-3">
-                <MapPin size={20} className="text-dental-blue" />
+                <MapPin size={20} className="text-dental-black" />
                 <span>1/70, Poonamallee High Rd, Sivabatham, Vanagaram, Chennai, Tamil Nadu 600095</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone size={20} className="text-dental-blue" />
+                <Phone size={20} className="text-dental-black" />
                 <a href="tel:+919597876632" className="hover:text-dental-blue transition-colors">095978 76632</a>
               </div>
               <div className="flex items-center gap-3">
-                <Clock size={20} className="text-dental-blue" />
+                <Clock size={20} className="text-dental-black" />
                 <span>Mon–Fri, 5–9 pm</span>
               </div>
             </div>

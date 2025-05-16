@@ -125,7 +125,7 @@ const AdminLoginPage = () => {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="admin@gmail.com" type="email" {...field} />
+                          <Input placeholder="Enter your email" type="email" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -144,11 +144,6 @@ const AdminLoginPage = () => {
                       </FormItem>
                     )}
                   />
-                  <div className="text-sm text-gray-500 bg-gray-50 p-2 rounded">
-                    Default credentials:<br />
-                    Email: admin@gmail.com<br />
-                    Password: Password@123
-                  </div>
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                       <>

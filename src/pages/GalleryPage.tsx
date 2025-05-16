@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { getAllWatermarkedImages } from "@/services/mediaService";
 import { getAllVideos } from "@/services/videoService";
-import { Image, Video, GalleryHorizontal } from "lucide-react";
+import { Image, Video } from "lucide-react";
 
 const GalleryPage = () => {
   const [activeTab, setActiveTab] = useState<"images" | "videos" | "all">("images");
@@ -29,6 +29,7 @@ const GalleryPage = () => {
         
         setImages(watermarkedImages);
         setVideos(trainingVideos);
+        console.log(images);
       } catch (error) {
         console.error("Error fetching media:", error);
         toast({
@@ -79,13 +80,13 @@ const GalleryPage = () => {
                     <Image size={16} />
                     Images
                   </TabsTrigger>
+                  {/* <TabsTrigger value="videos" className="flex items-center gap-2">
+                    <Video size={16} />
+                    Videos
+                  </TabsTrigger> */}
                   <TabsTrigger value="videos" className="flex items-center gap-2">
                     <Video size={16} />
                     Videos
-                  </TabsTrigger>
-                  <TabsTrigger value="all" className="flex items-center gap-2">
-                    <GalleryHorizontal size={16} />
-                    All
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -103,23 +104,23 @@ const GalleryPage = () => {
                   <CardContent className="p-3">
                     <div className="overflow-hidden rounded-md">
                       <AspectRatio ratio={4/3} className="bg-muted">
-                        {item.image_url ? ( // Images
+                        {item.url ? ( // Images
                           <img
-                            src={item.image_url}
-                            alt={item.title}
+                            src={item.url}
+                            alt={''}
                             className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                           />
                         ) : ( // Videos
                           <div className="relative w-full h-full">
                             <img
                               src={item.thumbnail || "https://placehold.co/400x300?text=Video"}
-                              alt={item.title}
+                              alt={''}
                               className="object-cover w-full h-full"
                             />
                             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                               <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-black" asChild>
-                                <a href={item.video_url} target="_blank" rel="noopener noreferrer">
-                                  <Video className="h-4 w-4 mr-2" /> Watch
+                                <a href={item.video_url} target="_blank" rel="noopener noreferrer" className=" text-black ">
+                                  <Video className="h-4 w-4 mr-2 text-black " /> Watch
                                 </a>
                               </Button>
                             </div>
@@ -127,12 +128,6 @@ const GalleryPage = () => {
                         )}
                       </AspectRatio>
                     </div>
-                    <h3 className="font-medium mt-3 text-dental-dark-blue truncate">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-dental-dark-gray mt-1">
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </p>
                   </CardContent>
                 </Card>
               ))}

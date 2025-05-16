@@ -29,7 +29,7 @@ const InstagramSection = () => {
         id: reel.id,
         title: reel.title,
         url: reel.url,
-        reelEmbedUrl: `${reel.url}/embed/captioned/`
+        reelEmbedUrl: `${reel.url}embed/captioned/`
       })) || [];
       
       setReels(transformedReels);
@@ -42,36 +42,7 @@ const InstagramSection = () => {
       });
       
       // Fallback to default reels if there's an error
-      setReels([
-        {
-          id: 1,
-          title: "1-minute Tip: How to brush your molars right 🦷",
-          thumbnail: "https://images.unsplash.com/photo-1541436293327-8f0261eadb5e?q=80&w=1169&auto=format&fit=crop",
-          url: "https://www.instagram.com/p/DIMHT4ATNSS/?img_index=3",
-          reelEmbedUrl: "https://www.instagram.com/p/DIMHT4ATNSS/embed/captioned/"
-        },
-        {
-          id: 2,
-          title: "This is what happens if you skip your dental visits! 😱",
-          thumbnail: "https://images.unsplash.com/photo-1611316185995-32ac43ac1b94?q=80&w=1170&auto=format&fit=crop",
-          url: "https://www.instagram.com/p/DIlziuSzyZo",
-          reelEmbedUrl: "https://www.instagram.com/p/DIlziuSzyZo/embed/captioned/"
-        },
-        {
-          id: 3,
-          title: "Behind the scenes: Cleaning tools we use 🧼",
-          thumbnail: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1170&auto=format&fit=crop",
-          url: "https://www.instagram.com/p/DJC06iQTPJl/",
-          reelEmbedUrl: "https://www.instagram.com/p/DJC06iQTPJl/embed/captioned/"
-        },
-        {
-          id: 4,
-          title: "A Perfect Smile Start with Great Dental Care",
-          thumbnail: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1170&auto=format&fit=crop",
-          url: "https://www.instagram.com/p/DHTYCwVT-KW/",
-          reelEmbedUrl: "https://www.instagram.com/p/DHTYCwVT-KW/embed/captioned/"
-        }
-      ]);
+      // setReels([ ]);
     } finally {
       setLoading(false);
     }
@@ -88,33 +59,6 @@ const InstagramSection = () => {
     );
   }
 
-  if (reels.length === 0) {
-    return (
-      <section className="py-16 bg-dental-light-blue/10">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">Instagram Tips</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            No Instagram tips available at the moment. Follow us on Instagram for daily dental insights!
-          </p>
-          <div className="text-center mt-10">
-            <a 
-              href="https://www.instagram.com/drprabhasdentistry?utm_source=qr&igsh=NGhrZmF3enM0NGhz" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <circle cx="12" cy="12" r="4"></circle>
-                <circle cx="18" cy="6" r="1.5"></circle>
-              </svg>
-              Follow Us on Instagram
-            </a>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="py-16 bg-dental-light-blue/10">
@@ -160,7 +104,7 @@ const InstagramSection = () => {
 
         <div className="text-center mt-10">
           <a 
-            href="https://www.instagram.com/drprabhasdentistry?utm_source=qr&igsh=NGhrZmF3enM0NGhz" 
+            href="https://www.instagram.com/drprabhasdentistry/?utm_source=qr&igsh=NGhrZmF3enM0NGhz#" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all"

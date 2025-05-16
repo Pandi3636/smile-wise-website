@@ -35,7 +35,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="text-dental-blue font-bold text-2xl">
-              Drprabhasdentistry Clinic
+              <img
+                src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
+                alt="Dr. Prabha"
+                className="rounded-lg shadow-lg w-15 h-12 object-cover relative z-1"
+              />
+
             </Link>
           </div>
 
@@ -70,7 +75,11 @@ const Navbar = () => {
           <div className="container mx-auto px-4 py-6">
             <div className="flex justify-between items-center mb-8">
               <Link to="/" className="text-dental-blue font-bold text-2xl" onClick={toggleMenu}>
-                Drprabhasdentistry  Clinic
+              <img
+                src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
+                alt="Dr. Prabha"
+                className="rounded-lg shadow-lg w-12 h-12 object-cover relative z-10"
+              />
               </Link>
               <Button variant="ghost" onClick={toggleMenu} aria-label="Close Menu">
                 <X />

@@ -38,6 +38,7 @@ const Gallery = () => {
       
       if (error) throw error;
       setImages(data || []);
+      console.log(images)
     } catch (error) {
       console.error("Error fetching images:", error);
       toast({
@@ -80,7 +81,7 @@ const Gallery = () => {
       <section className="py-16 bg-gradient-to-br from-dental-purple-light/20 via-dental-blue-soft/30 to-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">
-            Drprabhasdentistry Clinic
+            Dr prabhasdentistry Clinic
           </h2>
           <p>No images available in the gallery.</p>
         </div>
@@ -93,7 +94,7 @@ const Gallery = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">
-            Drprabhasdentistry Clinic
+            Dr prabhas dentistry Clinic
           </h2>
         </div>
 

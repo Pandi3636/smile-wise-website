@@ -21,7 +21,7 @@ const AboutSection = () => {
               About Drprabhasdentistry
             </h2>
             <p className="text-gray-600 mb-4">
-              Welcome to Drprabhasdentistry Clinic, where we've been providing exceptional dental care to the Chennai community for over 15 years. Our modern facility is equipped with state-of-the-art technology to ensure you receive the best possible treatment.
+              Welcome to Dr prabhas dentistry Clinic, where we've been providing exceptional dental care to the Chennai community for over 15 years. Our modern facility is equipped with state-of-the-art technology to ensure you receive the best possible treatment.
             </p>
             <p className="text-gray-600 mb-6">
               Dr. Prabha completed her dental education at a prestigious institution and has pursued numerous advanced training certificates to stay at the forefront of dental innovations. With a gentle approach and attention to detail, she ensures each patient receives personalized care in a comfortable environment.
