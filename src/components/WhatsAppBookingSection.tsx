@@ -14,7 +14,7 @@ const WhatsAppBookingSection = () => {
   const [treatment, setTreatment] = useState('');
   const [showPhoneIcon, setShowPhoneIcon] = useState(true);
   
-  const clinicPhoneNumber = '+919876543210'; // Replace with your actual clinic number
+  const clinicPhoneNumber = '+919597876632'; // Updated to the actual clinic number
   
   const handleWhatsAppBooking = () => {
     // Format the message
@@ -47,10 +47,17 @@ const WhatsAppBookingSection = () => {
   return (
     <section className="py-16 bg-gradient-to-r from-dental-blue to-blue-600">
       <div className="container mx-auto px-4">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-white mb-2 font-unifraktur">Quick Appointment Booking</h2>
+          <p className="text-white/90 max-w-2xl mx-auto">
+            Book your dental appointment in seconds through WhatsApp. Fill in your details and we'll get back to you shortly.
+          </p>
+        </div>
+        
         <div className="bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="grid md:grid-cols-2">
             <div className="p-8 bg-gradient-to-r from-dental-blue to-blue-600">
-              <h2 className="text-3xl font-bold text-white mb-4">Quick Appointment Booking</h2>
+              <h3 className="text-2xl font-bold text-white mb-4 font-unifraktur">Easy Booking</h3>
               <p className="text-white/90 mb-8">
                 Book your dental appointment in seconds through WhatsApp. Fill in your details and we'll get back to you shortly.
               </p>
@@ -115,7 +122,7 @@ const WhatsAppBookingSection = () => {
                 </Select>
               </div>
               
-              <div className="flex items-center space-x-4 mt-4">
+              <div className="flex items-center space-x-4 pt-5">
                 <div className="flex-1">
                   <Button 
                     onClick={handleWhatsAppBooking} 

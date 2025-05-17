@@ -22,6 +22,7 @@ export default {
 			fontFamily: {
 				'poppins': ['Poppins', 'sans-serif'],
 				'raleway': ['Raleway', 'sans-serif'],
+				'unifraktur': ['UnifrakturCook', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
