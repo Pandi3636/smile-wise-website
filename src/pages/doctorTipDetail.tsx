@@ -55,6 +55,7 @@ const DoctorTipDetail = () => {
     const hardcodedTips = [
       {
         id: "1",
+        name: "Flossing Importance",
         title: "Why Flossing is as Important as Brushing",
         description: "Flossing is often skipped in daily oral hygiene routines, but it's actually just as essential as brushing! When you brush your teeth, you're only cleaning about 60% of your tooth surfaces. Floss reaches those tight spaces between teeth that your toothbrush can't access, removing plaque and food particles that can lead to cavities and gum disease. Dr. Prabha recommends flossing at least once daily, preferably before bedtime. For proper technique, use about 18 inches of floss, wrap it around your middle fingers, and gently slide it between teeth, curving it against each tooth in a C-shape. Remember, healthy gums might bleed initially when you start flossing regularly, but this should subside within a week or two as your gum health improves.",
         author: "Dr. Prabha",
@@ -64,6 +65,7 @@ const DoctorTipDetail = () => {
       },
       {
         id: "2",
+        name: "Foods That Stain",
         title: "Top 5 Foods That Stain Your Teeth",
         description: "Many people are surprised to learn that their diet significantly impacts the whiteness of their smile. The top five foods and beverages that cause tooth staining are: 1) Coffee and Tea - The dark color compounds called tannins can cause yellowing. 2) Red Wine - Contains chromogens and tannins that lead to discoloration. 3) Curry - The deep pigmentation can stain teeth over time. 4) Berries - Blueberries, blackberries, and pomegranates contain powerful pigments. 5) Tomato-based sauces - Their acidity and bright red color create perfect conditions for staining. To minimize staining, Dr. Prabha recommends drinking water after consuming these foods, using a straw for beverages when possible, and maintaining regular professional dental cleanings twice yearly.",
         author: "Dr. Prabha",
@@ -73,6 +75,7 @@ const DoctorTipDetail = () => {
       },
       {
         id: "3",
+        name: "Toothbrush Replacement",
         title: "Is Your Toothbrush Too Old?",
         description: "Many patients are surprised to learn they should be replacing their toothbrush every 3 to 4 months. Over time, bristles become frayed and worn, making them less effective at cleaning teeth and removing plaque. Additionally, bacteria can accumulate on toothbrushes over time, especially after you've been sick. Signs that it's time for replacement include: visibly frayed bristles, discoloration of the bristles, or any mold growth (particularly if stored in a humid bathroom). After recovering from a cold, flu, or other infection, it's a good idea to replace your toothbrush even if it's relatively new. Remember, an effective toothbrush is fundamental to good oral hygiene, so make replacement a regular part of your health routine.",
         author: "Dr. Prabha",
@@ -82,6 +85,7 @@ const DoctorTipDetail = () => {
       },
       {
         id: "4",
+        name: "Kids Oral Habits",
         title: "How to Help Kids Develop Good Oral Habits",
         description: "Establishing good oral hygiene habits early sets children up for a lifetime of healthy teeth and gums. Start by making brushing fun - use colorful toothbrushes, flavored children's toothpaste, and turn brushing into a family activity. Set a consistent schedule, brushing after breakfast and before bedtime, to establish a routine. Use timers or sing two-minute songs to ensure adequate brushing time. For children under 8, parents should assist or supervise brushing to ensure all surfaces are cleaned properly. Introduce flossing as soon as teeth begin touching, using child-friendly floss picks if traditional flossing is difficult. Most importantly, be a good role model by demonstrating your own consistent oral care routine. Regular dental check-ups starting by the first birthday will help your child become comfortable with dental visits and allow for early detection of any potential issues.",
         author: "Dr. Prabha",

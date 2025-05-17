@@ -1,57 +1,55 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import AboutPage from "./pages/AboutPage";
-import ServicesPage from "./pages/ServicesPage";
-import DoctorTipsPage from "./pages/DoctorTipsPage";
-import TrainingPage from "./pages/TrainingPage";
-import ContactPage from "./pages/ContactPage";
-import AdminLoginPage from "./pages/AdminLoginPage";
-import AdminDashboardPage from "./pages/AdminDashboardPage";
-import AdminAddVideoPage from "./pages/AdminAddVideoPage";
-import AdminEditVideoPage from "./pages/AdminEditVideoPage";
-import AdminSettingsPage from "./pages/AdminSettingsPage";
-import AdminMediaPage from "./pages/AdminMediaPage";
-import DoctorTipDetail from "./pages/doctorTipDetail";
-import GalleryPage from "./pages/GalleryPage";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from '@/components/ui/toaster';
+import Index from '@/pages/Index';
+import NotFound from '@/pages/NotFound';
+import AdminLoginPage from '@/pages/AdminLoginPage';
+import AdminDashboardPage from '@/pages/AdminDashboardPage';
+import AdminMediaPage from '@/pages/AdminMediaPage';
+import AdminSettingsPage from '@/pages/AdminSettingsPage';
+import AdminAddVideoPage from '@/pages/AdminAddVideoPage';
+import AdminEditVideoPage from '@/pages/AdminEditVideoPage';
+import ServicesPage from '@/pages/ServicesPage';
+import AboutPage from '@/pages/AboutPage';
+import ContactPage from '@/pages/ContactPage';
+import DoctorTipsPage from '@/pages/DoctorTipsPage';
+import DoctorDataTips from '@/pages/DoctorDataTips';
+import ServiceDetailPage from '@/components/ServiceDetailPage';
+import TrainingPage from '@/pages/TrainingPage';
+import GalleryPage from '@/pages/GalleryPage';
+import TreatmentPage from '@/pages/TreatmentPage';
+import "./App.css";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/doctor-tips" element={<DoctorTipsPage />} />
-          <Route path="/doctor-tips/:id" element={<DoctorTipDetail />} />
+          <Route path="/doctor-tips/:id" element={<DoctorDataTips />} />
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          
-          {/* Admin Routes */}
-          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/treatments" element={<TreatmentPage />} />
+          <Route path="/treatments/:serviceId" element={<ServiceDetailPage />} />
+          <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/add-video" element={<AdminAddVideoPage />} />
-          <Route path="/admin/edit-video/:id" element={<AdminEditVideoPage />} />
-          <Route path="/admin/settings" element={<AdminSettingsPage />} />
           <Route path="/admin/media" element={<AdminMediaPage />} />
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/admin/settings" element={<AdminSettingsPage />} />
+          <Route path="/admin/video/add" element={<AdminAddVideoPage />} />
+          <Route path="/admin/video/edit/:id" element={<AdminEditVideoPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        <Toaster />
+      </Router>
+    </QueryClientProvider>
+  );
+}
 
 export default App;

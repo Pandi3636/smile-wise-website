@@ -2,8 +2,21 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, X, Phone, Instagram, Youtube, Clock, MapPin } from "lucide-react";
+import { Menu, X, Phone, Instagram, Youtube, Clock, MapPin, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+
+// Treatment menu items
+const treatmentItems = [
+  { title: "General Dentistry", slug: "general-dentistry" },
+  { title: "Cosmetic Dentistry", slug: "cosmetic-dentistry" },
+  { title: "Orthodontics", slug: "orthodontics" },
+  { title: "Root Canal", slug: "root-canal" },
+  { title: "Implants", slug: "implants" },
+  { title: "Children's Dentistry", slug: "childrens-dentistry" },
+  { title: "Laser Dentistry", slug: "laser-dentistry" },
+  { title: "Smile Corrections", slug: "smile-corrections" }
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +53,6 @@ const Navbar = () => {
                 alt="Dr. Prabha"
                 className="rounded-lg shadow-lg w-15 h-12 object-cover relative z-1"
               />
-
             </Link>
           </div>
 
@@ -54,6 +66,26 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             <Link to="/" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Home</Link>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-blue font-medium bg-transparent">
+                    Treatments <ChevronDown className="h-4 w-4 ml-1" />
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg grid grid-cols-2 w-[400px]">
+                    {treatmentItems.map((item) => (
+                      <Link 
+                        key={item.slug}
+                        to={`/treatments/${item.slug}`} 
+                        className="p-2 hover:bg-gray-100 rounded-md text-dental-dark-gray hover:text-dental-blue transition-colors"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             <Link to="/doctor-tips" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Doctor Tips</Link>
             <Link to="/services" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Services</Link>
             <Link to="/training" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Training</Link>
@@ -87,9 +119,27 @@ const Navbar = () => {
             </div>
             <nav className="flex flex-col space-y-6">
               <Link to="/" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Home</Link>
-              <Link to="/about" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>About</Link>
-              <Link to="/services" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Services</Link>
+              
+              {/* Mobile Treatments Dropdown */}
+              <div className="space-y-3">
+                <div className="text-xl text-dental-dark-gray font-medium">Treatments</div>
+                <div className="pl-4 space-y-3">
+                  {treatmentItems.map((item) => (
+                    <Link 
+                      key={item.slug}
+                      to={`/treatments/${item.slug}`} 
+                      className="block text-dental-dark-gray hover:text-dental-blue"
+                      onClick={toggleMenu}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              
               <Link to="/doctor-tips" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Doctor Tips</Link>
+              <Link to="/services" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Services</Link>
+              <Link to="/about" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>About</Link>
               <Link to="/gallery" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Gallery</Link>
               <Link to="/training" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Training</Link>
               <Link to="/contact" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Contact</Link>

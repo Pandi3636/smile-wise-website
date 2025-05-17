@@ -27,6 +27,8 @@ const DoctorTipsSection = () => {
   const [submitting, setSubmitting] = useState(false);
   const [selectedTip, setSelectedTip] = useState<DoctorTip | null>(null);
   
+  // New fields
+  const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [author, setAuthor] = useState("Dr. Prabha");
@@ -70,6 +72,7 @@ const DoctorTipsSection = () => {
   };
 
   const resetForm = () => {
+    setName("");
     setTitle("");
     setDescription("");
     setAuthor("Dr. Prabha");
@@ -89,6 +92,7 @@ const DoctorTipsSection = () => {
       }
       
       await createDoctorTip({
+        name,
         title,
         description,
         author,
@@ -117,6 +121,7 @@ const DoctorTipsSection = () => {
 
   const handleEditClick = (tip: DoctorTip) => {
     setSelectedTip(tip);
+    setName(tip.name || "");
     setTitle(tip.title);
     setDescription(tip.description);
     setAuthor(tip.author);
@@ -136,6 +141,7 @@ const DoctorTipsSection = () => {
       }
       
       await updateDoctorTip(selectedTip.id, {
+        name,
         title,
         description,
         author,
@@ -210,12 +216,21 @@ const DoctorTipsSection = () => {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input 
+                  id="name" 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Short name of the tip"
+                />
+              </div>
+              <div className="grid gap-2">
                 <Label htmlFor="title">Title</Label>
                 <Input 
                   id="title" 
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Enter tip title"
+                  placeholder="Catchy, user-facing title"
                 />
               </div>
               <div className="grid gap-2">
@@ -224,8 +239,8 @@ const DoctorTipsSection = () => {
                   id="description" 
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Enter tip description"
-                  rows={4}
+                  placeholder="Enter detailed tip content"
+                  rows={6}
                 />
               </div>
               <div className="grid gap-2">
@@ -299,6 +314,7 @@ const DoctorTipsSection = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-20">Image</TableHead>
+                  <TableHead>Name</TableHead>
                   <TableHead>Title</TableHead>
                   <TableHead>Description</TableHead>
                   <TableHead>Author</TableHead>
@@ -324,6 +340,7 @@ const DoctorTipsSection = () => {
                           )}
                         </div>
                       </TableCell>
+                      <TableCell>{tip.name || "-"}</TableCell>
                       <TableCell className="font-medium">{tip.title}</TableCell>
                       <TableCell className="max-w-xs truncate">{tip.description}</TableCell>
                       <TableCell>{tip.author}</TableCell>
@@ -347,7 +364,7 @@ const DoctorTipsSection = () => {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8 text-gray-500">
+                    <TableCell colSpan={6} className="text-center py-8 text-gray-500">
                       No doctor tips found. Add your first tip!
                     </TableCell>
                   </TableRow>
@@ -374,6 +391,14 @@ const DoctorTipsSection = () => {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
+              <Label htmlFor="edit-name">Name</Label>
+              <Input 
+                id="edit-name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="edit-title">Title</Label>
               <Input 
                 id="edit-title" 
@@ -387,7 +412,7 @@ const DoctorTipsSection = () => {
                 id="edit-description" 
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                rows={4}
+                rows={6}
               />
             </div>
             <div className="grid gap-2">

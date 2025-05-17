@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -34,6 +33,7 @@ const DoctorTipsSection = () => {
   const fallbackTips = [
     {
       id: "1",
+      name: "Flossing Importance",
       title: "Why Flossing is as Important as Brushing",
       description: "Dr. Prabha explains how daily flossing prevents gum disease and tooth decay.",
       image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKz9wpYfUyavigCRdSXyS-CwQLjmWjGQTH8Q&s",
@@ -43,6 +43,7 @@ const DoctorTipsSection = () => {
     },
     {
       id: "2",
+      name: "Foods That Stain",
       title: "Top 5 Foods That Stain Your Teeth",
       description: "Learn which foods to avoid for a whiter smile.",
       image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyef76wUc1ywuU0aYfdaMoBZHWq3EI5rgu_NPpczQsuydG3X3veZYjibW8RmB3TaBvT7Y&usqp=CAU",
@@ -52,6 +53,7 @@ const DoctorTipsSection = () => {
     },
     {
       id: "3",
+      name: "Toothbrush Replacement",
       title: "Is Your Toothbrush Too Old?",
       description: "Replace it every 3 months or after an illness.",
       image_url: "https://static.vecteezy.com/system/resources/previews/017/324/224/non_2x/a-bunch-of-old-worn-out-toothbrushes-with-bent-bristles-on-a-white-background-photo.jpg",
@@ -61,6 +63,7 @@ const DoctorTipsSection = () => {
     },
     {
       id: "4",
+      name: "Kids Oral Habits",
       title: "How to Help Kids Develop Good Oral Habits",
       description: "Make brushing fun and consistent.",
       image_url: "https://cdn.shopify.com/s/files/1/0661/2113/8345/files/WEB-BANNERS19.jpg?v=1728290727",

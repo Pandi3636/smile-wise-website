@@ -25,6 +25,18 @@ CREATE TABLE IF NOT EXISTS public.categories (
   name VARCHAR(255) NOT NULL
 );
 
+-- Create doctor_tips table
+CREATE TABLE IF NOT EXISTS public.doctor_tips (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  author TEXT NOT NULL DEFAULT 'Dr. Prabha',
+  image_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
 -- Insert initial admin user
 INSERT INTO public.admin_users (email, password, role)
 VALUES ('admin@gmail.com', 'admin@123', 'admin')
