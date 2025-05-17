@@ -19,6 +19,7 @@ import AdminSettingsPage from "./pages/AdminSettingsPage";
 import AdminMediaPage from "./pages/AdminMediaPage";
 import DoctorTipDetail from "./pages/doctorTipDetail";
 import GalleryPage from "./pages/GalleryPage";
+import TreatmentPage from "./pages/TreatmentPage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,9 @@ const App = () => (
           <Route path="/training" element={<TrainingPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          
+          {/* Treatment Routes */}
+          <Route path="/treatments/:slug" element={<TreatmentPage />} />
           
           {/* Admin Routes */}
           <Route path="/admin-login" element={<AdminLoginPage />} />
