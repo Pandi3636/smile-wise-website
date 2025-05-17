@@ -85,6 +85,7 @@ export type Database = {
           description: string
           id: string
           image_url: string | null
+          name: string | null
           title: string
           updated_at: string
         }
@@ -94,6 +95,7 @@ export type Database = {
           description: string
           id?: string
           image_url?: string | null
+          name?: string | null
           title: string
           updated_at?: string
         }
@@ -103,6 +105,7 @@ export type Database = {
           description?: string
           id?: string
           image_url?: string | null
+          name?: string | null
           title?: string
           updated_at?: string
         }

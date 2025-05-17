@@ -13,6 +13,7 @@ import EMISection from "@/components/EMISection";
 import AboutSection from "@/components/AboutSection";
 import AppointmentBookingSection from "@/components/AppointmentBookingSection";
 import DoctorTipsSection from "@/components/DoctorTipsSection";
+import WhatsAppBookingSection from "@/components/WhatsAppBookingSection";
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
       <Gallery/>
       <AboutSection />
       <AppointmentBookingSection />
+      <WhatsAppBookingSection />
       <ScheduleVisitSection />
       <DoctorTipsSection />
       <FAQ/>

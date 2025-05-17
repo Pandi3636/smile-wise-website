@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 // Types
 export interface DoctorTip {
   id: string;
-  name?: string;
+  name: string | null;
   title: string;
   description: string;
   author: string;
