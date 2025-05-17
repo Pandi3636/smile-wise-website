@@ -11,6 +11,8 @@ import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import EMISection from "@/components/EMISection";
 import AboutSection from "@/components/AboutSection";
+import AppointmentBookingSection from "@/components/AppointmentBookingSection";
+import DoctorTipsSection from "@/components/DoctorTipsSection";
 
 const Index = () => {
   return (
@@ -20,11 +22,13 @@ const Index = () => {
       <Services/>
       <Gallery/>
       <AboutSection />
+      <AppointmentBookingSection />
       <ScheduleVisitSection />
-      <InstagramSection />
-      <TeethViewSection />
+      <DoctorTipsSection />
       <FAQ/>
       <EMISection />
+      <InstagramSection />
+      <TeethViewSection />
       <ContactSection />
       <Footer />
     </div>
