@@ -78,7 +78,7 @@ export default function DoctorTipDetail() {
       <main className="flex-grow">
         {/* Hero Image Section */}
         {tip.image_url && (
-          <div className="relative w-full h-[500px] bg-gray-100">
+          <div className="relative w-full h-[300px] bg-gray-100">
             <div className="absolute inset-0 bg-black/30 z-10" /> {/* Overlay */}
             <img 
               src={tip.image_url} 
@@ -102,7 +102,7 @@ export default function DoctorTipDetail() {
         )}
 
         {/* Content Section - Full Width */}
-        <div className="w-full bg-white py-12">
+        <div className="w-full bg-white py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="prose prose-lg max-w-none">
               <p className="whitespace-pre-wrap text-gray-700 leading-relaxed">

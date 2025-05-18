@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -8,14 +7,23 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 
 // Treatment menu items
 const treatmentItems = [
-  { title: "General Dentistry", slug: "general-dentistry" },
+  { title: "Non contact Cleaning", slug: "non-contact-cleaning" },
   { title: "Cosmetic Dentistry", slug: "cosmetic-dentistry" },
-  { title: "Orthodontics", slug: "orthodontics" },
+  { title: "General Dentistry", slug: "general-dentistry" },
+  { title: "Digital Dentistry", slug: "digital-dentistry" },
   { title: "Root Canal", slug: "root-canal" },
   { title: "Implants", slug: "implants" },
+  { title: "Orthodontics", slug: "orthodontics" },
+  { title: "Stress Free Treatments", slug: "stress-free-treatments" },
   { title: "Children's Dentistry", slug: "childrens-dentistry" },
+  { title: "Reverse Aging Dentistry", slug: "reverse-aging-dentistry" },
+  { title: "Crown in A Day", slug: "crown-in-a-day" },
+  { title: "Smile Corrections", slug: "smile-corrections" },
+  { title: "Zygoma Implants", slug: "zygoma-implants" },
+  { title: "Fixed Teeth Rehabilitation Within 3 days", slug: "fixed-teeth-rehabilitation-within-3-days" },
+  { title: "Invisible braces - Aligners", slug: "invisible-braces-aligners" },
   { title: "Laser Dentistry", slug: "laser-dentistry" },
-  { title: "Smile Corrections", slug: "smile-corrections" }
+  { title: "Dental Tourism", slug: "dental-tourism" },
 ];
 
 const Navbar = () => {
@@ -53,7 +61,11 @@ const Navbar = () => {
                 alt="Dr. Prabha"
                 className="w-20 h-16 object-cover"
               />
-              <span className="ml-4 text-xl lg:text-2xl text-dental-blue">Dr prabhas dentistry Clinic</span>
+              <span
+                className="ml-4 text-xl lg:text-2xl text-dental-blue"
+                style={{ fontFamily: "'Playpen Sans', cursive" }} >
+                Dr Prabhas Dentistry
+              </span>
             </Link>
           </div>
 
@@ -70,39 +82,29 @@ const Navbar = () => {
             <NavigationMenu className="w-full">
               <NavigationMenuList className="w-full">
                 <NavigationMenuItem className="w-full">
-                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-blue  font-medium transition-colors">
+                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-black font-medium transition-colors">
                     Treatments
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="p-2 rounded-md shadow-lg w-screen left-0 absolute">
-                    <div className="container mx-auto">
-                      <div className="flex flex-wrap gap-3">
-                        {treatmentItems.map((item) => (
+                  <NavigationMenuContent
+                    className="rounded-md shadow-lg  absolute bg-white"
+                  >
+                    <ul className="flex flex-col w-[210px]">
+                      {treatmentItems.map((item) => (
+                        <li key={item.slug}>
                           <Link
-                            key={item.slug}
                             to={`/treatments/${item.slug}`}
-                            className="flex items-center gap-3 p-3 hover:bg-dental-light-blue/10 rounded-md text-dental-dark-gray hover:text-dental-blue transition-all duration-300 min-w-[200px]"
+                            className="block px-3 py-2 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
                           >
-                            {item.icon && (
-                              <div className="text-dental-blue">
-                                {item.icon}
-                              </div>
-                            )}
-                            <div>
-                              <span className="font-medium">{item.title}</span>
-                              {item.description && (
-                                <p className="text-sm text-gray-600 line-clamp-1">
-                                  {item.description}
-                                </p>
-                              )}
-                            </div>
+                            {item.title}
                           </Link>
-                        ))}
-                      </div>
-                    </div>
+                        </li>
+                      ))}
+                    </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+
             <Link to="/doctor-tips" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Doctor Tips</Link>
             <Link to="/services" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Services</Link>
             <Link to="/training" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Training</Link>

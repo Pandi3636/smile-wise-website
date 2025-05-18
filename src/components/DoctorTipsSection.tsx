@@ -103,7 +103,11 @@ const DoctorTipsSection = () => {
                   <CardTitle className="text-lg">{tip.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>{tip.description}</CardDescription>
+                  <CardDescription>
+                    {tip.description.length > 50
+                      ? tip.description.slice(0, 50) + '...'
+                      : tip.description}
+                  </CardDescription>
                   <Link to={`/doctor-tips/${tip.id}`}>
                     <p className="text-dental-blue mt-2 hover:underline">View More</p>
                   </Link>

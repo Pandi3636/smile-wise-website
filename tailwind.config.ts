@@ -22,6 +22,8 @@ export default {
 			fontFamily: {
 				'poppins': ['Poppins', 'sans-serif'],
 				'raleway': ['Raleway', 'sans-serif'],
+                'cairo': ['"Cairo"', 'sans-serif'],
+
 			},
 			colors: {
 				border: 'hsl(var(--border))',

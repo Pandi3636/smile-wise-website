@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Phone, Clock, MapPin, ArrowRight } from "lucide-react";
 
@@ -11,11 +10,11 @@ const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed">
         <img
           src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg"
           alt="Modern dental office"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover" 
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
       </div>
@@ -27,17 +26,17 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10 text-center">
+      <div className="relative z-10 text-center text-white py-16">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="space-y-6">
-            <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight"  >
               Your Perfect
               <span className="text-dental-blue"> Smile</span>
               <br />
               Starts Here.
             </h1>
-            <p className="text-xl text-black-200 max-w-2xl mx-auto leading-relaxed">
-              We provide comprehensive dental care with a gentle touch. Your smile is our priority - let us help you maintain a healthy, beautiful smile.
+            <p className="text-xl text-white max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'Playpen Sans', cursive" }} >
+              “ Quality with Utmost Care is Our Motto. We Provide Comprehensive Dental Care Where Your Smile Meets Expertise”
             </p>
           </div>
 

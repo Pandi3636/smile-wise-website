@@ -1,8 +1,10 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const EMISection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative py-16 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')" }}>
       <div className="absolute inset-0 bg-dental-dark-blue/70"></div>
@@ -51,7 +53,10 @@ const EMISection = () => {
             </ul>
           </div>
           
-          <Button className="bg-dental-mint hover:bg-dental-light-mint text-dental-dark-blue font-semibold font-raleway px-8 py-3 rounded-lg transition-colors">
+          <Button 
+            onClick={() => navigate('/emi-contact')}
+            className="bg-dental-mint hover:bg-dental-light-mint text-dental-dark-blue font-semibold font-raleway px-8 py-3 rounded-lg transition-colors"
+          >
             Learn More
           </Button>
         </div>

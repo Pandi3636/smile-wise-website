@@ -18,6 +18,7 @@ import ServiceDetailPage from '@/components/ServiceDetailPage';
 import TrainingPage from '@/pages/TrainingPage';
 import GalleryPage from '@/pages/GalleryPage';
 import TreatmentPage from '@/pages/TreatmentPage';
+import EmiContact from '@/pages/EmiContact';
 import "./App.css";
 import { TooltipProvider } from './components/ui/tooltip';
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/treatments" element={<TreatmentPage />} />
           <Route path="/treatments/:serviceId" element={<ServiceDetailPage />} />
+          <Route path="/emi-contact" element={<EmiContact />} />
           <Route path="/admin-login" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/admin/media" element={<AdminMediaPage />} />
