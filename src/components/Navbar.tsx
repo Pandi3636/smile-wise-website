@@ -46,13 +46,14 @@ const Navbar = () => {
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <Link to="/" className="text-dental-blue font-bold text-2xl">
+          <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center text-dental-black font-bold text-2xl">
               <img
-                src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
+                src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed-removebg-preview.png"
                 alt="Dr. Prabha"
-                className="rounded-lg shadow-lg w-15 h-12 object-cover relative z-1"
+                className="w-20 h-16 object-cover"
               />
+              <span className="ml-4 text-xl lg:text-2xl text-dental-blue">Dr prabhas dentistry Clinic</span>
             </Link>
           </div>
 
@@ -66,22 +67,38 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             <Link to="/" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Home</Link>
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-blue font-medium bg-transparent">
-                    Treatments <ChevronDown className="h-4 w-4 ml-1" />
+            <NavigationMenu className="w-full">
+              <NavigationMenuList className="w-full">
+                <NavigationMenuItem className="w-full">
+                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-blue  font-medium transition-colors">
+                    Treatments
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="bg-white p-4 rounded-md shadow-lg grid grid-cols-2 w-[400px]">
-                    {treatmentItems.map((item) => (
-                      <Link 
-                        key={item.slug}
-                        to={`/treatments/${item.slug}`} 
-                        className="p-2 hover:bg-gray-100 rounded-md text-dental-dark-gray hover:text-dental-blue transition-colors"
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
+                  <NavigationMenuContent className="p-2 rounded-md shadow-lg w-screen left-0 absolute">
+                    <div className="container mx-auto">
+                      <div className="flex flex-wrap gap-3">
+                        {treatmentItems.map((item) => (
+                          <Link
+                            key={item.slug}
+                            to={`/treatments/${item.slug}`}
+                            className="flex items-center gap-3 p-3 hover:bg-dental-light-blue/10 rounded-md text-dental-dark-gray hover:text-dental-blue transition-all duration-300 min-w-[200px]"
+                          >
+                            {item.icon && (
+                              <div className="text-dental-blue">
+                                {item.icon}
+                              </div>
+                            )}
+                            <div>
+                              <span className="font-medium">{item.title}</span>
+                              {item.description && (
+                                <p className="text-sm text-gray-600 line-clamp-1">
+                                  {item.description}
+                                </p>
+                              )}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -107,11 +124,11 @@ const Navbar = () => {
           <div className="container mx-auto px-4 py-6">
             <div className="flex justify-between items-center mb-8">
               <Link to="/" className="text-dental-blue font-bold text-2xl" onClick={toggleMenu}>
-              <img
-                src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
-                alt="Dr. Prabha"
-                className="rounded-lg shadow-lg w-12 h-12 object-cover relative z-10"
-              />
+                <img
+                  src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
+                  alt="Dr. Prabha"
+                  className="rounded-lg shadow-lg w-12 h-12 object-cover relative z-10"
+                />
               </Link>
               <Button variant="ghost" onClick={toggleMenu} aria-label="Close Menu">
                 <X />
@@ -119,15 +136,15 @@ const Navbar = () => {
             </div>
             <nav className="flex flex-col space-y-6">
               <Link to="/" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Home</Link>
-              
+
               {/* Mobile Treatments Dropdown */}
               <div className="space-y-3">
                 <div className="text-xl text-dental-dark-gray font-medium">Treatments</div>
                 <div className="pl-4 space-y-3">
                   {treatmentItems.map((item) => (
-                    <Link 
+                    <Link
                       key={item.slug}
-                      to={`/treatments/${item.slug}`} 
+                      to={`/treatments/${item.slug}`}
                       className="block text-dental-dark-gray hover:text-dental-blue"
                       onClick={toggleMenu}
                     >
@@ -136,7 +153,7 @@ const Navbar = () => {
                   ))}
                 </div>
               </div>
-              
+
               <Link to="/doctor-tips" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Doctor Tips</Link>
               <Link to="/services" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Services</Link>
               <Link to="/about" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>About</Link>

@@ -132,12 +132,6 @@ const AppointmentBookingSection = () => {
 
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-md mt-4">
                 <div className="flex items-center space-x-2">
-                  <Label htmlFor="show-phone" className="text-sm text-gray-700">Show Phone Call Option</Label>
-                  <Switch
-                    id="show-phone"
-                    checked={showPhoneOption}
-                    onCheckedChange={setShowPhoneOption}
-                  />
                 </div>
               </div>
 
@@ -150,7 +144,6 @@ const AppointmentBookingSection = () => {
                   Book via WhatsApp
                 </Button>
                 
-                {showPhoneOption && (
                   <Button 
                     type="button" 
                     variant="outline"
@@ -160,7 +153,6 @@ const AppointmentBookingSection = () => {
                     <Phone className="h-4 w-4" />
                     Call Now
                   </Button>
-                )}
               </div>
             </form>
           </Card>

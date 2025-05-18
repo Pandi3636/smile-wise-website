@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Navbar from './Navbar';
 
 type ServiceDetail = {
   id: string;
@@ -193,72 +194,76 @@ const ServiceDetailPage = () => {
   }
 
   return (
-    <div className="pt-28 pb-16">
-      <div className="container mx-auto px-4">
-        <Link 
-          to="/services" 
-          className="inline-flex items-center text-dental-blue hover:text-dental-dark-blue mb-6"
-        >
-          <ChevronLeft className="h-4 w-4 mr-1" />
-          Back to Services
-        </Link>
+    <div className="min-h-screen">
+      <Navbar />
 
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="h-64 md:h-80 relative">
-            <img 
-              src={service.image} 
-              alt={service.title} 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-              <div className="p-6">
-                <h1 className="text-3xl md:text-4xl font-bold text-white font-unifraktur">{service.title}</h1>
-              </div>
-            </div>
-          </div>
+      <div className="pt-28 pb-16">
+        <div className="container mx-auto px-4">
+          <Link
+            to="/services"
+            className="inline-flex items-center text-dental-blue hover:text-dental-dark-blue mb-6"
+          >
+            <ChevronLeft className="h-4 w-4 mr-1" />
+            Back to Services
+          </Link>
 
-          <div className="p-6 md:p-8">
-            <div className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4 font-unifraktur text-center">About this Service</h2>
-              <p className="text-gray-700">{service.fullDescription}</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div className="bg-dental-light-blue/10 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4 font-unifraktur text-center">Benefits</h3>
-                <ul className="space-y-2">
-                  {service.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-dental-blue mr-2">•</span>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-dental-light-mint/30 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4 font-unifraktur text-center">Treatment Process</h3>
-                <ol className="space-y-2">
-                  {service.process.map((step, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-dental-blue mr-2 font-bold">{index+1}.</span>
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ol>
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="h-64 md:h-80 relative">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                <div className="p-6">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white font-unifraktur">{service.title}</h1>
+                </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-lg flex justify-between items-center">
-              <div>
-                <p className="text-gray-600">Price Range:</p>
-                <p className="text-2xl font-bold text-dental-blue">{service.price}</p>
+            <div className="p-6 md:p-8">
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold mb-4 font-unifraktur text-center">About this Service</h2>
+                <p className="text-gray-700">{service.fullDescription}</p>
               </div>
-              <Button asChild className="bg-dental-blue hover:bg-blue-600">
-                <a href="https://wa.me/919597876632?text=I'm%20interested%20in%20your%20services" target="_blank" rel="noreferrer">
-                  Book Consultation
-                </a>
-              </Button>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="bg-dental-light-blue/10 p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 font-unifraktur text-center">Benefits</h3>
+                  <ul className="space-y-2">
+                    {service.benefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-dental-blue mr-2">•</span>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-dental-light-mint/30 p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 font-unifraktur text-center">Treatment Process</h3>
+                  <ol className="space-y-2">
+                    {service.process.map((step, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-dental-blue mr-2 font-bold">{index + 1}.</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 p-6 rounded-lg flex justify-between items-center">
+                <div>
+                  {/* <p className="text-gray-600">Price Range:</p>
+                <p className="text-2xl font-bold text-dental-blue">{service.price}</p> */}
+                </div>
+                <Button asChild className="bg-dental-blue hover:bg-blue-600">
+                  <a href="https://wa.me/919597876632?text=I'm%20interested%20in%20your%20services" target="_blank" rel="noreferrer">
+                    Book Consultation
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

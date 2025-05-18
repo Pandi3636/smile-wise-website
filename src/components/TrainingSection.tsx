@@ -9,14 +9,6 @@ import { getAllVideos } from "@/services/videoService";
 import { TrainingVideo } from "@/types";
 import { useToast } from "@/components/ui/use-toast";
 
-const categories = [
-  { id: "general", name: "General Dentistry" },
-  { id: "cosmetic", name: "Cosmetic Dentistry" },
-  { id: "pediatric", name: "Pediatric Dentistry" },
-  { id: "orthodontics", name: "Orthodontics" },
-  { id: "oral-surgery", name: "Oral Surgery" },
-  { id: "endodontics", name: "Endodontics" }
-];
 
 const TrainingSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<null | {
@@ -48,31 +40,27 @@ const TrainingSection = () => {
 
     fetchVideos();
   }, [toast]);
-
+  console.log(videos);
   // Group videos by category
-  const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
-    const categoryId = video.category_id || 'general';
-    if (!acc[categoryId]) acc[categoryId] = [];
-    
-    // Prepare video for display with thumbnail and duration
-    acc[categoryId].push({
-      id: video.id,
-      title: video.title,
-      description: video.description || "",
-      thumbnail: video.thumbnail || "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1173&auto=format&fit=crop",
-      url: video.video_url,
-      duration: "3:45", // Placeholder duration
-    });
-    
-    return acc;
-  }, {});
+// Example if each video has category_name field:
+const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
+  const categoryId = video.category_id || 'general'; // this is the category name here
+  if (!acc[categoryId]) acc[categoryId] = [];
+
+  acc[categoryId].push({
+    id: video.id,
+    title: video.title,
+    description: video.description || "",
+    thumbnail: video.thumbnail || "https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=1173&auto=format&fit=crop",
+    url: video.video_url,
+    duration: "3:45",
+  });
+
+  return acc;
+}, {});
+
 
   // Initialize empty arrays for categories without videos
-  categories.forEach(category => {
-    if (!videosByCategory[category.id]) {
-      videosByCategory[category.id] = [];
-    }
-  });
 
   return (
     <section id="training" className="py-16 bg-white">
@@ -94,13 +82,13 @@ const TrainingSection = () => {
 
         <Tabs defaultValue="general" className="max-w-5xl mx-auto">
           <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8">
-            {categories.map((category) => (
-              <TabsTrigger key={category.id} value={category.id}>
-                {category.name}
+             {Object.entries(videosByCategory).map(([category]) => (
+              <TabsTrigger key={category} value={category}>
+                {category} 
               </TabsTrigger>
             ))}
           </TabsList>
-          
+
           {Object.entries(videosByCategory).map(([category, categoryVideos]) => (
             <TabsContent key={category} value={category}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -111,10 +99,10 @@ const TrainingSection = () => {
                 ) : categoryVideos.length > 0 ? (
                   categoryVideos.map((video) => (
                     <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-                      <div 
+                      <div
                         className="relative h-44 overflow-hidden"
-                        onClick={() => setSelectedVideo({ 
-                          title: video.title, 
+                        onClick={() => setSelectedVideo({
+                          title: video.title,
                           url: video.url,
                           description: video.description
                         })}
@@ -154,9 +142,9 @@ const TrainingSection = () => {
             <div className="bg-white rounded-lg overflow-hidden max-w-4xl w-full">
               <div className="p-4 flex justify-between items-center border-b">
                 <h3 className="font-medium text-lg">{selectedVideo.title}</h3>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setSelectedVideo(null)}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">

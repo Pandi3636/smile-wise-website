@@ -5,8 +5,9 @@ export interface TrainingVideo {
   video_url: string;
   created_at: string;
   thumbnail?: string;
-  category_id?: string;
+  category_id?: any;
   description?: string;
+  video: any;
 }
 
 export interface AdminCredentials {

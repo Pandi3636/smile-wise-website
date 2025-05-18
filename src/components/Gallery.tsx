@@ -37,7 +37,7 @@ const Gallery = () => {
         .order('created_at', { ascending: false });
       
       if (error) throw error;
-      setImages(data || []);
+    setImages((data || []).slice(0, 3));  // ✅ only keep the 4 latest
       console.log(images)
     } catch (error) {
       console.error("Error fetching images:", error);

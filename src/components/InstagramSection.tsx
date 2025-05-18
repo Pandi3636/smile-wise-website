@@ -73,7 +73,7 @@ const InstagramSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {reels.map((reel) => (
+{reels.slice(0, 4).map((reel) => (
             <Card key={reel.id} className="overflow-hidden ">
               <a href={reel.url} target="_blank" rel="noopener noreferrer" className="block">
                 <div className="relative h-96 overflow-hidden">
