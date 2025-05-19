@@ -117,9 +117,6 @@ const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
                             <Video className="w-8 h-8 text-dental-blue" />
                           </div>
                         </div>
-                        <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
-                          {video.duration}
-                        </div>
                       </div>
                       <CardContent className="p-4">
                         <h3 className="font-medium text-lg">{video.title}</h3>

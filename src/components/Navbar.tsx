@@ -50,6 +50,18 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
@@ -86,7 +98,7 @@ const Navbar = () => {
                     Treatments
                   </NavigationMenuTrigger>
                   <NavigationMenuContent
-                    className="rounded-md shadow-lg  absolute bg-white"
+                    className="rounded-md shadow-lg absolute bg-white"
                   >
                     <ul className="flex flex-col w-[210px]">
                       {treatmentItems.map((item) => (
@@ -106,7 +118,7 @@ const Navbar = () => {
             </NavigationMenu>
 
             <Link to="/doctor-tips" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Doctor Tips</Link>
-            <Link to="/services" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Services</Link>
+            {/* <Link to="/services" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Services</Link> */}
             <Link to="/training" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Training</Link>
             <Link to="/gallery" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Gallery</Link>
             <Link to="/about" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">About</Link>
@@ -122,54 +134,102 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobile && (
-        <div className={`fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex justify-between items-center mb-8">
-              <Link to="/" className="text-dental-blue font-bold text-2xl" onClick={toggleMenu}>
+        <div 
+          className={`fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out ${
+            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="h-full flex flex-col">
+            {/* Header */}
+            <div className="flex justify-between items-center p-4 border-b">
+              <Link to="/" className="flex items-center gap-2" onClick={toggleMenu}>
                 <img
                   src="https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//2a0326a6-8854-40d1-88dd-14ed79c172ed.jpg"
                   alt="Dr. Prabha"
-                  className="rounded-lg shadow-lg w-12 h-12 object-cover relative z-10"
+                  className="w-10 h-10 rounded-lg object-cover"
                 />
+                <span className="text-dental-blue font-semibold">Dr Prabhas Dentistry</span>
               </Link>
               <Button variant="ghost" onClick={toggleMenu} aria-label="Close Menu">
                 <X />
               </Button>
             </div>
-            <nav className="flex flex-col space-y-6">
-              <Link to="/" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Home</Link>
 
-              {/* Mobile Treatments Dropdown */}
-              <div className="space-y-3">
-                <div className="text-xl text-dental-dark-gray font-medium">Treatments</div>
-                <div className="pl-4 space-y-3">
-                  {treatmentItems.map((item) => (
-                    <Link
-                      key={item.slug}
-                      to={`/treatments/${item.slug}`}
-                      className="block text-dental-dark-gray hover:text-dental-blue"
-                      onClick={toggleMenu}
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto">
+              <nav className="p-4 space-y-1">
+                <Link 
+                  to="/" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Home
+                </Link>
+
+                {/* Treatments Section */}
+                <div className="py-2">
+                  <div className="px-4 text-lg font-medium text-dental-dark-gray mb-2">Treatments</div>
+                  <div className="max-h-[300px] overflow-y-auto bg-gray-50 rounded-lg">
+                    {treatmentItems.map((item) => (
+                      <Link
+                        key={item.slug}
+                        to={`/treatments/${item.slug}`}
+                        className="block py-2 px-6 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
+                        onClick={toggleMenu}
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <Link to="/doctor-tips" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Doctor Tips</Link>
-              <Link to="/services" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Services</Link>
-              <Link to="/about" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>About</Link>
-              <Link to="/gallery" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Gallery</Link>
-              <Link to="/training" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Training</Link>
-              <Link to="/contact" className="text-xl text-dental-dark-gray hover:text-dental-blue font-medium transition-colors" onClick={toggleMenu}>Contact</Link>
-              <Button asChild className="bg-dental-blue hover:bg-blue-600 w-full">
-                <a href="https://wa.me/919597876632" target="_blank" rel="noopener noreferrer">
-                  Book Appointment
-                </a>
-              </Button>
+                {/* Other Links */}
+                <Link 
+                  to="/doctor-tips" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Doctor Tips
+                </Link>
+                <Link 
+                  to="/services" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Services
+                </Link>
+                <Link 
+                  to="/training" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Training
+                </Link>
+                <Link 
+                  to="/gallery" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Gallery
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  About
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
+                  onClick={toggleMenu}
+                >
+                  Contact
+                </Link>
+              </nav>
 
-              <div className="pt-6 border-t border-gray-100">
-                <h3 className="font-semibold mb-4">Contact Information</h3>
+              {/* Contact Information */}
+              <div className="p-4 border-t">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <MapPin size={18} className="text-dental-blue" />
@@ -194,7 +254,16 @@ const Navbar = () => {
                   </a>
                 </div>
               </div>
-            </nav>
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t">
+              <Button asChild className="bg-dental-blue hover:bg-blue-600 w-full">
+                <a href="https://wa.me/919597876632" target="_blank" rel="noopener noreferrer">
+                  Book Appointment
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       )}

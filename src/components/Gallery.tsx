@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, ArrowRight, ArrowLeft, Image } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/components/ui/use-toast";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,6 +12,7 @@ const Gallery = () => {
   const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     fetchWatermarkedImages();
@@ -93,7 +94,10 @@ const Gallery = () => {
     <section id="dental-tips" className="py-16 bg-gradient-to-br from-dental-purple-light/20 via-dental-blue-soft/30 to-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">
+          <h2 
+            className="text-3xl font-bold text-dental-dark-gray mb-2 cursor-pointer hover:text-dental-blue transition-colors"
+            onClick={() => setIsPopupOpen(true)}
+          >
             Dr Prabhas dentistry Clinic
           </h2>
         </div>
@@ -120,6 +124,35 @@ const Gallery = () => {
           ))}
         </div>
       </div>
+
+      <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-dental-dark-blue">Welcome to Dr Prabhas Dentistry Clinic</DialogTitle>
+          </DialogHeader>
+          <div className="mt-4 space-y-4">
+            <p className="text-gray-600">
+              At Dr Prabhas Dentistry Clinic, we are committed to providing exceptional dental care with a focus on your comfort and satisfaction. Our state-of-the-art facility is equipped with the latest technology to ensure the best possible treatment outcomes.
+            </p>
+            <div className="bg-dental-light-blue/10 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2 text-dental-dark-blue">Our Commitment</h3>
+              <ul className="space-y-2 text-gray-600">
+                <li>• Quality dental care with utmost attention to detail</li>
+                <li>• Modern technology and advanced treatment options</li>
+                <li>• Experienced and compassionate dental professionals</li>
+                <li>• Comfortable and welcoming environment</li>
+                <li>• Personalized treatment plans for each patient</li>
+              </ul>
+            </div>
+            <div className="bg-dental-light-blue/10 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2 text-dental-dark-blue">Clinic Hours</h3>
+              <p className="text-gray-600">Monday - Friday: 5:00 PM - 9:00 PM</p>
+              <p className="text-gray-600">Saturday: By Appointment</p>
+              <p className="text-gray-600">Sunday: Closed</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

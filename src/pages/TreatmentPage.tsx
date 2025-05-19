@@ -1,11 +1,26 @@
-
 import { useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface Treatment {
+  title: string;
+  description: string;
+  image: string;
+  benefits: string[];
+  process: string[];
+  faq: FAQ[];
+}
 
 // Treatment data - in a real application, this would come from a database
-const treatments = {
+export const treatments: Record<string, Treatment> = {
   "general-dentistry": {
     title: "General Dentistry",
     description: "Our general dentistry services cover routine check-ups, cleanings, fillings, and preventive care to maintain your oral health.",
@@ -15,6 +30,27 @@ const treatments = {
       "Early detection of dental problems",
       "Maintain overall oral health",
       "Professional teeth cleaning"
+    ],
+    process: [
+      "Initial consultation and examination",
+      "Digital X-rays and diagnostics",
+      "Professional cleaning and scaling",
+      "Treatment planning and implementation",
+      "Follow-up care and maintenance"
+    ],
+    faq: [
+      {
+        question: "How often should I visit the dentist?",
+        answer: "We recommend visiting the dentist every 6 months for routine check-ups and cleanings. However, some patients may need more frequent visits based on their oral health needs."
+      },
+      {
+        question: "What happens during a routine dental check-up?",
+        answer: "A routine check-up includes a thorough examination of your teeth, gums, and mouth, professional cleaning, X-rays if needed, and a discussion about your oral health and any concerns."
+      },
+      {
+        question: "Is dental cleaning painful?",
+        answer: "Dental cleaning is generally not painful. Some patients may experience slight discomfort, but we use gentle techniques and can provide numbing options if needed."
+      }
     ]
   },
   "cosmetic-dentistry": {
@@ -26,6 +62,27 @@ const treatments = {
       "Boost your confidence",
       "Correct discoloration and staining",
       "Fix chips, cracks and gaps"
+    ],
+    process: [
+      "Initial smile consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Follow-up and maintenance"
+    ],
+    faq: [
+      {
+        question: "How long do cosmetic procedures last?",
+        answer: "The longevity of cosmetic procedures varies. Teeth whitening typically lasts 6-12 months, while veneers and crowns can last 10-15 years with proper care."
+      },
+      {
+        question: "Are cosmetic procedures painful?",
+        answer: "Most cosmetic procedures are minimally invasive and cause little to no discomfort. We use local anesthesia when needed to ensure your comfort."
+      },
+      {
+        question: "How much do cosmetic procedures cost?",
+        answer: "Costs vary depending on the specific procedure and your individual needs. We offer flexible payment plans and can provide a detailed estimate during your consultation."
+      }
     ]
   },
   "orthodontics": {
@@ -37,6 +94,27 @@ const treatments = {
       "Correct bite problems",
       "Improve oral function",
       "Enhance facial aesthetics"
+    ],
+    process: [
+      "Initial orthodontic consultation",
+      "Digital scanning and X-rays",
+      "Treatment plan development",
+      "Appliance placement",
+      "Regular adjustments and monitoring"
+    ],
+    faq: [
+      {
+        question: "How long does orthodontic treatment take?",
+        answer: "Treatment duration varies based on individual needs, typically ranging from 12-24 months. We'll provide a specific timeline during your consultation."
+      },
+      {
+        question: "Are there options besides traditional braces?",
+        answer: "Yes, we offer various options including clear aligners, ceramic braces, and lingual braces. We'll recommend the best option for your needs."
+      },
+      {
+        question: "Will orthodontic treatment be painful?",
+        answer: "You may experience some discomfort when braces are first placed or adjusted, but this is temporary and can be managed with over-the-counter pain relievers."
+      }
     ]
   },
   "root-canal": {
@@ -48,6 +126,27 @@ const treatments = {
       "Save your natural tooth",
       "Prevent infection spread",
       "Restore tooth functionality"
+    ],
+    process: [
+      "Diagnosis and X-rays",
+      "Local anesthesia",
+      "Pulp removal and cleaning",
+      "Canal filling and sealing",
+      "Crown placement"
+    ],
+    faq: [
+      {
+        question: "Is root canal treatment painful?",
+        answer: "Modern root canal treatment is relatively painless. We use local anesthesia to ensure your comfort throughout the procedure."
+      },
+      {
+        question: "How long does a root canal take?",
+        answer: "A typical root canal procedure takes 1-2 hours, depending on the complexity of the case and the number of canals in the tooth."
+      },
+      {
+        question: "What happens after a root canal?",
+        answer: "After the procedure, you may experience some sensitivity for a few days. We'll provide specific care instructions and schedule a follow-up appointment."
+      }
     ]
   },
   "implants": {
@@ -59,6 +158,27 @@ const treatments = {
       "Preserve facial structure",
       "Look and function like natural teeth",
       "No adhesives or removable parts"
+    ],
+    process: [
+      "Initial consultation and planning",
+      "Implant placement surgery",
+      "Healing period",
+      "Abutment placement",
+      "Crown attachment"
+    ],
+    faq: [
+      {
+        question: "How long do dental implants last?",
+        answer: "With proper care, dental implants can last a lifetime. The crown may need replacement after 10-15 years."
+      },
+      {
+        question: "Is implant surgery painful?",
+        answer: "The procedure is performed under local anesthesia, so you won't feel pain during the surgery. Some discomfort may occur during healing."
+      },
+      {
+        question: "Who is a good candidate for implants?",
+        answer: "Most healthy adults with good oral health are candidates. We'll evaluate your specific situation during the consultation."
+      }
     ]
   },
   "childrens-dentistry": {
@@ -70,6 +190,27 @@ const treatments = {
       "Child-friendly dental environment",
       "Education on proper oral hygiene",
       "Preventive treatments"
+    ],
+    process: [
+      "Child-friendly introduction",
+      "Gentle examination",
+      "Preventive treatments",
+      "Education and guidance",
+      "Regular follow-ups"
+    ],
+    faq: [
+      {
+        question: "When should my child first visit the dentist?",
+        answer: "We recommend bringing your child for their first dental visit when their first tooth appears or by their first birthday."
+      },
+      {
+        question: "How can I prepare my child for their first visit?",
+        answer: "Talk positively about the dentist, read children's books about dental visits, and explain that the dentist helps keep their teeth healthy."
+      },
+      {
+        question: "What preventive treatments do you offer for children?",
+        answer: "We offer fluoride treatments, dental sealants, and regular cleanings to help prevent cavities and maintain oral health."
+      }
     ]
   },
   "laser-dentistry": {
@@ -81,6 +222,27 @@ const treatments = {
       "Reduced bleeding and swelling",
       "Faster healing times",
       "More precise treatment"
+    ],
+    process: [
+      "Initial assessment",
+      "Treatment planning",
+      "Laser procedure",
+      "Post-treatment care",
+      "Follow-up evaluation"
+    ],
+    faq: [
+      {
+        question: "Is laser dentistry safe?",
+        answer: "Yes, laser dentistry is FDA-approved and safe. Our team is specially trained in laser procedures."
+      },
+      {
+        question: "What procedures can be done with lasers?",
+        answer: "Lasers can be used for gum disease treatment, cavity detection, teeth whitening, and various soft tissue procedures."
+      },
+      {
+        question: "Is laser treatment more expensive?",
+        answer: "While laser procedures may cost slightly more, they often reduce the need for multiple visits and provide better results."
+      }
     ]
   },
   "smile-corrections": {
@@ -92,6 +254,27 @@ const treatments = {
       "Address multiple issues at once",
       "Dramatic smile enhancement",
       "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
     ]
   },
 };
@@ -127,7 +310,7 @@ const TreatmentPage = () => {
         }}
       >
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{treatment.title}</h1>
+          <h1 className="text-3xl md:text-3xl font-bold text-white mb-6">{treatment.title}</h1>
           <p className="text-xl text-white max-w-2xl">{treatment.description}</p>
         </div>
       </div>
@@ -170,6 +353,58 @@ const TreatmentPage = () => {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Treatment Process */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-semibold text-dental-dark-gray mb-8 text-center">Treatment Process</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {treatment.process.map((step, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-dental-blue text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
+                      {index + 1}
+                    </div>
+                    <h3 className="text-lg font-semibold">Step {index + 1}</h3>
+                  </div>
+                  <p className="text-gray-600">{step}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-semibold text-dental-dark-gray mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="w-full">
+              {treatment.faq.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-lg font-medium">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-16 bg-dental-light-blue/10 rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-semibold text-dental-dark-gray mb-4">Ready to Transform Your Smile?</h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Take the first step towards a healthier, more beautiful smile. Book your consultation today and let our expert team guide you through your dental journey.
+          </p>
+          <Button asChild size="lg" className="bg-dental-blue hover:bg-blue-600">
+            <a href="https://wa.me/919597876632" target="_blank" rel="noopener noreferrer">
+              Book Appointment via WhatsApp
+            </a>
+          </Button>
         </div>
       </div>
       

@@ -5,11 +5,12 @@ import Navbar from "@/components/Navbar";
 // import TeethViewSection from "@/components/TeethViewSection";
 import ContactSection from "@/components/ContactSection";
 import FAQ from "@/components/FAQ";
-import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
 import EMISection from "@/components/EMISection";
 import AppointmentBookingSection from "@/components/AppointmentBookingSection";
-import DoctorTipsSection from "@/components/DoctorTipsSection";
+// import DoctorTipsSection from "@/components/DoctorTipsSection";
+import DentalServices from "@/components/DentalServices";
+import Teeth3DView from "@/components/Teeth3DView";
 
 const Index = () => {
   const heroImageUrl = "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg"; // Get the hero image URL
@@ -24,14 +25,15 @@ const Index = () => {
       <HeroSection />
       {/* This div provides the white background for sections scrolling over the fixed hero image */}
       <div className="relative z-10 bg-white">
-        <Services/>
+        <DentalServices />
         <Gallery/>
-        <DoctorTipsSection />
+        {/* <DoctorTipsSection /> */}
+                <Teeth3DView />
+
         <AppointmentBookingSection />
         <InstagramSection />
         <EMISection />
         <FAQ/>
-        {/* <TeethViewSection /> */}
         <ContactSection />
         <Footer />
       </div>
