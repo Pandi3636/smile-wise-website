@@ -7,6 +7,7 @@ import { CheckCircle, Clock, Award, Users } from "lucide-react";
 
 // Comprehensive procedure data
 const procedureData: Record<string, any> = {
+  // General & Specialized Procedures
   "dental-obturators": {
     title: "Dental Obturators",
     description: "Custom-made prosthetic devices that restore function and appearance after oral surgery or congenital defects.",
@@ -49,9 +50,50 @@ const procedureData: Record<string, any> = {
       "Scheduling of recommended procedures"
     ]
   },
+  "acrylic-prosthesis": {
+    title: "Acrylic Prosthesis",
+    description: "Durable and aesthetic acrylic-based dental prosthetics for tooth replacement and restoration.",
+    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
+    category: "General & Specialized Procedures",
+    duration: "3-4 appointments",
+    benefits: [
+      "Cost-effective solution",
+      "Natural appearance",
+      "Easy maintenance",
+      "Comfortable fit",
+      "Quick fabrication"
+    ],
+    process: [
+      "Initial consultation",
+      "Impressions and measurements",
+      "Laboratory fabrication",
+      "Fitting and adjustments",
+      "Final delivery and care instructions"
+    ]
+  },
+  "aesthetic-dentistry": {
+    title: "Aesthetic Dentistry",
+    description: "Comprehensive cosmetic treatments to enhance your smile's appearance and boost confidence.",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    category: "General & Specialized Procedures",
+    duration: "Varies by treatment",
+    benefits: [
+      "Enhanced smile aesthetics",
+      "Increased confidence",
+      "Natural-looking results",
+      "Personalized treatment",
+      "Long-lasting outcomes"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments",
+      "Maintenance guidance"
+    ]
+  },
   "bps-denture": {
     title: "BPS Dentures",
-    type: "Treatment",
     description: "Bio-functional prosthetic system dentures that provide superior comfort, function, and natural appearance.",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
     category: "General & Specialized Procedures",
@@ -73,31 +115,93 @@ const procedureData: Record<string, any> = {
       "Follow-up care and maintenance"
     ]
   },
-  "bleaching-of-discolored-teeth": {
-    title: "Bleaching of Discolored Teeth",
-    type: "Procedure",
-    description: "Professional teeth whitening treatment to brighten discolored teeth and enhance your smile.",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
-    category: "Restorative & Cosmetic Procedures",
-    duration: "1-2 sessions",
+  "ceramic-tooth": {
+    title: "Ceramic Tooth",
+    description: "High-quality ceramic tooth restorations that mimic natural teeth perfectly.",
+    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800",
+    category: "General & Specialized Procedures",
+    duration: "2-3 appointments",
     benefits: [
-      "Significantly whiter teeth",
-      "Removes stains and discoloration",
-      "Boosts confidence",
-      "Safe and effective treatment",
-      "Long-lasting results"
+      "Natural appearance",
+      "Biocompatible material",
+      "Stain resistant",
+      "Strong and durable",
+      "Perfect color matching"
     ],
     process: [
-      "Consultation and shade assessment",
-      "Teeth cleaning and preparation",
-      "Application of whitening gel",
-      "Activation with special light",
-      "Post-treatment care instructions"
+      "Tooth preparation",
+      "Digital impressions",
+      "Laboratory fabrication",
+      "Fitting and bonding",
+      "Final polishing"
+    ]
+  },
+  "all-on-4-dental-implants": {
+    title: "All On 4 Dental Implants",
+    description: "Full arch restoration with just four strategically placed implants for immediate function.",
+    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
+    category: "General & Specialized Procedures",
+    duration: "1-2 days",
+    benefits: [
+      "Immediate teeth replacement",
+      "Minimal implants required",
+      "Cost-effective solution",
+      "Quick recovery",
+      "Natural function restored"
+    ],
+    process: [
+      "Comprehensive planning",
+      "Implant placement surgery",
+      "Immediate temporary prosthesis",
+      "Healing period",
+      "Final prosthesis placement"
+    ]
+  },
+  "cad-cam-zirconia-crowns": {
+    title: "CAD CAM Zirconia Crowns",
+    description: "Computer-aided design and manufacturing of premium zirconia crowns for superior strength and aesthetics.",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    category: "General & Specialized Procedures",
+    duration: "Same day possible",
+    benefits: [
+      "Exceptional strength",
+      "Perfect fit",
+      "Natural aesthetics",
+      "Biocompatible",
+      "Long-lasting"
+    ],
+    process: [
+      "Digital scanning",
+      "CAD design",
+      "CAM milling",
+      "Fitting and bonding",
+      "Final adjustments"
+    ]
+  },
+  // Restorative & Cosmetic Procedures
+  "3-unit-bridge": {
+    title: "3 Unit Bridge",
+    description: "Fixed dental prosthetic that replaces one or more missing teeth using adjacent teeth as support.",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    category: "Restorative & Cosmetic Procedures",
+    duration: "2-3 appointments",
+    benefits: [
+      "Permanent tooth replacement",
+      "Natural chewing function",
+      "Improved speech",
+      "Enhanced aesthetics",
+      "Prevents teeth shifting"
+    ],
+    process: [
+      "Tooth preparation",
+      "Impression taking",
+      "Temporary bridge placement",
+      "Laboratory fabrication",
+      "Final bridge cementation"
     ]
   },
   "composite-restorations": {
     title: "Composite Restorations (Tooth Coloured Fillings)",
-    type: "Procedure",
     description: "Modern tooth-colored fillings that restore damaged teeth while maintaining natural appearance.",
     image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800",
     category: "Restorative & Cosmetic Procedures",
@@ -117,9 +221,29 @@ const procedureData: Record<string, any> = {
       "Shaping and polishing"
     ]
   },
+  "bleaching-of-discolored-teeth": {
+    title: "Bleaching of Discolored Teeth",
+    description: "Professional teeth whitening treatment to brighten discolored teeth and enhance your smile.",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    category: "Restorative & Cosmetic Procedures",
+    duration: "1-2 sessions",
+    benefits: [
+      "Significantly whiter teeth",
+      "Removes stains and discoloration",
+      "Boosts confidence",
+      "Safe and effective treatment",
+      "Long-lasting results"
+    ],
+    process: [
+      "Consultation and shade assessment",
+      "Teeth cleaning and preparation",
+      "Application of whitening gel",
+      "Activation with special light",
+      "Post-treatment care instructions"
+    ]
+  },
   "dental-laminates": {
     title: "Dental Laminates",
-    type: "Procedure",
     description: "Ultra-thin porcelain veneers that transform your smile with minimal tooth preparation.",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
     category: "Restorative & Cosmetic Procedures",
@@ -137,6 +261,69 @@ const procedureData: Record<string, any> = {
       "Impression taking",
       "Temporary restoration",
       "Final laminate bonding"
+    ]
+  },
+  "composite-bondings": {
+    title: "Composite Bondings",
+    description: "Tooth-colored composite resin bonding to repair chips, gaps, and discoloration.",
+    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800",
+    category: "Procedures",
+    duration: "30-60 minutes per tooth",
+    benefits: [
+      "Conservative treatment",
+      "Natural appearance",
+      "Same-day completion",
+      "Cost-effective",
+      "Reversible procedure"
+    ],
+    process: [
+      "Tooth surface preparation",
+      "Composite application",
+      "Shaping and contouring",
+      "Light curing",
+      "Final polishing"
+    ]
+  },
+  "cast-partial-denture": {
+    title: "Cast Partial Denture",
+    description: "Precision-cast partial denture with metal framework for superior fit and durability.",
+    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800",
+    category: "Procedures",
+    duration: "4-5 appointments",
+    benefits: [
+      "Excellent retention",
+      "Durable metal framework",
+      "Comfortable fit",
+      "Natural appearance",
+      "Long-lasting solution"
+    ],
+    process: [
+      "Initial impressions",
+      "Framework design",
+      "Metal casting",
+      "Tooth setup and try-in",
+      "Final delivery and adjustments"
+    ]
+  },
+  "fixed-prosthodontics": {
+    title: "Fixed Prosthodontics",
+    description: "Comprehensive fixed prosthetic solutions including crowns, bridges, and implant restorations.",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800",
+    category: "Procedures",
+    duration: "Varies by treatment",
+    benefits: [
+      "Permanent solutions",
+      "Natural function",
+      "Enhanced aesthetics",
+      "Improved oral health",
+      "Long-term durability"
+    ],
+    process: [
+      "Comprehensive evaluation",
+      "Treatment planning",
+      "Tooth preparation",
+      "Laboratory fabrication",
+      "Final restoration placement"
     ]
   }
 };

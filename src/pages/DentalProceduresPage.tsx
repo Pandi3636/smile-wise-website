@@ -40,10 +40,46 @@ const dentalProcedures = {
         image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
       },
       {
+        title: "Ceramic Tooth",
+        slug: "ceramic-tooth",
+        description: "High-quality ceramic tooth restorations that mimic natural teeth perfectly.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
         title: "All On 4 Dental Implants",
         slug: "all-on-4-dental-implants",
         description: "Full arch restoration with just four strategically placed implants.",
         image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "CAD CAM Zirconia Crowns",
+        slug: "cad-cam-zirconia-crowns",
+        description: "Computer-aided design and manufacturing of premium zirconia crowns.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "All Ceramic Crowns with Warranty",
+        slug: "all-ceramic-crowns-with-warranty",
+        description: "Premium all-ceramic crowns with comprehensive warranty coverage.",
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Dental Smile Design",
+        slug: "dental-smile-design",
+        description: "Comprehensive smile makeover using digital planning and design.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Aesthetic Metal Free Crowns",
+        slug: "aesthetic-metal-free-crowns",
+        description: "Beautiful metal-free crowns for natural-looking restorations.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "All Prosthodontic Works",
+        slug: "all-prosthodontic-works",
+        description: "Comprehensive prosthodontic treatments for complete oral rehabilitation.",
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
       }
     ]
   },
@@ -63,16 +99,46 @@ const dentalProcedures = {
         image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
       },
       {
-        title: "Bleaching of Discolored Teeth",
-        slug: "bleaching-of-discolored-teeth",
-        description: "Professional teeth whitening for a brighter, confident smile.",
+        title: "Alignment of Crooked & Protruding Teeth",
+        slug: "alignment-of-crooked-protruding-teeth",
+        description: "Orthodontic treatment to correct misaligned and protruding teeth.",
         image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Alginate Impressions",
+        slug: "alginate-impressions",
+        description: "Precise dental impressions for various prosthetic treatments.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Implant and Implant Prosthesis",
+        slug: "implant-and-implant-prosthesis",
+        description: "Complete implant solutions with custom prosthetic attachments.",
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Advanced Digital Diagnostics",
+        slug: "advanced-digital-diagnostics",
+        description: "State-of-the-art digital imaging and diagnostic tools.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "3M Lava & Procera Crown",
+        slug: "3m-lava-procera-crown",
+        description: "Premium crown systems for superior strength and aesthetics.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
       },
       {
         title: "Cosmetic Dental Procedures",
         slug: "cosmetic-dental-procedures",
         description: "Comprehensive aesthetic treatments for smile enhancement.",
-        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Immediate Loading Implantology",
+        slug: "immediate-loading-implantology",
+        description: "Same-day implant placement with immediate prosthetic loading.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
       },
       {
         title: "Dental Prosthetics",
@@ -81,10 +147,73 @@ const dentalProcedures = {
         image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
       },
       {
+        title: "Bleaching of Discolored Teeth",
+        slug: "bleaching-of-discolored-teeth",
+        description: "Professional teeth whitening for a brighter, confident smile.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Endodontic Dentistry",
+        slug: "endodontic-dentistry",
+        description: "Root canal treatments and pulp therapy procedures.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+      },
+      {
         title: "Computerised Digital X-Ray",
         slug: "computerised-digital-x-ray",
         description: "Advanced digital imaging for precise diagnosis and treatment planning.",
         image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      }
+    ]
+  },
+  "treatments": {
+    title: "Treatments",
+    procedures: [
+      {
+        title: "BPS Dentures Fixing",
+        slug: "bps-dentures-fixing",
+        description: "Professional fitting and adjustment of BPS denture systems.",
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
+      }
+    ]
+  },
+  "tests": {
+    title: "Tests",
+    procedures: [
+      {
+        title: "Dental Screening and Prophylaxis",
+        slug: "dental-screening-and-prophylaxis",
+        description: "Comprehensive dental examination and preventive cleaning.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
+      }
+    ]
+  },
+  "procedures": {
+    title: "Procedures",
+    procedures: [
+      {
+        title: "Dental Laminates",
+        slug: "dental-laminates",
+        description: "Ultra-thin porcelain veneers for smile transformation.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Composite Bondings",
+        slug: "composite-bondings",
+        description: "Tooth-colored bonding for chips, gaps, and discoloration.",
+        image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Cast Partial Denture",
+        slug: "cast-partial-denture",
+        description: "Precision-cast partial dentures with metal framework.",
+        image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=500"
+      },
+      {
+        title: "Fixed Prosthodontics",
+        slug: "fixed-prosthodontics",
+        description: "Permanent prosthetic solutions including crowns and bridges.",
+        image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500"
       }
     ]
   }
