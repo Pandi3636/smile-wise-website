@@ -35,7 +35,7 @@ const DoctorTipsSection = () => {
       id: "1",
       name: "Flossing Importance",
       title: "Why Flossing is as Important as Brushing",
-      description: "Dr. Prabha explains how daily flossing prevents gum disease and tooth decay.",
+      description: "Dr. Prabha's explains how daily flossing prevents gum disease and tooth decay.",
       image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKz9wpYfUyavigCRdSXyS-CwQLjmWjGQTH8Q&s",
       author: "Dr. Prabha",
       created_at: new Date().toISOString(),
@@ -80,7 +80,7 @@ const DoctorTipsSection = () => {
     <section id="doctor-tips" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">Doctor Tips</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-poppins text-dental-dark-blue">Doctor Tips</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Discover professional advice from Dr. Prabha to maintain optimal dental health between visits.
           </p>
@@ -117,23 +117,7 @@ const DoctorTipsSection = () => {
           </div>
         )}
 
-        <div className="text-center mt-10">
-          <Link
-            to="/doctor-tips"
-            className="text-dental-blue hover:text-blue-700 font-medium inline-flex items-center"
-          >
-            View all doctor tips
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
+
       </div>
     </section>
   );

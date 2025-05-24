@@ -3,24 +3,15 @@ import React from "react";
 const teethModels = [
   {
     title: "Maxillary First Molar",
-    embedUrl: "https://sketchfab.com/models/9117c7a9bf0848f29bc4e85931697e7b/embed",
+    embedUrl: "https://sketchfab.com/models/e17aff6102bd471eacbd8a29da743bb6/embed?ui_infos=0&ui_controls=1&ui_watermark=0",
     description: "3D view of Maxillary First Molar with Cusp of Carabelli"
   },
   {
-    title: "Mandibular First Molar",
-    embedUrl: "https://sketchfab.com/models/9117c7a9bf0848f29bc4e85931697e7b/embed",
-    description: "3D view of Mandibular First Molar"
+    title: "Maxillary First Molar",
+    embedUrl: "https://sketchfab.com/models/83fb965c76cd4da7980f89dc32c20a56/embed?ui_infos=0&ui_controls=1&ui_watermark=0",
+    description: "3D view of Maxillary First Molar with Cusp of Carabelli"
   },
-  {
-    title: "Maxillary Central Incisor",
-    embedUrl: "https://sketchfab.com/models/9117c7a9bf0848f29bc4e85931697e7b/embed",
-    description: "3D view of Maxillary Central Incisor"
-  },
-  {
-    title: "Mandibular Canine",
-    embedUrl: "https://sketchfab.com/models/9117c7a9bf0848f29bc4e85931697e7b/embed",
-    description: "3D view of Mandibular Canine"
-  }
+
 ];
 
 const Teeth3DView = () => {
@@ -46,18 +37,18 @@ const Teeth3DView = () => {
                 <iframe
                   title={model.title}
                   src={model.embedUrl}
-                  frameBorder="0"
+                 style={{ border: 'none' }} // ✅ replaces frameBorder="0"
                   allow="autoplay; fullscreen; xr-spatial-tracking"
                   allowFullScreen
                   className="w-full h-[300px]"
                 ></iframe>
               </div>
-              <div className="p-6">
+              {/* <div className="p-6">
                 <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">
                   {model.title}
                 </h3>
                 <p className="text-gray-600">{model.description}</p>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

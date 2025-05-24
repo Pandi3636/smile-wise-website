@@ -37,11 +37,10 @@ const EmiContact = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: "url('https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg')",
-            filter: "brightness(0.7)"
+            filter: "brightness(1)"
           }}
         />
         
-        {/* Content */}
         <div className="relative z-10 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">

@@ -13,23 +13,24 @@ import DentalServices from "@/components/DentalServices";
 import Teeth3DView from "@/components/Teeth3DView";
 
 const Index = () => {
-  const heroImageUrl = "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg"; // Get the hero image URL
 
   return (
     <div 
-      className="min-h-screen bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: `url('${heroImageUrl}')` }}
-    >
+      className="min-h-screen bg-cover bg-center bg-fixed">
       <Navbar />
-      {/* HeroSection will now primarily serve as the content layer over the fixed background */}
+      <div className="fixed bottom-0 left-0 right-0 w-full bg-dental-blue z-50">
+  <div className="text-center whitespace-nowrap overflow-hidden">
+    <span className="text-1xl text-white inline-block px-3 py-2" style={{ fontFamily: "'Playpen Sans', cursive" }} >
+      Dr Prabha's Dentistry - Where Your Smile Meets Expertise
+    </span>
+  </div>
+</div>
       <HeroSection />
-      {/* This div provides the white background for sections scrolling over the fixed hero image */}
       <div className="relative z-10 bg-white">
         <DentalServices />
         <Gallery/>
         {/* <DoctorTipsSection /> */}
-                <Teeth3DView />
-
+        <Teeth3DView />
         <AppointmentBookingSection />
         <InstagramSection />
         <EMISection />

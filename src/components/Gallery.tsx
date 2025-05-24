@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowUp, ArrowRight, ArrowLeft, Image } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useToast } from "@/components/ui/use-toast";
@@ -16,7 +16,7 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchWatermarkedImages();
-    
+
     let interval: number | undefined;
     if (isAutoPlaying) {
       interval = window.setInterval(() => {
@@ -36,9 +36,9 @@ const Gallery = () => {
         .from('watermarked_images')
         .select('*')
         .order('created_at', { ascending: false });
-      
+
       if (error) throw error;
-    setImages((data || []).slice(0, 3));  // ✅ only keep the 4 latest
+      setImages((data || []).slice(0, 3));  // ✅ only keep the 4 latest
       console.log(images)
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -52,20 +52,7 @@ const Gallery = () => {
     }
   };
 
-  const goToImage = (index: number) => {
-    setActiveIndex(index);
-    setIsAutoPlaying(false);
-  };
 
-  const goToPrevImage = () => {
-    setActiveIndex(prev => (prev - 1 + images.length) % images.length);
-    setIsAutoPlaying(false);
-  };
-
-  const goToNextImage = () => {
-    setActiveIndex(prev => (prev + 1) % images.length);
-    setIsAutoPlaying(false);
-  };
 
   if (loading) {
     return (
@@ -81,8 +68,8 @@ const Gallery = () => {
     return (
       <section className="py-16 bg-gradient-to-br from-dental-purple-light/20 via-dental-blue-soft/30 to-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-dental-dark-gray mb-2">
-            Dr prabhasdentistry Clinic
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-poppins text-dental-dark-blue">
+            Dr Prabha's Dentistry Clinic
           </h2>
           <p>No images available in the gallery.</p>
         </div>
@@ -94,31 +81,28 @@ const Gallery = () => {
     <section id="dental-tips" className="py-16 bg-gradient-to-br from-dental-purple-light/20 via-dental-blue-soft/30 to-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 
-            className="text-3xl font-bold text-dental-dark-gray mb-2 cursor-pointer hover:text-dental-blue transition-colors"
-            onClick={() => setIsPopupOpen(true)}
-          >
-            Dr Prabhas dentistry Clinic
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-poppins text-dental-dark-blue">
+            Dr Prabha's dentistry Clinic
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {images.map((image, index) => (
             <Card key={image.id} className="border-none shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-              <div className="h-[250px]">
-                <div className="h-full overflow-hidden relative">
-                  <img
-                    src={image.image_url}
-                    alt={image.title || ''}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-medium text-dental-dark-gray">{image.title || 'Untitled'}</h3>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {new Date(image.created_at).toLocaleDateString()}
-                  </p>
-                </CardContent>
+              <div >
+                <AspectRatio ratio={10 / 16} className="bg-muted">
+
+                  <div className="h-full overflow-hidden relative">
+
+                    <img
+                      src={image.image_url}
+                      alt={image.title || ''}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+
+                  </div>
+                </AspectRatio>
+
               </div>
             </Card>
           ))}
@@ -132,7 +116,7 @@ const Gallery = () => {
           </DialogHeader>
           <div className="mt-4 space-y-4">
             <p className="text-gray-600">
-              At Dr Prabhas Dentistry Clinic, we are committed to providing exceptional dental care with a focus on your comfort and satisfaction. Our state-of-the-art facility is equipped with the latest technology to ensure the best possible treatment outcomes.
+              At Dr Prabha's Dentistry Clinic, we are committed to providing exceptional dental care with a focus on your comfort and satisfaction. Our state-of-the-art facility is equipped with the latest technology to ensure the best possible treatment outcomes.
             </p>
             <div className="bg-dental-light-blue/10 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2 text-dental-dark-blue">Our Commitment</h3>

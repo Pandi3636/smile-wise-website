@@ -11,20 +11,20 @@ const AboutSection = () => {
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-dental-blue/20 rounded-full"></div>
             <img 
               src="https://lh3.googleusercontent.com/p/AF1QipPdP5OxqA_12vAHbCrLsJJmi9Bfbi1ncjonhOXc=s1360-w1360-h1020-rw"
-              alt="Dr. Prabha"
+              alt="Dr. Prabha's"
               className="rounded-lg shadow-lg w-full h-auto object-cover relative z-10"
             />
           </div>
 
           <div>
             <h2 className="text-3xl font-bold text-dental-dark-gray mb-1">
-              About Drprabhasdentistry
+              About Dr prabha's dentistry
             </h2>
             <p className="text-gray-600 mb-4">
-              Welcome to Dr Prabhas dentistry Clinic, where we've been providing exceptional dental care to the Chennai community for over 15 years. Our modern facility is equipped with state-of-the-art technology to ensure you receive the best possible treatment.
+              Welcome to Dr Prabha's dentistry Clinic, where we've been providing exceptional dental care to the Chennai community for over 15 years. Our modern facility is equipped with state-of-the-art technology to ensure you receive the best possible treatment.
             </p>
             <p className="text-gray-600 mb-6">
-              Dr. Prabha completed her dental education at a prestigious institution and has pursued numerous advanced training certificates to stay at the forefront of dental innovations. With a gentle approach and attention to detail, she ensures each patient receives personalized care in a comfortable environment.
+              Dr. Prabha's completed her dental education at a prestigious institution and has pursued numerous advanced training certificates to stay at the forefront of dental innovations. With a gentle approach and attention to detail, she ensures each patient receives personalized care in a comfortable environment.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">

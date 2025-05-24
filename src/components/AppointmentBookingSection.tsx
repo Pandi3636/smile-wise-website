@@ -40,7 +40,7 @@ const AppointmentBookingSection = () => {
     }
     
     // Format the WhatsApp message
-    const message = `Hello Dr. Prabha, I'd like to book an appointment.\n\nName: ${name}\nTime: ${time}\nDay: ${day}\nTreatment: ${treatment}`;
+    const message = `Hello Dr. Prabha's, I'd like to book an appointment.\n\nName: ${name}\nTime: ${time}\nDay: ${day}\nTreatment: ${treatment}`;
     const encodedMessage = encodeURIComponent(message);
     
     // Open WhatsApp with the pre-filled message
@@ -138,7 +138,7 @@ const AppointmentBookingSection = () => {
               <div className="flex items-center gap-3 pt-4">
                 <Button 
                   type="submit" 
-                  className="w-full bg-green-600 hover:bg-green-700 flex items-center justify-center gap-2"
+                  className="w-full bg-dental-blue hover:bg-blue-600 flex items-center justify-center gap-2"
                 >
                   <MessageSquare className="h-4 w-4" />
                   Book via WhatsApp

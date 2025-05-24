@@ -4,6 +4,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+    const clinicPhoneNumber = '+919597876632'; 
+
+    const handlePhoneCall = () => {
+    window.location.href = `tel:${clinicPhoneNumber}`;
+  };
+
 
   return (
 <footer className="bg-[url('https://images.weserv.nl/?output=webp&url=https://vbosedentalcare.com/assets/images/footer/footer-bg.jpg')] bg-cover bg-center text-white">
@@ -49,12 +55,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">General Dentistry</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Cosmetic Dentistry</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Orthodontics</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Pediatric Dentistry</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Dental Implants</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Root Canal Treatment</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">General Dentistry</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">Cosmetic Dentistry</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">Orthodontics</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">Pediatric Dentistry</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">Dental Implants</Link></li>
+              <li><Link to="/treatments" className="text-gray-300 hover:text-white transition-colors">Root Canal Treatment</Link></li>
             </ul>
           </div>
 
@@ -68,7 +74,7 @@ const Footer = () => {
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone size={20} className="text-dental-blue" />
+                <Phone size={20} className="text-dental-blue" onClick={handlePhoneCall} />
                 <a href="tel:+919597876632" className="text-gray-300 hover:text-white transition-colors">
                   095978 76632
                 </a>

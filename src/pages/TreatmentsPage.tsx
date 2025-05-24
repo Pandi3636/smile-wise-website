@@ -12,12 +12,9 @@ const TreatmentsPage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <div className="relative pt-32 pb-20 bg-dental-dark-blue">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Dental Treatments</h1>
-          <p className="text-xl text-white/90 max-w-2xl">
-            Discover our comprehensive range of dental treatments designed to give you the healthy, beautiful smile you deserve.
-          </p>
+      <div className="relative pt-32 pb-20">
+        <div className="container mx-auto px-2">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center font-poppins text-dental-dark-blue">Our Dental Service</h2>
         </div>
       </div>
 

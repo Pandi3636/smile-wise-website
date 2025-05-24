@@ -24,7 +24,8 @@ export const treatments: Record<string, Treatment> = {
   "general-dentistry": {
     title: "General Dentistry",
     description: "Our general dentistry services cover routine check-ups, cleanings, fillings, and preventive care to maintain your oral health.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
     benefits: [
       "Prevent tooth decay and gum disease",
       "Early detection of dental problems",
@@ -56,7 +57,8 @@ export const treatments: Record<string, Treatment> = {
   "cosmetic-dentistry": {
     title: "Cosmetic Dentistry",
     description: "Transform your smile with our cosmetic dentistry services including teeth whitening, veneers, and smile makeovers.",
-    image: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//3dccc5f0-11c7-4efa-8ba9-a1ad9da6f9b3.jpg",
     benefits: [
       "Enhance your smile's appearance",
       "Boost your confidence",
@@ -88,7 +90,7 @@ export const treatments: Record<string, Treatment> = {
   "orthodontics": {
     title: "Orthodontics",
     description: "Straighten your teeth and correct bite issues with our modern orthodontic treatments including braces and clear aligners.",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image: 'https://images.pexels.com/photos/6627562/pexels-photo-6627562.jpeg?auto=compress&cs=tinysrgb&w=600',
     benefits: [
       "Straighten misaligned teeth",
       "Correct bite problems",
@@ -120,7 +122,8 @@ export const treatments: Record<string, Treatment> = {
   "root-canal": {
     title: "Root Canal Treatment",
     description: "Save your natural tooth and relieve pain with our gentle and effective root canal treatments.",
-    image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.pexels.com/photos/4971514/pexels-photo-4971514.jpeg?auto=compress&cs=tinysrgb&w=600",
     benefits: [
       "Eliminate tooth pain",
       "Save your natural tooth",
@@ -152,7 +155,8 @@ export const treatments: Record<string, Treatment> = {
   "implants": {
     title: "Dental Implants",
     description: "Replace missing teeth with dental implants that look, feel, and function like your natural teeth.",
-    image: "https://images.unsplash.com/photo-1601458889412-87ad29e::hl=en&w=1200&q=80",
+    image:
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//e04266cb-4ab8-4447-ab95-18f657a996f8.jpg",
     benefits: [
       "Permanent solution for missing teeth",
       "Preserve facial structure",
@@ -184,7 +188,8 @@ export const treatments: Record<string, Treatment> = {
   "childrens-dentistry": {
     title: "Children's Dentistry",
     description: "Specialized dental care for children in a friendly, comfortable environment to establish good oral health habits early.",
-    image: "https://images.unsplash.com/photo-1559608568-298537e67dc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.pexels.com/photos/7789705/pexels-photo-7789705.jpeg?auto=compress&cs=tinysrgb&w=600",
     benefits: [
       "Early detection of dental issues",
       "Child-friendly dental environment",
@@ -216,7 +221,8 @@ export const treatments: Record<string, Treatment> = {
   "laser-dentistry": {
     title: "Laser Dentistry",
     description: "Advanced laser technology for more comfortable and precise dental procedures with faster healing times.",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image:
+      "https://images.pexels.com/photos/5355839/pexels-photo-5355839.jpeg?auto=compress&cs=tinysrgb&w=600",
     benefits: [
       "Less pain and discomfort",
       "Reduced bleeding and swelling",
@@ -248,7 +254,236 @@ export const treatments: Record<string, Treatment> = {
   "smile-corrections": {
     title: "Smile Corrections",
     description: "Comprehensive smile makeover services to address multiple aesthetic concerns and give you the smile of your dreams.",
-    image: "https://images.unsplash.com/photo-1581263518256-ba4a28ed5517?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//a1e4ee3c-0291-414e-8f33-ed94bba464df.jpg',
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+  "reverse-aging-dentistry": {
+    title: "Reverse Aging Dentistry",
+    description: "Comprehensive treatments focused on restoring youthful dental aesthetics and function, addressing issues like wear, discoloration, and volume loss.",
+    image: 'https://images.pexels.com/photos/5622023/pexels-photo-5622023.jpeg?auto=compress&cs=tinysrgb&w=600',
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+    "crown-in-a-day": {
+    title: "Crown in A Day",
+    description: "Using CEREC technology to design, create, and place dental crowns in a single appointment, offering a fast and convenient restoration.",
+    image: 'https://images.pexels.com/photos/6627564/pexels-photo-6627564.jpeg?auto=compress&cs=tinysrgb&w=600',
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+      "digital-dentistry": {
+    title: "digital-dentistry",
+    description:"Leveraging digital tools and workflows for enhanced precision, efficiency, and patient experience in various dental procedures.",
+    image:
+      "https://images.pexels.com/photos/6502161/pexels-photo-6502161.jpeg?auto=compress&cs=tinysrgb&w=600",
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+ "zygoma-implants": {
+    title: "Zygoma Implants",
+    description:      "A specialized implant technique using the zygomatic bone to provide support for dental prosthetics, often used in cases of significant bone loss in the upper jaw.",
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//7e2fb975-ed49-41e6-91fb-b654e3592e1b.jpg',
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+   "fixed-teeth-rehabilitation-within-3-days": {
+    title: "Fixed Teeth Rehabilitation Within 3 days",
+    description:      "A rapid and efficient method to restore full arch dentition with fixed prosthetics, providing functional teeth shortly after implant placement.",
+    image:
+      "https://images.pexels.com/photos/6627564/pexels-photo-6627564.jpeg?auto=compress&cs=tinysrgb&w=600",
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+"invisible-braces-Aligners": {
+    title: "Invisible braces - Aligners",
+    description:
+      "A discreet orthodontic treatment using a series of clear, custom-made aligners to gradually shift teeth into the desired position.",
+    image:
+      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+    benefits: [
+      "Customized treatment plan",
+      "Address multiple issues at once",
+      "Dramatic smile enhancement",
+      "Boost your self-confidence"
+    ],
+    process: [
+      "Smile analysis and consultation",
+      "Digital smile design",
+      "Treatment planning",
+      "Procedure implementation",
+      "Final adjustments and follow-up"
+    ],
+    faq: [
+      {
+        question: "What issues can smile correction address?",
+        answer: "We can address discoloration, misalignment, gaps, chips, and other aesthetic concerns to create your ideal smile."
+      },
+      {
+        question: "How long does a smile makeover take?",
+        answer: "The duration varies based on the treatments needed. Some procedures can be completed in one visit, while others may take several months."
+      },
+      {
+        question: "Will the results look natural?",
+        answer: "Yes, we use advanced techniques and materials to ensure your new smile looks natural and complements your facial features."
+      }
+    ]
+  },
+  "dental-tourism": {
+    title: "Dental-tourism",
+    description:
+      "Combining your dental treatment with a travel experience, offering high-quality dental care while visiting a new location.",
+    image: 'https://images.pexels.com/photos/5355839/pexels-photo-5355839.jpeg?auto=compress&cs=tinysrgb&w=600',
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",
@@ -299,24 +534,22 @@ const TreatmentPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      
-      {/* Treatment Hero */}
-      <div 
-        className="relative pt-32 pb-20" 
+            <div 
+        className="relative pt-32 pb-20 mt-50" 
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${treatment.image})`,
+          backgroundImage: `url(${treatment.image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl md:text-3xl font-bold text-white mb-6">{treatment.title}</h1>
-          <p className="text-xl text-white max-w-2xl">{treatment.description}</p>
+      <div className="max-w-5xl mx-auto p-4 space-y-6">
+        <h1 className="text-4xl font-bold text-center text-white ">{treatment.title}</h1>
+        <p className="text-lg text-center text-white ">{treatment.description}</p>
         </div>
       </div>
       
       {/* Treatment Content */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-1 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-semibold text-dental-dark-gray mb-6">About {treatment.title}</h2>
@@ -355,25 +588,6 @@ const TreatmentPage = () => {
           </div>
         </div>
 
-        {/* Treatment Process */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-semibold text-dental-dark-gray mb-8 text-center">Treatment Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {treatment.process.map((step, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-dental-blue text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
-                      {index + 1}
-                    </div>
-                    <h3 className="text-lg font-semibold">Step {index + 1}</h3>
-                  </div>
-                  <p className="text-gray-600">{step}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
 
         {/* FAQ Section */}
         <div className="mt-16">

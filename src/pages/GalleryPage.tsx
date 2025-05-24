@@ -13,6 +13,7 @@ import { Image, Video } from "lucide-react";
 
 const GalleryPage = () => {
   const [activeTab, setActiveTab] = useState<"images" | "videos" | "all">("images");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [images, setImages] = useState<any[]>([]);
   const [videos, setVideos] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +64,7 @@ const GalleryPage = () => {
 
       <div className="flex-1 bg-gradient-to-br from-dental-blue-soft/10 to-white">
         <div className="container mx-auto px-4 py-16">
-          <div className="text-center mb-10">
+          <div className="text-center mb-10 mt-8">
             <h1 className="text-4xl font-bold text-dental-dark-blue mb-4">
               Media Gallery
             </h1>
@@ -75,7 +76,7 @@ const GalleryPage = () => {
           <div className="mb-8">
             <Tabs defaultValue="images" onValueChange={(value) => setActiveTab(value as any)} className="w-full">
               <div className="flex justify-center">
-                <TabsList className="grid w-full max-w-md grid-cols-3">
+                <TabsList className="grid w-full max-w-md  items-center ">
                   <TabsTrigger value="images" className="flex items-center gap-2">
                     <Image size={16} />
                     Images
@@ -84,10 +85,10 @@ const GalleryPage = () => {
                     <Video size={16} />
                     Videos
                   </TabsTrigger> */}
-                  <TabsTrigger value="videos" className="flex items-center gap-2">
+                  {/* <TabsTrigger value="videos" className="flex items-center gap-2">
                     <Video size={16} />
                     Videos
-                  </TabsTrigger>
+                  </TabsTrigger> */}
                 </TabsList>
               </div>
             </Tabs>
@@ -103,7 +104,7 @@ const GalleryPage = () => {
                 <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-3">
                     <div className="overflow-hidden rounded-md">
-                      <AspectRatio ratio={4/3} className="bg-muted">
+                      <AspectRatio ratio={9/15} className="bg-muted">
                         {item.url ? ( // Images
                           <img
                             src={item.url}

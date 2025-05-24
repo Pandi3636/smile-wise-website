@@ -20,31 +20,36 @@ const TrainingSection = () => {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllVideos();
-        setVideos(data);
-      } catch (error: any) {
-        console.error("Error fetching videos:", error);
-        toast({
-          title: "Error loading videos",
-          description: "Please try again later",
-          variant: "destructive",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
+const [activeTab, setActiveTab] = useState<string | null>(null);
 
-    fetchVideos();
-  }, [toast]);
-  console.log(videos);
-  // Group videos by category
-// Example if each video has category_name field:
+useEffect(() => {
+  const fetchVideos = async () => {
+    try {
+      setLoading(true);
+      const data = await getAllVideos();
+      setVideos(data);
+
+      if (data.length > 0) {
+        const firstCategory = data[0].category_id || "Full Mouth Rehabilitation";
+        setActiveTab(firstCategory);
+      }
+    } catch (error: any) {
+      console.error("Error fetching videos:", error);
+      toast({
+        title: "Error loading videos",
+        description: "Please try again later",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchVideos();
+}, [toast]);
+
 const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
-  const categoryId = video.category_id || 'general'; // this is the category name here
+  const categoryId = video.category_id || 'Full Mouth Rehabilitation'; // this is the category name here
   if (!acc[categoryId]) acc[categoryId] = [];
 
   acc[categoryId].push({
@@ -80,7 +85,7 @@ const videosByCategory = videos.reduce((acc: Record<string, any[]>, video) => {
           </div>
         </div>
 
-        <Tabs defaultValue="general" className="max-w-5xl mx-auto">
+<Tabs value={activeTab ?? ""} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
           <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8">
              {Object.entries(videosByCategory).map(([category]) => (
               <TabsTrigger key={category} value={category}>

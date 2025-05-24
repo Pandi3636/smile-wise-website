@@ -7,23 +7,38 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 
 // Treatment menu items
 const treatmentItems = [
-  { title: "Non contact Cleaning", slug: "non-contact-cleaning" },
-  { title: "Cosmetic Dentistry", slug: "cosmetic-dentistry" },
-  { title: "General Dentistry", slug: "general-dentistry" },
-  { title: "Digital Dentistry", slug: "digital-dentistry" },
-  { title: "Root Canal", slug: "root-canal" },
-  { title: "Implants", slug: "implants" },
-  { title: "Orthodontics", slug: "orthodontics" },
-  { title: "Stress Free Treatments", slug: "stress-free-treatments" },
-  { title: "Children's Dentistry", slug: "childrens-dentistry" },
-  { title: "Reverse Aging Dentistry", slug: "reverse-aging-dentistry" },
-  { title: "Crown in A Day", slug: "crown-in-a-day" },
-  { title: "Smile Corrections", slug: "smile-corrections" },
-  { title: "Zygoma Implants", slug: "zygoma-implants" },
-  { title: "Fixed Teeth Rehabilitation Within 3 days", slug: "fixed-teeth-rehabilitation-within-3-days" },
-  { title: "Invisible braces - Aligners", slug: "invisible-braces-aligners" },
-  { title: "Laser Dentistry", slug: "laser-dentistry" },
-  { title: "Dental Tourism", slug: "dental-tourism" },
+  {
+    items: [
+      { title: "General Dentistry", slug: "general-dentistry" },
+      { title: "Children's Dentistry", slug: "childrens-dentistry" },
+      { title: "Root Canal Treatment", slug: "root-canal" },
+      { title: "Reverse Aging Dentistry", slug: "reverse-aging-dentistry" },
+         { title: "Fixed Teeth Rehabilitation Within 3 days", slug: "fixed-teeth-rehabilitation-within-3-days" },
+
+
+    ],
+  },
+  {
+    items: [
+      { title: "Cosmetic Dentistry", slug: "cosmetic-dentistry" },
+      { title: "Smile Corrections", slug: "smile-corrections" },
+      { title: "Dental Implants", slug: "implants" },
+      { title: "Crown in A Day", slug: "crown-in-a-day" },
+      { title: "Invisible braces - Aligners", slug: "invisible-braces-Aligners" },
+
+
+    ],
+  },
+  {
+    items: [
+      { title: "Orthodontics", slug: "orthodontics" },
+      { title: "Laser Dentistry", slug: "laser-dentistry" },
+      { title: "digital-dentistry", slug: "digital-dentistry" },
+      { title: "Zygoma Implants", slug: "zygoma-implants" },
+
+
+    ],
+  },
 ];
 
 const Navbar = () => {
@@ -63,7 +78,7 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white shadow-md py-1'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -76,7 +91,7 @@ const Navbar = () => {
               <span
                 className="ml-4 text-xl lg:text-2xl text-dental-blue"
                 style={{ fontFamily: "'Playpen Sans', cursive" }} >
-                Dr Prabhas Dentistry
+                Dr Prabha's Dentistry
               </span>
             </Link>
           </div>
@@ -100,18 +115,32 @@ const Navbar = () => {
                   <NavigationMenuContent
                     className="rounded-md shadow-lg absolute bg-white"
                   >
-                    <ul className="flex flex-col w-[210px]">
-                      {treatmentItems.map((item) => (
-                        <li key={item.slug}>
-                          <Link
-                            to={`/treatments/${item.slug}`}
-                            className="block px-3 py-2 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
-                          >
-                            {item.title}
-                          </Link>
-                        </li>
+                    <div className="grid grid-cols-3 gap-4 p-6 w-[800px]">
+                      <div className="col-span-3 mb-4">
+                        <Link
+                          to="/treatments"
+                          className="block text-lg font-semibold text-dental-dark-gray hover:text-dental-black transition-colors"
+                        >
+                          View All Treatments →
+                        </Link>
+                      </div>
+                      {treatmentItems.map((category) => (
+                        <div  className="space-y-3">
+                          <ul className="space-y-2">
+                            {category.items.map((item) => (
+                              <li key={item.slug}>
+                                <Link
+                                  to={`/treatment/${item.slug}`}
+                                  className="block text-sm text-gray-600 hover:text-dental-black transition-colors"
+                                >
+                                  {item.title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -129,6 +158,7 @@ const Navbar = () => {
               </a>
             </Button>
           </nav>
+          
         </div>
       </div>
 
@@ -148,7 +178,7 @@ const Navbar = () => {
                   alt="Dr. Prabha"
                   className="w-10 h-10 rounded-lg object-cover"
                 />
-                <span className="text-dental-blue font-semibold">Dr Prabhas Dentistry</span>
+                <span className="text-dental-blue font-semibold">Dr Prabha's Dentistry</span>
               </Link>
               <Button variant="ghost" onClick={toggleMenu} aria-label="Close Menu">
                 <X />
@@ -170,16 +200,13 @@ const Navbar = () => {
                 <div className="py-2">
                   <div className="px-4 text-lg font-medium text-dental-dark-gray mb-2">Treatments</div>
                   <div className="max-h-[300px] overflow-y-auto bg-gray-50 rounded-lg">
-                    {treatmentItems.map((item) => (
-                      <Link
-                        key={item.slug}
-                        to={`/treatments/${item.slug}`}
-                        className="block py-2 px-6 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
-                        onClick={toggleMenu}
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
+                    <Link
+                      to="/treatments"
+                      className="block py-2 px-6 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      View All Treatments →
+                    </Link>
                   </div>
                 </div>
 
