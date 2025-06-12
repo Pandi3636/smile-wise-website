@@ -11,9 +11,9 @@ const writeStream = createWriteStream(__dirname + '/dist/sitemap.xml');
 sitemap.pipe(writeStream);
 
   // Add routes manually (add more if you have other pages via client-side routing)
-  sitemap.write({ url: '/', changefreq: 'monthly', priority: 1.0 });
-  sitemap.write({ url: '/about', changefreq: 'monthly', priority: 0.8 });
-  sitemap.write({ url: '/services', changefreq: 'monthly', priority: 0.8 });
+  sitemap.write({ url: '/dentist-in-nearme/chennai/vanagaram', changefreq: 'monthly', priority: 1.0 });
+  sitemap.write({ url: '/dentist-in-vanagaram', changefreq: 'monthly', priority: 1.0 });
+  sitemap.write({ url: '/services', changefreq: 'monthly', priority: 1.0 });
   sitemap.write({ url: '/doctor-tips', changefreq: 'monthly', priority: 1.0 });
   sitemap.write({ url: '/treatments', changefreq: 'monthly', priority: 1.0 });
 

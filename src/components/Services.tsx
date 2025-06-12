@@ -10,7 +10,7 @@ const serviceItems = [
     description:
       "Our general dentistry services cover routine check-ups, cleanings, fillings, and preventive care to maintain your oral health.",
     image:
-      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/photo-1606811971618-4486d14f3f99.jpg",
     slug: "general-dentistry",
   },
   {
@@ -25,7 +25,7 @@ const serviceItems = [
     title: "Orthodontics",
     description:
       "Straighten your teeth and correct bite issues with our modern orthodontic treatments including braces and clear aligners.",
-    image: 'https://images.pexels.com/photos/6627562/pexels-photo-6627562.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/dental-procedure-installing-braces-close-up-dentistry-braces-teeth_169016-67279.avif',
     slug: "orthodontics",
   },
   {

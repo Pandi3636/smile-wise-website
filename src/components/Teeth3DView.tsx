@@ -3,16 +3,18 @@ import React from "react";
 const teethModels = [
   {
     title: "Maxillary First Molar",
-    embedUrl: "https://sketchfab.com/models/e17aff6102bd471eacbd8a29da743bb6/embed?ui_infos=0&ui_controls=1&ui_watermark=0",
-    description: "3D view of Maxillary First Molar with Cusp of Carabelli"
+    embedUrl:
+      "https://sketchfab.com/models/7d300055ca92491baddc46e714656205/embed?autostart=1&ui_controls=0&ui_infos=0&preload=1",
+    description: "3D view of Maxillary First Molar with Cusp of Carabelli",
   },
   {
     title: "Maxillary First Molar",
-    embedUrl: "https://sketchfab.com/models/83fb965c76cd4da7980f89dc32c20a56/embed?ui_infos=0&ui_controls=1&ui_watermark=0",
-    description: "3D view of Maxillary First Molar with Cusp of Carabelli"
+    embedUrl:
+      "https://sketchfab.com/models/c1e66fa66ed74b83ac88134d5624715f/embed?autostart=1&ui_controls=0&ui_infos=0&preload=1",
+    description: "3D view of Maxillary First Molar with Cusp of Carabelli",
   },
-
 ];
+
 
 const Teeth3DView = () => {
   return (
@@ -43,12 +45,6 @@ const Teeth3DView = () => {
                   className="w-full h-[300px]"
                 ></iframe>
               </div>
-              {/* <div className="p-6">
-                <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">
-                  {model.title}
-                </h3>
-                <p className="text-gray-600">{model.description}</p>
-              </div> */}
             </div>
           ))}
         </div>

@@ -25,7 +25,7 @@ export const treatments: Record<string, Treatment> = {
     title: "General Dentistry",
     description: "Our general dentistry services cover routine check-ups, cleanings, fillings, and preventive care to maintain your oral health.",
     image:
-      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/photo-1606811971618-4486d14f3f99.jpg",
     benefits: [
       "Prevent tooth decay and gum disease",
       "Early detection of dental problems",
@@ -90,7 +90,7 @@ export const treatments: Record<string, Treatment> = {
   "orthodontics": {
     title: "Orthodontics",
     description: "Straighten your teeth and correct bite issues with our modern orthodontic treatments including braces and clear aligners.",
-    image: 'https://images.pexels.com/photos/6627562/pexels-photo-6627562.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/dental-procedure-installing-braces-close-up-dentistry-braces-teeth_169016-67279.avif',
     benefits: [
       "Straighten misaligned teeth",
       "Correct bite problems",
@@ -351,7 +351,7 @@ export const treatments: Record<string, Treatment> = {
     title: "digital-dentistry",
     description:"Leveraging digital tools and workflows for enhanced precision, efficiency, and patient experience in various dental procedures.",
     image:
-      "https://images.pexels.com/photos/6502161/pexels-photo-6502161.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/istockphoto-1252962000-612x612.jpg",
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",
@@ -383,7 +383,7 @@ export const treatments: Record<string, Treatment> = {
  "zygoma-implants": {
     title: "Zygoma Implants",
     description:      "A specialized implant technique using the zygomatic bone to provide support for dental prosthetics, often used in cases of significant bone loss in the upper jaw.",
-    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//7e2fb975-ed49-41e6-91fb-b654e3592e1b.jpg',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/Zygomatic-Implants-1024x683.jpg',
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",
@@ -416,7 +416,7 @@ export const treatments: Record<string, Treatment> = {
     title: "Fixed Teeth Rehabilitation Within 3 days",
     description:      "A rapid and efficient method to restore full arch dentition with fixed prosthetics, providing functional teeth shortly after implant placement.",
     image:
-      "https://images.pexels.com/photos/6627564/pexels-photo-6627564.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/full-mouth-rehabilitation-by-crowns-260nw-2113128206.webp",
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",
@@ -450,7 +450,7 @@ export const treatments: Record<string, Treatment> = {
     description:
       "A discreet orthodontic treatment using a series of clear, custom-made aligners to gradually shift teeth into the desired position.",
     image:
-      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/images%20(1).jpg",
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",
@@ -483,7 +483,7 @@ export const treatments: Record<string, Treatment> = {
     title: "Dental-tourism",
     description:
       "Combining your dental treatment with a travel experience, offering high-quality dental care while visiting a new location.",
-    image: 'https://images.pexels.com/photos/5355839/pexels-photo-5355839.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/Dental%20tourism.png',
     benefits: [
       "Customized treatment plan",
       "Address multiple issues at once",

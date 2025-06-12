@@ -9,7 +9,7 @@ const services = [
     description:
       "Our general dentistry services cover routine check-ups, cleanings, fillings, and preventive care to maintain your oral health.",
     image:
-      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/photo-1606811971618-4486d14f3f99.jpg",
     slug: "General Dentistry",
   },
   {
@@ -24,8 +24,8 @@ const services = [
     title: "Orthodontics",
     description:
       "Straighten your teeth and correct bite issues with our modern orthodontic treatments including braces and clear aligners.",
-    image: 'https://images.pexels.com/photos/6627562/pexels-photo-6627562.jpeg?auto=compress&cs=tinysrgb&w=600',
-    slug: "Orthodontics",
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/dental-procedure-installing-braces-close-up-dentistry-braces-teeth_169016-67279.avif',
+    slug: "orthodontics",
   },
   {
     title: "Root Canal Treatment",
@@ -33,7 +33,7 @@ const services = [
       "Save your natural tooth and relieve pain with our gentle and effective root canal treatments.",
     image:
       "https://images.pexels.com/photos/4971514/pexels-photo-4971514.jpeg?auto=compress&cs=tinysrgb&w=600",
-    slug: "Root Canal Treatment",
+    slug: "root-canal",
   },
   {
     title: "Dental Implants",
@@ -41,7 +41,7 @@ const services = [
       "Replace missing teeth with dental implants that look, feel, and function like your natural teeth.",
     image:
       "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//e04266cb-4ab8-4447-ab95-18f657a996f8.jpg",
-    slug: "Dental Implants",
+    slug: "implants",
   },
   {
     title: "Children's Dentistry",
@@ -49,7 +49,7 @@ const services = [
       "Specialized dental care for children in a friendly, comfortable environment to establish good oral health habits early.",
     image:
       "https://images.pexels.com/photos/7789705/pexels-photo-7789705.jpeg?auto=compress&cs=tinysrgb&w=600",
-    slug: "Children's Dentistry",
+    slug: "childrens-dentistry",
   },
   {
     title: "Laser Dentistry",
@@ -57,14 +57,14 @@ const services = [
       "Advanced laser technology for more comfortable and precise dental procedures with faster healing times.",
     image:
       "https://images.pexels.com/photos/5355839/pexels-photo-5355839.jpeg?auto=compress&cs=tinysrgb&w=600",
-    slug: "Laser Dentistry",
+    slug: "laser-dentistry",
   },
   {
     title: "Smile Corrections",
     description:
       "Comprehensive smile makeover services to address multiple aesthetic concerns and give you the smile of your dreams.",
     image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//a1e4ee3c-0291-414e-8f33-ed94bba464df.jpg',
-    slug: "Smile Corrections",
+    slug: "smile-corrections",
   },
   {
     title: "Reverse Aging Dentistry",
@@ -85,14 +85,14 @@ const services = [
     description:
       "Leveraging digital tools and workflows for enhanced precision, efficiency, and patient experience in various dental procedures.",
     image:
-      "https://images.pexels.com/photos/6502161/pexels-photo-6502161.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/istockphoto-1252962000-612x612.jpg",
     slug: "digital-dentistry",
   },
   {
     title: "Zygoma Implants",
     description:
       "A specialized implant technique using the zygomatic bone to provide support for dental prosthetics, often used in cases of significant bone loss in the upper jaw.",
-    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//7e2fb975-ed49-41e6-91fb-b654e3592e1b.jpg',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/Zygomatic-Implants-1024x683.jpg',
     slug: "zygoma-implants",
   },
   {
@@ -100,7 +100,7 @@ const services = [
     description:
       "A rapid and efficient method to restore full arch dentition with fixed prosthetics, providing functional teeth shortly after implant placement.",
     image:
-      "https://images.pexels.com/photos/6627564/pexels-photo-6627564.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/full-mouth-rehabilitation-by-crowns-260nw-2113128206.webp",
     slug: "fixed-teeth-rehabilitation-within-3-days",
   },
   {
@@ -108,14 +108,14 @@ const services = [
     description:
       "A discreet orthodontic treatment using a series of clear, custom-made aligners to gradually shift teeth into the desired position.",
     image:
-      "https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/images%20(1).jpg",
     slug: "invisible-braces-Aligners",
   },
   {
     title: "Dental-tourism",
     description:
       "Combining your dental treatment with a travel experience, offering high-quality dental care while visiting a new location.",
-    image: 'https://images.pexels.com/photos/5355839/pexels-photo-5355839.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/Dental%20tourism.png',
     slug: "dental-tourism",
   },
 ];

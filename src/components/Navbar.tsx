@@ -32,54 +32,12 @@ const treatmentItems = [
       { title: "Laser Dentistry", slug: "laser-dentistry" },
       { title: "digital-dentistry", slug: "digital-dentistry" },
       { title: "Zygoma Implants", slug: "zygoma-implants" },
+      { title: "Dental-tourism", slug: "dental-tourism" },
+
     ],
   },
 ];
 
-// Dental Procedures menu items
-const dentalProcedureItems = [
-  {
-    category: "General & Specialized Procedures",
-    items: [
-      { title: "Dental Obturators", slug: "dental-obturators" },
-      { title: "Dental Consultation", slug: "dental-consultation" },
-      { title: "Acrylic Prosthesis", slug: "acrylic-prosthesis" },
-      { title: "Aesthetic Dentistry", slug: "aesthetic-dentistry" },
-      { title: "BPS Denture", slug: "bps-denture" },
-      { title: "Ceramic Tooth", slug: "ceramic-tooth" },
-      { title: "All On 4 Dental Implants", slug: "all-on-4-dental-implants" },
-      { title: "CAD CAM Zarconia Crowns", slug: "cad-cam-zarconia-crowns" },
-      { title: "All Ceramic Crowns with Warranty", slug: "all-ceramic-crowns-with-warranty" },
-      { title: "Dental Smile Design", slug: "dental-smile-design" },
-      { title: "Aesthetic Metal Free Crowns", slug: "aesthetic-metal-free-crowns" },
-      { title: "All Prosthodontic works", slug: "all-prosthodontic-works" },
-      { title: "All Ceramic Prosthesis", slug: "all-ceramic-prosthesis" },
-      { title: "Crowns (Metal, Ceramic)", slug: "crowns-metal-ceramic" },
-      { title: "CAD CAM", slug: "cad-cam" },
-      { title: "Full Mouth Rehabilitation with Dental Implants", slug: "full-mouth-rehabilitation-with-dental-implants" },
-      { title: "CAD CAM Prosthesis", slug: "cad-cam-prosthesis" },
-      { title: "All Kind of Fillings", slug: "all-kind-of-fillings" },
-    ],
-  },
-  {
-    category: "Restorative & Cosmetic Procedures",
-    items: [
-      { title: "3 Unit Bridge", slug: "3-unit-bridge" },
-      { title: "Composite Restorations (Tooth Coloured Fillings)", slug: "composite-restorations" },
-      { title: "Alignment of Crooked & Protruding Teeth", slug: "alignment-of-crooked-protruding-teeth" },
-      { title: "Alginate Impressions", slug: "alginate-impressions" },
-      { title: "Implant and Implant Prosthesis", slug: "implant-and-implant-prosthesis" },
-      { title: "Advanced Digital Diagnostics", slug: "advanced-digital-diagnostics" },
-      { title: "3M Lava & Procera Crown", slug: "3m-lava-procera-crown" },
-      { title: "Cosmetic Dental Procedures", slug: "cosmetic-dental-procedures" },
-      { title: "Immediate Loading Implantology", slug: "immediate-loading-implantology" },
-      { title: "Dental Prosthetics", slug: "dental-prosthetics" },
-      { title: "Bleaching of Discolored Teeth", slug: "bleaching-of-discolored-teeth" },
-      { title: "Endodontic Dentistry", slug: "endodontic-dentistry" },
-      { title: "Computerised Digital X-Ray", slug: "computerised-digital-x-ray" },
-    ],
-  },
-];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -186,50 +144,12 @@ const Navbar = () => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Dental Procedures Dropdown */}
-            <NavigationMenu className="w-full">
-              <NavigationMenuList className="w-full">
-                <NavigationMenuItem className="w-full">
-                  <NavigationMenuTrigger className="text-dental-dark-gray hover:text-dental-black font-medium transition-colors">
-                    Dental Procedures
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="rounded-md shadow-lg absolute bg-white">
-                    <div className="grid grid-cols-2 gap-6 p-6 w-[900px]">
-                      <div className="col-span-2 mb-4">
-                        <Link
-                          to="/dental-procedures"
-                          className="block text-lg font-semibold text-dental-dark-gray hover:text-dental-black transition-colors"
-                        >
-                          View All Dental Procedures →
-                        </Link>
-                      </div>
-                      {dentalProcedureItems.map((category) => (
-                        <div key={category.category} className="space-y-3">
-                          <h4 className="font-semibold text-dental-blue">{category.category}</h4>
-                          <ul className="space-y-2 max-h-80 overflow-y-auto">
-                            {category.items.map((item) => (
-                              <li key={item.slug}>
-                                <Link
-                                  to={`/procedure/${item.slug}`}
-                                  className="block text-sm text-gray-600 hover:text-dental-black transition-colors"
-                                >
-                                  {item.title}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+
 
             <Link to="/doctor-tips" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Doctor Tips</Link>
             <Link to="/training" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Training</Link>
             <Link to="/gallery" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Gallery</Link>
-            <Link to="/about" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">About</Link>
+            <Link to="/dentist-in-vanagaram" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">About</Link>
             <Link to="/contact" className="text-dental-dark-gray hover:text-dental-blue font-medium transition-colors">Contact</Link>
             <Button asChild className="bg-dental-blue hover:bg-blue-600">
               <a href="https://wa.me/919597876632" target="_blank" rel="noopener noreferrer">
@@ -289,18 +209,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Dental Procedures Section */}
-                <div className="py-2">
-                  <div className="px-4 text-lg font-medium text-dental-dark-gray mb-2">Dental Procedures</div>
-                  <div className="max-h-[200px] overflow-y-auto bg-gray-50 rounded-lg">
-                    <Link
-                      to="/dental-procedures"
-                      className="block py-2 px-6 text-dental-dark-gray hover:text-dental-blue hover:bg-gray-100 transition-colors"
-                      onClick={toggleMenu}
-                    >
-                      View All Dental Procedures →
-                    </Link>
-                  </div>
-                </div>
+
 
                 {/* Other Links */}
                 <Link 
@@ -332,7 +241,7 @@ const Navbar = () => {
                   Gallery
                 </Link>
                 <Link 
-                  to="/about" 
+                  to="/dentist-in-vanagaram" 
                   className="block py-2 px-4 text-lg text-dental-dark-gray hover:text-dental-blue hover:bg-gray-50 rounded-lg transition-colors" 
                   onClick={toggleMenu}
                 >

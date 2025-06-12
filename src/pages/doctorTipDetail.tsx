@@ -78,7 +78,7 @@ export default function DoctorTipDetail() {
       <main className="flex-grow">
         {/* Hero Image Section */}
         {tip.image_url && (
-          <div className="relative w-full h-[300px] bg-gray-100">
+          <div className="relative w-full h-[380px] bg-gray-100">
             <div className="absolute inset-0 bg-black/30 z-10" /> {/* Overlay */}
             <img 
               src={tip.image_url} 

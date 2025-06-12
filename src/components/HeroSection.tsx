@@ -37,7 +37,7 @@ const HeroSection = () => {
               <br />
               Starts Here.
             </h1>
-            <p className="text-xl text-black max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'Playpen Sans', cursive" }} >
+            <p className="text-xl text-black max-w-2xl font-bold  mx-auto leading-relaxed" style={{ fontFamily: "'Playpen Sans', cursive" }} >
               " Quality with Utmost Care is Our Motto. We Provide Comprehensive Dental Care Where Your Smile Meets Expertise"
             </p>
           </div>
@@ -50,12 +50,7 @@ const HeroSection = () => {
                 Book Appointment
               </a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-black hover:bg-white/10 transform hover:scale-105 transition-all duration-300">
-              <a href="#services" className="flex items-center">
-                <ArrowRight className="mr-2" size={18} />
-                Our Services
-              </a>
-            </Button>
+
           </div>
 
         </div>

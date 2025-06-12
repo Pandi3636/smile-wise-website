@@ -1,49 +1,47 @@
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import React from 'react';
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const EmiContact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const whatsappBaseUrl = "https://wa.me/+919876543210";
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const whatsappMessage = `Name: ${formData.name}%0AEmail: ${formData.email}%0AMessage: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/+919876543210?text=${whatsappMessage}`;
-    window.open(whatsappUrl, '_blank');
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const emiOptions = [
+    {
+      title: 'Quick Approval',
+      description: 'Get approved within 24 hours',
+      message: 'I am interested in Quick Approval EMI for dental treatment.',
+    },
+    {
+      title: 'Flexible Terms',
+      description: 'Choose from 3 to 12 months',
+      message: 'I want to know more about Flexible EMI Terms.',
+    },
+    {
+      title: 'Zero Interest',
+      description: 'Available on select treatments',
+      message: 'Please tell me more about Zero Interest EMI options.',
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <div className="flex-grow relative">
+        {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: "url('https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg')",
-            filter: "brightness(1)"
-          }}
+          // style={{ 
+          //   backgroundImage: "url('https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training//WhatsApp%20Image%202025-05-17%20at%2021.37.31.jpeg')",
+          //   filter: "brightness(1)"
+          // }}
         />
-        
+
+        {/* Content */}
         <div className="relative z-10 py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
+              {/* Heading */}
               <div className="text-center mb-12">
                 <h1 className="text-3xl md:text-5xl font-bold text-white mt-7 font-poppins">
                   Easy Monthly Installments
@@ -53,79 +51,32 @@ const EmiContact = () => {
                 </p>
               </div>
 
+              {/* Card with CTA options */}
               <Card className="bg-white/55 backdrop-blur-sm shadow-xl mt-7">
                 <CardHeader>
                   <CardTitle className="text-3xl font-bold text-center text-dental-dark-blue font-poppins">
                     Contact Us for EMI Options
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name" className="text-dental-dark-blue font-semibold">Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Enter your name"
-                        className="border-dental-mint focus:border-dental-dark-blue"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-dental-dark-blue font-semibold">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="Enter your email"
-                        className="border-dental-mint focus:border-dental-dark-blue"
-                      />
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="message" className="text-dental-dark-blue font-semibold">Message</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        placeholder="Tell us about your treatment needs and preferred payment duration"
-                        className="min-h-[120px] border-dental-mint focus:border-dental-dark-blue"
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-dental-mint hover:bg-dental-light-mint text-dental-dark-blue font-semibold py-3 text-lg transition-colors"
-                    >
-                      Send Message via WhatsApp
-                    </Button>
-                  </form>
-                </CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                  {emiOptions.map((item, index) => {
+                    const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(item.message)}`;
+                    return (
+                      <a
+                        key={index}
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center hover:shadow-xl transition-all duration-300"
+                      >
+                        <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">{item.title}</h3>
+                        <p className="text-gray-600">{item.description}</p>
+                      </a>
+                    );
+                  })}
+                </div>
               </Card>
-
-              {/* Additional Information */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-                  <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">Quick Approval</h3>
-                  <p className="text-gray-600">Get approved within 24 hours</p>
-                </div>
-                <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-                  <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">Flexible Terms</h3>
-                  <p className="text-gray-600">Choose from 3 to 12 months</p>
-                </div>
-                <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg text-center">
-                  <h3 className="text-xl font-semibold text-dental-dark-blue mb-2">Zero Interest</h3>
-                  <p className="text-gray-600">Available on select treatments</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -135,4 +86,4 @@ const EmiContact = () => {
   );
 };
 
-export default EmiContact; 
+export default EmiContact;

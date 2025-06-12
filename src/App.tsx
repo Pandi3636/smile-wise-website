@@ -39,8 +39,11 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
+
+            {/* SEO route for Vanagaram */}
+            <Route path="/dentist-in-nearme/chennai/vanagaram" element={<Index />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/dentist-in-vanagaram" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/doctor-tips" element={<DoctorTipsPage />} />
             <Route path="/doctor-tips/:id" element={<DoctorTipDetail />} />

@@ -31,7 +31,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'X-rays to detect hidden issues',
       'Treatment of cavities, gum disease, and other common dental problems',
     ],
-    image: 'https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/photo-1606811971618-4486d14f3f99.jpg',
     price: 'Starting from ₹500',
   },
   'cosmetic-dentistry': {
@@ -89,7 +89,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Regular adjustments and monitoring',
       'Retention planning to maintain results',
     ],
-    image: 'https://images.pexels.com/photos/6627562/pexels-photo-6627562.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/dental-procedure-installing-braces-close-up-dentistry-braces-teeth_169016-67279.avif',
     price: 'Starting from ₹30,000',
   },
   'root-canal': {
@@ -222,7 +222,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Precise treatment delivery',
       'Digital record keeping',
     ],
-    image: 'https://images.pexels.com/photos/6502161/pexels-photo-6502161.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/istockphoto-1252962000-612x612.jpg',
     price: 'Price varies by service',
   },
 
@@ -261,7 +261,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Prosthetic attachment (often immediate)',
       'Healing and follow-up care',
     ],
-    image: 'https://images.unsplash.com/photo-1546519638-68e1b0df096b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/Zygomatic-Implants-1024x683.jpg',
     price: 'Price varies upon consultation',
   },
   'fixed-teeth-rehabilitation-within-3-days': {
@@ -280,7 +280,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Temporary prosthetic attachment within 3 days',
       'Final prosthetic placement after healing',
     ],
-    image: 'https://images.pexels.com/photos/6627564/pexels-photo-6627564.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/full-mouth-rehabilitation-by-crowns-260nw-2113128206.webp',
     price: 'Price varies upon consultation',
   },
   'invisible-braces-aligners': {
@@ -299,7 +299,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Wearing aligners in sequence',
       'Regular check-ups and monitoring',
     ],
-    image: 'https://images.pexels.com/photos/6529111/pexels-photo-6529111.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/images%20(1).jpg',
     price: 'Starting from ₹50,000',
   },
   'dental-tourism': {
@@ -318,7 +318,7 @@ const serviceDetails: Record<string, ServiceDetail> = {
       'Dental treatment',
       'Recovery and follow-up',
     ],
-    image: 'https://images.unsplash.com/photo-1583422409516-2895a779c6c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+    image: 'https://upkmrcbkrsfwejwepiqa.supabase.co/storage/v1/object/public/training/watermarked_images/dentist-langley.jpg',
     price: 'Price varies by treatment and location',
   },
 };
