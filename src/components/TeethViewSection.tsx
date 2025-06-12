@@ -1,99 +1,56 @@
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
-// Fix the import path for OrbitControls
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+import React from "react";
+
+const teethModels = [
+  {
+    title: "Maxillary First Molar",
+    embedUrl:
+      "https://sketchfab.com/models/7d300055ca92491baddc46e714656205/embed?autostart=1&ui_controls=0&ui_infos=0&preload=1",
+    description: "3D view of Maxillary First Molar with Cusp of Carabelli",
+  },
+  {
+    title: "Maxillary First Molar",
+    embedUrl:
+      "https://sketchfab.com/models/c1e66fa66ed74b83ac88134d5624715f/embed?autostart=1&ui_controls=0&ui_infos=0&preload=1",
+    description: "3D view of Maxillary First Molar with Cusp of Carabelli",
+  },
+];
 
 const TeethViewSection = () => {
-  const mountRef = useRef(null);
-
-  useEffect(() => {
-    // === THREE.JS CODE START ===
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xeeeeee);
-
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
-    if (mountRef.current) {
-      mountRef.current.appendChild(renderer.domElement);
-    }
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(0, 1, 1).normalize();
-    scene.add(directionalLight);
-
-    // Load the 3D model (replace 'path/to/your/model.gltf' with the actual path)
-    const loader = new THREE.GLTFLoader();
-    loader.load('/scene.gltf', (gltf) => {
-      const model = gltf.scene;
-      scene.add(model);
-
-      // Optional: Scale the model if it's too big or small
-      model.scale.set(0.01, 0.01, 0.01);
-
-      // Center the model (adjust the values as needed)
-      const boundingBox = new THREE.Box3().setFromObject(model);
-      const center = boundingBox.getCenter(new THREE.Vector3());
-      model.position.set(-center.x, -center.y, -center.z);
-
-      // Animation loop
-      const animate = () => {
-        requestAnimationFrame(animate);
-
-        controls.update(); // required if damping or auto-rotation is enabled
-
-        renderer.render(scene, camera);
-      };
-
-      animate();
-    }, undefined, function (error) {
-      console.error(error);
-    });
-
-    // === THREE.JS EXAMPLE CODE END ===
-
-    // Resize handler
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / 2 / window.innerHeight / 2;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (mountRef.current) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, []);
-
   return (
-    <div id="teeth-view" className="bg-gray-100 py-8">
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
-          Explore Our 3D Teeth View
-        </h2>
-        <div ref={mountRef} style={{ height: '500px' }} />
-        <p className="text-center text-gray-600 mt-4">
-          Interact with our 3D teeth model to learn more about dental anatomy.
-        </p>
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-dental-dark-blue mb-4">
+            3D Teeth Visualization
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Explore our interactive 3D models to better understand dental anatomy and treatments.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {teethModels.map((model, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden"
+            >
+              <div className="aspect-w-16 aspect-h-9">
+                <iframe
+                  title={model.title}
+                  src={model.embedUrl}
+                  style={{ border: 'none' }}
+                  allow="autoplay; fullscreen; xr-spatial-tracking"
+                  allowFullScreen
+                  className="w-full h-[300px]"
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default TeethViewSection;
