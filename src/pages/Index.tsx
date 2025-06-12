@@ -1,3 +1,4 @@
+
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import InstagramSection from "@/components/InstagramSection";
@@ -11,6 +12,7 @@ import AppointmentBookingSection from "@/components/AppointmentBookingSection";
 // import DoctorTipsSection from "@/components/DoctorTipsSection";
 import DentalServices from "@/components/DentalServices";
 import Teeth3DView from "@/components/Teeth3DView";
+import DentalProceduresHomeSection from "@/components/DentalProceduresHomeSection";
 
 const Index = () => {
 
@@ -28,6 +30,7 @@ const Index = () => {
       <HeroSection />
       <div className="relative z-10 bg-white">
         <DentalServices />
+        <DentalProceduresHomeSection />
         <Gallery/>
         {/* <DoctorTipsSection /> */}
         <Teeth3DView />
