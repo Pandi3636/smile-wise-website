@@ -21,58 +21,33 @@ const HeroSection = () => {
     <section className="relative min-h-[80vh] flex flex-col md:flex-row items-center justify-center py-12 md:py-28 overflow-hidden bg-gradient-to-br from-dental-mint/40 via-white to-dental-blue/10">
       {/* Dentist-Themed Background decorations */}
       <div className="absolute top-4 left-8 w-40 h-40 bg-dental-mint/30 rounded-full blur-xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-20 h-20 border-4 border-dental-blue/20 rounded-full animate-pulse pointer-events-none" />
+      <div className="absolute bottom-10 left-20 w-24 h-24 border-4 border-dental-blue/20 rounded-full animate-pulse pointer-events-none" />
       {/* Tooth Shape Decorative */}
-      <div className="absolute top-1/4 left-1/3 opacity-10 select-none pointer-events-none hidden md:block">
+      <div className="absolute top-1/4 right-1/3 opacity-10 select-none pointer-events-none hidden md:block">
         <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
           <ellipse cx="45" cy="45" rx="40" ry="25" fill="#A7F3D0" />
         </svg>
       </div>
       {/* Floating dentist icons */}
-      <div className="absolute top-14 right-[15%] z-0 opacity-20 animate-float hidden md:block">
+      <div className="absolute top-14 left-[15%] z-0 opacity-20 animate-float hidden md:block">
         <div className="w-20 h-20 bg-dental-light-mint rounded-full flex items-center justify-center shadow-lg animate-float">
           <Shield size={32} className="text-dental-dark-blue" />
         </div>
       </div>
-      <div className="absolute bottom-6 left-10 opacity-20 animate-float hidden md:block">
+      <div className="absolute bottom-6 right-10 opacity-20 animate-float hidden md:block">
         <div className="w-16 h-16 bg-dental-blue rounded-full flex items-center justify-center">
           <Sparkles size={28} className="text-white" />
         </div>
       </div>
       {/* --- End BG Stuff --- */}
 
-
       <div className="container relative mx-auto px-4 z-10 flex flex-col md:flex-row items-center md:items-stretch gap-10 md:gap-20">
-        {/* Left: Main Image with decorative frame/badges */}
-        <div className="flex-1 w-full flex flex-col justify-center items-center relative min-w-[300px]">
-          <div className="relative group">
-            {/* Main Dental-themed border */}
-            <div className="absolute -inset-6 md:-inset-8 -z-10 rounded-3xl bg-gradient-to-br from-dental-blue/20 to-dental-mint/20 blur-md opacity-80 shadow-md"></div>
-            <div className="absolute -inset-1 rounded-2xl border-4 border-dental-light-mint/40 -z-10" />
-            <img
-              src={SAMPLE_IMAGE}
-              alt="Friendly Dentist at Work"
-              className="w-[320px] h-[400px] md:w-[380px] md:h-[510px] object-cover rounded-2xl border-4 border-white shadow-2xl scale-105 hover:scale-110 transition-transform duration-500"
-              style={{ maxWidth: 380, maxHeight: 510, background: "#A7F3D0" }}
-              draggable={false}
-            />
-
-            {/* Floating Badges (Awards & Sparkle) */}
-            <div className="absolute -top-8 -right-8 bg-white rounded-full p-4 shadow-lg border-4 border-dental-mint">
-              <Award className="text-dental-blue" size={28} />
-            </div>
-            <div className="absolute -bottom-8 -left-8 bg-dental-blue rounded-full p-4 shadow-lg">
-              <Sparkles className="text-white" size={28} />
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Main Content */}
-        <div className="flex-1 w-full flex flex-col justify-center">
-          <div className="space-y-7">
+        {/* Left: Main Content */}
+        <div className="flex-1 w-full flex flex-col justify-center md:items-start items-center order-2 md:order-1">
+          <div className="space-y-7 w-full max-w-xl">
             {/* Animated Dentist Icon */}
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-dental-mint text-dental-dark-blue shadow-lg animate-pulse">
+              <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-dental-mint text-dental-dark-blue shadow-lg animate-pulse ring-4 ring-white">
                 <svg height="32" width="32" viewBox="0 0 40 40" className="inline">
                   <ellipse cx="20" cy="20" rx="18" ry="10" fill="#0EA5E9" />
                   <ellipse cx="15" cy="28" rx="4" ry="7" fill="white" />
@@ -129,6 +104,30 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
+
+        {/* Right: Main Image with decorative frame/badges */}
+        <div className="flex-1 w-full flex flex-col justify-center items-center relative min-w-[300px] order-1 md:order-2">
+          <div className="relative group">
+            {/* Main Dental-themed border */}
+            <div className="absolute -inset-6 md:-inset-8 -z-10 rounded-3xl bg-gradient-to-br from-dental-blue/20 to-dental-mint/20 blur-md opacity-80 shadow-md"></div>
+            <div className="absolute -inset-1 rounded-2xl border-4 border-dental-light-mint/40 -z-10" />
+            <img
+              src={SAMPLE_IMAGE}
+              alt="Friendly Dentist at Work"
+              className="w-[320px] h-[400px] md:w-[380px] md:h-[510px] object-cover rounded-2xl border-4 border-white shadow-2xl scale-105 hover:scale-110 transition-transform duration-500"
+              style={{ maxWidth: 380, maxHeight: 510, background: "#A7F3D0" }}
+              draggable={false}
+            />
+
+            {/* Floating Badges (Awards & Sparkle) */}
+            <div className="absolute -top-8 -right-8 bg-white rounded-full p-4 shadow-lg border-4 border-dental-mint">
+              <Award className="text-dental-blue" size={28} />
+            </div>
+            <div className="absolute -bottom-8 -left-8 bg-dental-blue rounded-full p-4 shadow-lg">
+              <Sparkles className="text-white" size={28} />
+            </div>
+          </div>
+        </div>
       </div>
       {/* Animation keyframes via Tailwind utility (see tailwind.config) */}
       {/* 
@@ -148,4 +147,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
