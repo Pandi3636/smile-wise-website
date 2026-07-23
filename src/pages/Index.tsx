@@ -30,7 +30,7 @@ const Index = () => {
       <HeroSection />
       <div className="relative z-10 bg-white">
         <DentalServices />
-        <DentalProceduresHomeSection />
+        {/* <DentalProceduresHomeSection /> */}
         <Gallery/>
         {/* <DoctorTipsSection /> */}
         <Teeth3DView />

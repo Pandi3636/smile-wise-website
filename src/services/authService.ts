@@ -103,8 +103,7 @@ export const adminLogin = async (credentials: AdminCredentials) => {
       .select('*')
       .eq('email', credentials.email)
       .eq('password', credentials.password)
-      .single();
-    
+      .maybeSingle();    
     if (adminError) {
       if (adminError.message.includes('No rows found')) {
         throw new Error('Invalid credentials. Please try again.');

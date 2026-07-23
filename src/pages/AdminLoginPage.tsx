@@ -106,15 +106,7 @@ const AdminLoginPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {setupError && (
-                <Alert variant="destructive" className="mb-4">
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertTitle>Setup Error</AlertTitle>
-                  <AlertDescription>
-                    {setupError}
-                  </AlertDescription>
-                </Alert>
-              )}
+            
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
